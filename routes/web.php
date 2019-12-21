@@ -281,4 +281,7 @@ Route::post('/packages-location-dates', 'ajax\AjaxController@ajax_for_packages_l
 Route::post('/flights-src-desti-dates', 'ajax\AjaxController@ajax_for_flights_src_desti_dates');
 Route::post('/submit-contact-form', 'ajax\AjaxController@ajax_for_submit_contact_form');
 
+
+Route::get('/wp-content/uploads/{order}', 'secure\paymentController@notAllow');
+
 Route::get('/{slug}', 'front\HomeController@static_page');

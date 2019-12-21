@@ -52,6 +52,11 @@ terminal number:
 
 class paymentController extends Controller
 {
+    public function notAllow()
+    {
+        return "404: Not allow";
+    }
+    
     public function payment()
     {
         if (rami_checking_is_mobile()) {
