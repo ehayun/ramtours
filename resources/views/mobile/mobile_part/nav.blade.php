@@ -84,6 +84,8 @@
                      </li>
                      <li class=""><a href="{{ url('/loc-accommodation/82') }}" class="dropdown-item">לינה בהולנד</a>
                      </li>
+                     <li class=""><a href="{{ url('/loc-accommodation/80') }}" class="dropdown-item">לינה בבלגיה</a>
+                     </li>
                   </ul>
                </li>
                {{-- flights --}}
