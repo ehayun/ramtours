@@ -155,11 +155,11 @@ class paymentController extends Controller
 								 <cardNo>CGMPI</cardNo>
 								 <total>' . $cgConf['amount'] . '</total>
 								 <transactionType>Debit</transactionType>
-								 <creditType>RegularCredit</creditType>
+								 <creditType>Payments</creditType>
 								 <currency>ILS</currency>
 								 <transactionCode>Phone</transactionCode>
 								 <authNumber/>
-								 <numberOfPayments/>
+								 <numberOfPayments>1-10</numberOfPayments>
 								 <firstPayment/>
 								 <periodicalPayment/>
 								 <validation>TxnSetup</validation>
