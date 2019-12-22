@@ -159,7 +159,7 @@ class paymentController extends Controller
 								 <currency>ILS</currency>
 								 <transactionCode>Phone</transactionCode>
 								 <authNumber/>
-								 <numberOfPayments/>
+								 <numberOfPayments>10<numberOfPayments/>
 								 <firstPayment/>
 								 <periodicalPayment/>
 								 <validation>TxnSetup</validation>
