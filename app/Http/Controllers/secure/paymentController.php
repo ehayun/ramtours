@@ -159,7 +159,7 @@ class paymentController extends Controller
 								 <currency>ILS</currency>
 								 <transactionCode>Phone</transactionCode>
 								 <authNumber/>
-								 <numberOfPayments>10<numberOfPayments/>
+								 <numberOfPayments/>
 								 <firstPayment/>
 								 <periodicalPayment/>
 								 <validation>TxnSetup</validation>
@@ -211,6 +211,7 @@ class paymentController extends Controller
 
             curl_close($CR);
         }
+
 
         if (function_exists("simplexml_load_string")) {
             if (strpos(strtoupper($result), 'HEB')) {$result = iconv("utf-8", "iso-8859-8", $result);}
