@@ -155,11 +155,11 @@ class paymentController extends Controller
 								 <cardNo>CGMPI</cardNo>
 								 <total>' . $cgConf['amount'] . '</total>
 								 <transactionType>Debit</transactionType>
-								 <creditType>Payments</creditType>
+								 <creditType>RegularCredit</creditType>
 								 <currency>ILS</currency>
 								 <transactionCode>Phone</transactionCode>
 								 <authNumber/>
-								 <numberOfPayments>1-10</numberOfPayments>
+								 <numberOfPayments/>
 								 <firstPayment/>
 								 <periodicalPayment/>
 								 <validation>TxnSetup</validation>
@@ -366,6 +366,8 @@ class paymentController extends Controller
 
     public function payment_notOk(Request $request)
     {
+        // var_dump("Not ok");
+        // dd($request);
         $order = order::find(session()->get('last_order_id'));
         if (!empty($order)) {
             $order->payment_status = 3;
@@ -380,6 +382,8 @@ class paymentController extends Controller
 
     public function payment_verify(Request $request)
     {
+        // var_dump("verify");
+        // dd($request);
         // $response = $this->verify_deal($request->lowprofilecode);
         session()->forget('rami_pack_cart');
         session()->forget('rami_pack_passengers');
