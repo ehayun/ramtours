@@ -210,6 +210,9 @@
                <h3 class="pkg_head">רכב <span
                      class="rt_headd">{{ get_rami_page_placeholder('help_text_vehicle',1) }}</span></h3>
                <div class="rt_crt_sec col-sm-12">
+               <div class="col-md-8">
+                <small><b>איסוף והחזרה של רכב בתחנות שונות מחייב דמי החזר לחברת ההשכרה של כ-40 יורו</b></small>
+                </div>
                   <img src="{{url('ramtours/'.$all_cars['first_car_img'])}}" class="img-fluid">
                   <h4 class="pkg_subhead">{!!$all_cars['first_car_title']!!} </h4>
                   <p>{!!$all_cars['first_car_des']!!} </p>

@@ -802,6 +802,10 @@
                         src="{{url('/assets/front/images')}}/pkg-car.png"></h3>
                   </div>
                 </div>
+
+                <div class="col-md-8">
+                <small><b>איסוף והחזרה של רכב בתחנות שונות מחייב דמי החזר לחברת ההשכרה של כ-40 יורו</b></small>
+                </div>
                 <div class="col-md-8">
                   <h5>{{$all_cars['first_car_title']}}</h5>
                   <p>{!!$all_cars['first_car_des']!!}</p>
