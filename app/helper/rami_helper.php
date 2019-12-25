@@ -1870,6 +1870,13 @@ if (!function_exists('get_rami_room_title_by_id')) {
     }
 }
 
+if (!function_exists('is_black_forest')) {
+    function is_black_forest($package) {
+        return $package-> package_flight_location == 21 ;
+    }
+}
+
+
 if (!function_exists('get_child_location_parent_name_seq')) {
     function get_child_location_parent_name_seq($id, $loc_name = '')
     {

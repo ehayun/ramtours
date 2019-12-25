@@ -566,12 +566,14 @@
                          <span class="card_price">{{$hotel_card['price']}}</span> יורו למשפחה. </label>
                    </div>
                    @endif -->
+                   @if (is_black_forest($package))
                <div id="bf_card_cont" class="custom-control custom-checkbox">
                   <input id="bf_card" class="custom-control-input" type="checkbox">
                   <label class="custom-control-label" for="bf_card">
                      אבקש להוסיף לחבילה כרטיס היער השחור משפחתי בעלות של 265 יורו למשפחה.
                   </label>
                </div>
+               @endif
                <p class="rt_balinfo">תוספת למבוגר מעל גיל 16 היא 30 יורו ללילה.</p>
                <p class="rt_balinfo">תוספת תינוק (0-2) לחבילה היא בעלות 150 דולר .</p>
                <p class="rt_balinfo">שריינו את החופשה שבחרתם בתשלום מקדמה של סה"כ <span style="color:#ffa800">200</span>
