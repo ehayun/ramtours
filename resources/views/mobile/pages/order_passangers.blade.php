@@ -329,17 +329,17 @@
 
 
                   <div class="filter_cont custom-control custom-checkbox">
-                     <label class="custom-control-label" for="chk-b1">מאשר/ת שקראתי ומסכים לכל תנאי העסקה בהזמנה זו.
-                        <input type="checkbox" class="custom-control-input" id="chk-b1" name="payer_terms" value="1"
+                     <label class="xcustom-control-label" for="chk-b1">מאשר/ת שקראתי ומסכים לכל תנאי העסקה בהזמנה זו.
+                        <input type="checkbox" class="xcustom-control-input" id="chk-b1" name="payer_terms"  style="float: right;" value="1"
                            {{get_edit_select_check_pvr_old_value('payer_terms', '', 1, 'check')}}>
 
                      </label>
                      {!! get_form_error_msg($errors, 'payer_terms') !!}
                   </div>
                   <div class="filter_cont custom-control custom-checkbox">
-                     <label class="custom-control-label" for="chk-b2"> הוסף אותי למועדון לקוחות לצורך קבלת מבצעים
+                     <label class="xcustom-control-label" for="chk-b2"> הוסף אותי למועדון לקוחות לצורך קבלת מבצעים
                         ופרסומות
-                        <input type="checkbox" class="custom-control-input" id="chk-b2" name="payer_news_letter">
+                        <input type="checkbox" class="xcustom-control-input" id="chk-b2" name="payer_news_letter" style="float: right;">
                      </label>
                   </div>
                   <div class="order-button">
