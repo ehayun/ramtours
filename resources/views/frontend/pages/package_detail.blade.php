@@ -181,7 +181,7 @@
               </div>
               @if((!empty($hotel_extra1)) && (!empty($hotel_extra1_rooms)))
               <div class="pkg-select apart rami_cart_select_div rami_package_hotel_extra1_room">
-                <label>דמלון נוסף  1 {{$hotel_extra1->hotel_code.'('.$hotel_extra1_dates.')'}}</label>
+                <label>מלון נוסף  1 {{$hotel_extra1->hotel_code.'('.$hotel_extra1_dates.')'}}</label>
                 <div class="aprt-inner">
                   <select class="rami_pkg_chnage_select chnage_select1" element_no='1' element_name="hotel_extra1_room">
                     <option value="0">בחר חדר </option>
@@ -271,12 +271,14 @@
                    <span class="card_price">{{$hotel_card['price']}}</span> יורו למשפחה. </label>
              </div>
              @endif -->
+             @if (is_black_forest($package))
                 <div id="bf_card_cont" class="custom-control custom-checkbox">
                   <input id="bf_card" class="custom-control-input" type="checkbox">
                   <label class="custom-control-label" for="bf_card">
                     אבקש להוסיף לחבילה כרטיס היער השחור משפחתי בעלות של 265 יורו למשפחה.
                   </label>
                 </div>
+                @endif
                 <p class="rt_balinfo">תוספת למבוגר מעל גיל 16 היא 30 יורו ללילה.</p>
                 <p class="rt_balinfo">תוספת תינוק (0-2) לחבילה היא בעלות 150 דולר .</p>
                 <p class="rt_balinfo">שריינו את החופשה שבחרתם בתשלום מקדמה של סה"כ <span
@@ -1123,6 +1125,9 @@
                     <h3>רכב <span class="rt_headd"> {{ get_rami_page_placeholder('help_text_vehicle',1) }}</span><img
                         src="{{url('/assets/front/images')}}/pkg-car.png"></h3>
                   </div>
+                </div>
+                <div class="col-md-8">
+                <small><b>איסוף והחזרה של רכב בתחנות שונות מחייב דמי החזר לחברת ההשכרה של כ-40 יורו</b></small>
                 </div>
                 <div class="col-md-8">
                   <h5>{{$all_cars['first_car_title']}}</h5>
