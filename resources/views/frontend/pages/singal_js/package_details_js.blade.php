@@ -219,6 +219,16 @@
          if(res.status=='success'){
            window.location.href=res.url;
          }else{
+          if(res.extra_hotel_2_room_error==1){
+           // res.msg +=',Add More Room ';
+            res.msg ='Extra hotel 2הדירה או החדר שבחרתם אינם מתאימים למספר הנפשות בעסקה.יש להוסיף חדר נוסף או לבחור חדר או דירה גדולים יותר.';
+
+           }
+           if(res.extra_hotel_1_room_error==1){
+           // res.msg +=',Add More Room ';
+            res.msg ='Extra hotel 1הדירה או החדר שבחרתם אינם מתאימים למספר הנפשות בעסקה.יש להוסיף חדר נוסף או לבחור חדר או דירה גדולים יותר.';
+
+           }
            if(res.flight_error==1){
             res.msg =' הוסף טיסות אחרות   ';
            }
@@ -241,6 +251,44 @@
 
 
      });
+    $('.rami_package_flights select').change(function(event) {
+       var loc_id=$(this).find('option[value='+$(this).val()+']').attr('loc_id');
+       render_car_acc_to_flight(loc_id);
+    });
+    var loc_id=$('.rami_package_flights select').find('option[value='+$('.rami_package_flights select').val()+']').attr('loc_id');
+    render_car_acc_to_flight(loc_id);
+    function render_car_acc_to_flight(loc_id){
+       $('.rami_package_cars select option').each(function(index, el) {
+        if(typeof $(this).attr('loc_id') === "undefined"){
+          $(this).show();
+        }else if( $(this).attr('loc_id')==loc_id ){
+          $(this).show();
+        }else{
+          $(this).hide();
+        }
+       });
+       var last_added=0;
+       $('.crprice li').each(function(index, el) {
+        if(typeof $(this).attr('loc_id') === "undefined"){
+          $(this).show();
+        }else if( $(this).attr('loc_id')==loc_id ){
+          $(this).show();
+          if(last_added==0){
+            $(this).addClass('li_show');
+            last_added=1;
+          }else{
+            last_added=0;
+          }
+          
+        }else{
+          $(this).hide();
+          $(this).removeClass('li_show')
+        }
+       });
+       $('.rami_package_cars select').val(0);
+       setup_cart();
+       
+    }
 
 
 

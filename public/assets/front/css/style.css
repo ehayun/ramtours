@@ -1059,6 +1059,7 @@ div#map .bd-sec {margin-bottom: 7px;}
 .pkg-section .flight-secc.bottom {padding: 15px 0px;}
 div#car h5 {color: #a0a0a0;padding-top: 10px;font-weight: normal!important;}
 ul.crprice li:nth-child(odd) {background: #e3e5e6;}
+ul.crprice .li_show {background: #e3e5e6;}
 .hotel_contt .pics {display: none;}
 .hotel_contt .pics:nth-child(1) {display: block;}
 .hotel_header {height: 45px;border-bottom: 1px solid #ccc;margin-bottom: 14px;font-weight: normal;font-size: 18px;line-height: 42px;color: #a0a0a0;}

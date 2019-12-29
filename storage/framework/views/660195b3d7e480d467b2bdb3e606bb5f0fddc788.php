@@ -1,1 +1,0 @@
-404<?php /**PATH /home/eli/ramtours/resources/views/errors/404.blade.php ENDPATH**/ ?>

@@ -109,6 +109,136 @@ class MobileHomeController extends Controller
             $count++;
         }
         $data['hotel_rooms'] = $new_rooms;
+        //extra hotel here
+        $data['hotel_extra1']=[];
+        $data['hotel_extra1_rooms']=[];
+        $data['hotel_extra1_amenities']=[];
+        $data['hotel_extra1_features']=[];
+        $data['hotel_extra2']=[];
+        $data['hotel_extra2_rooms']=[];
+        $data['hotel_extra2_amenities']=[];
+        $data['hotel_extra2_features']=[];
+        if($package->having_extra_hotel_1==1){
+            $data['hotel_extra1'] = hotel::find($package->extra_hotel_1);
+            $data['hotel_extra1_dates']=rami_get_require_date_format($package->extra_hotel_1_start_date, 'd/m').'-' .rami_get_require_date_format($package->extra_hotel_1_end_date, 'd/m');
+            $data['hotel_extra1_amenities'] = unserialize($data['hotel_extra1']->hotel_amenities);
+            $data['hotel_extra1_features'] = unserialize($data['hotel_extra1']->hotel_features);
+            $hotel_extra1_rooms = unserialize($package->extra_hotel_1_rooms); 
+            $data['hotel_extra1_gallery'] = hotel_image::where(['hotel_id' => $package->extra_hotel_1])->orderBy('sequence', 'desc')->get();
+           $data['hotel_extra1_gallery_count'] = $data['hotel_extra1_gallery']->count() - 6;
+           $hotel_card = array();
+           if (!empty($data['hotel_extra1']->hotel_card)) {
+                $card = card::find($data['hotel_extra1']->hotel_card);
+                if (!empty($card)) {
+                    $hotel_card['title'] = $card->card_title;
+                    $hotel_card['price'] = get_rami_price_conversion_shekel_to_other(get_rami_price_conversion_to_shekel($card->price, $card->price_currency), 1);
+                    $hotel_card['link'] = $card['link'];
+                    $hotel_card['card_image'] = $card['image'];
+                }
+            }
+            $data['hotel_extra1_card'] = $hotel_card;
+            $new_rooms = array();
+            $count=0;
+            foreach ($hotel_extra1_rooms as $room) {
+                $room_details = room::find($room);
+                if (empty($room_details)) {
+                    continue;
+                }
+                $new_rooms[$count]['id'] = $room_details->id;
+                if (!empty($room_details->old_room_id)) {
+                    $new_rooms[$count]['room_code'] = $room_details->old_room_id . '-d';
+                } else {
+                    $new_rooms[$count]['room_code'] = $room_details->id . '-d';
+                }
+                $new_rooms[$count]['title'] = $room_details->room_title;
+                $new_rooms[$count]['room_desc'] = $room_details->room_desc;
+                if (!empty($room_details->room_type_name)) {
+                    $new_rooms[$count]['room_type'] = $room_details->room_type_name->room_type;
+                } else {
+                    $new_rooms[$count]['room_type'] = '';
+                }
+                $new_rooms[$count]['room_availble'] = get_rami_room_avalible($room_details->id, $package->package_start_date);
+                $new_rooms[$count]['max_people'] = $room_details->max_people;
+                $new_rooms[$count]['room_area'] = $room_details->room_area;
+                $new_rooms[$count]['room_images'] = $room_details->room_images;
+                $new_rooms[$count]['room_avalible'] = get_rami_package_room_avalible($package->id, $room_details->id);
+                $count++;
+            }
+            $data['hotel_extra1_rooms']=$new_rooms;
+        }
+        if($package->having_extra_hotel_2==1){
+           $data['hotel_extra2'] = hotel::find($package->extra_hotel_2);
+           $data['hotel_extra2_dates']=rami_get_require_date_format($package->extra_hotel_2_start_date, 'd/m').'-' .rami_get_require_date_format($package->extra_hotel_2_end_date, 'd/m');
+           $data['hotel_extra2_amenities'] = unserialize($data['hotel_extra2']->hotel_amenities);
+           $data['hotel_extra2_features'] = unserialize($data['hotel_extra2']->hotel_features);
+           $data['hotel_extra2_gallery'] = hotel_image::where(['hotel_id' => $package->extra_hotel_2])->orderBy('sequence', 'desc')->get();
+           $data['hotel_extra2_gallery_count'] = $data['hotel_extra2_gallery']->count() - 6;
+           $hotel_card = array();
+           if (!empty($data['hotel_extra2']->hotel_card)) {
+                $card = card::find($data['hotel_extra2']->hotel_card);
+                if (!empty($card)) {
+                    $hotel_card['title'] = $card->card_title;
+                    $hotel_card['price'] = get_rami_price_conversion_shekel_to_other(get_rami_price_conversion_to_shekel($card->price, $card->price_currency), 1);
+                    $hotel_card['link'] = $card['link'];
+                    $hotel_card['card_image'] = $card['image'];
+                }
+            }
+            $data['hotel_extra2_card'] = $hotel_card;
+           $rooms = unserialize($package->extra_hotel_1_rooms);
+           $hotel_extra2_rooms = unserialize($package->extra_hotel_2_rooms); 
+            $new_rooms = array();
+            $count=0;
+            foreach ($hotel_extra2_rooms as $room) {
+                $room_details = room::find($room);
+                if (empty($room_details)) {
+                    continue;
+                }
+                $new_rooms[$count]['id'] = $room_details->id;
+                if (!empty($room_details->old_room_id)) {
+                    $new_rooms[$count]['room_code'] = $room_details->old_room_id . '-d';
+                } else {
+                    $new_rooms[$count]['room_code'] = $room_details->id . '-d';
+                }
+                $new_rooms[$count]['title'] = $room_details->room_title;
+                $new_rooms[$count]['room_desc'] = $room_details->room_desc;
+                if (!empty($room_details->room_type_name)) {
+                    $new_rooms[$count]['room_type'] = $room_details->room_type_name->room_type;
+                } else {
+                    $new_rooms[$count]['room_type'] = '';
+                }
+                $new_rooms[$count]['room_availble'] = get_rami_room_avalible($room_details->id, $package->package_start_date);
+                $new_rooms[$count]['max_people'] = $room_details->max_people;
+                $new_rooms[$count]['room_area'] = $room_details->room_area;
+                $new_rooms[$count]['room_images'] = $room_details->room_images;
+                $new_rooms[$count]['room_avalible'] = get_rami_package_room_avalible($package->id, $room_details->id);
+                $count++;
+            }
+            $data['hotel_extra2_rooms']=$new_rooms;  
+        }
+        if((empty($package->extra_hotel_1))&&(empty($package->extra_hotel_2))){
+            $data['hotel_dates']=rami_get_require_date_format($package->package_start_date, 'd/m').'-' .rami_get_require_date_format($package->package_end_date, 'd/m');
+        }elseif(empty($package->extra_hotel_2)){
+            if(rami_get_no_of_days_diff($package->package_start_date, $package->extra_hotel_1_start_date) >1){
+               $data['hotel_dates']=rami_get_require_date_format($package->package_start_date, 'd/m').'-' .rami_get_require_date_format($package->extra_hotel_1_start_date, 'd/m'); 
+               $data['hotel_dates'].=' ,'.rami_get_require_date_format($package->extra_hotel_1_end_date, 'd/m').'-' .rami_get_require_date_format($package->package_end_date, 'd/m');
+
+            }else{
+               $data['hotel_dates']=rami_get_require_date_format($package->extra_hotel_1_end_date, 'd/m').'-' .rami_get_require_date_format($package->package_end_date, 'd/m'); 
+            }
+        }else{
+             if(rami_get_no_of_days_diff($package->package_start_date, $package->extra_hotel_1_start_date) >1){
+               $data['hotel_dates']=rami_get_require_date_format($package->package_start_date, 'd/m').'-' .rami_get_require_date_format($package->extra_hotel_1_start_date, 'd/m');
+               if(rami_get_no_of_days_diff($package->extra_hotel_1_end_date, $package->extra_hotel_2_start_date) >1){
+                $data['hotel_dates'].=' ,'.rami_get_require_date_format($package->extra_hotel_1_end_date, 'd/m').'-' .rami_get_require_date_format($package->extra_hotel_2_start_date, 'd/m');
+               }
+               $data['hotel_dates'].=' ,'.rami_get_require_date_format($package->extra_hotel_2_end_date, 'd/m').'-' .rami_get_require_date_format($package->package_end_date, 'd/m'); 
+            }else{
+               if(rami_get_no_of_days_diff($package->extra_hotel_1_end_date, $package->extra_hotel_2_start_date) >0){
+                $data['hotel_dates']=rami_get_require_date_format($package->extra_hotel_1_end_date, 'd/m').'-' .rami_get_require_date_format($package->extra_hotel_2_start_date, 'd/m');
+               }
+               $data['hotel_dates'].=' ,'.rami_get_require_date_format($package->extra_hotel_2_end_date, 'd/m').'-' .rami_get_require_date_format($package->package_end_date, 'd/m');
+            }
+        }
         $data['amenities'] = unserialize($package->hotel->hotel_amenities);
         $data['features'] = unserialize($package->hotel->hotel_features);
         $data['hotel_gallery'] = hotel_image::where(['hotel_id' => $package->hotel->id])->get();
@@ -157,6 +287,7 @@ class MobileHomeController extends Controller
                     //$up_flights[$int]['time_taken']=rami_get_no_of_hours_min_diff($flight->departure_time, $flight->arrival_time);
                     if ($int == $total_count) {
                         $fligts_data[$count]['up_desti'] = $flight->flight->location_desti->loc_name;
+                        $up_flights[$count]['up_desti_id'] = $flight->flight->location_desti->id;
                         $fligts_data[$count]['up_arrival_time'] = $flight->arrival_time;
                         $fligts_data[$count]['up_time_taken'] = rami_get_no_of_hours_min_diff($fligts_data[$count]['up_departure_time'], $fligts_data[$count]['up_arrival_time']);
                         $fligts_data[$count]['up_arrival_full_date'] = rami_get_require_date_time_format($flight->arrival_time, 'd') . ' ' . get_month_name_hebrew(rami_get_require_date_time_format($flight->arrival_time, 'm')) . ' ,' . rami_get_require_date_time_format($flight->arrival_time, 'Y');
@@ -173,6 +304,7 @@ class MobileHomeController extends Controller
                 $fligts_data[$count]['up_departure_time_in_month_date'] = rami_get_require_date_time_format($flight_schedule->up_departure_time, 'd') . ' ,' . get_month_name_hebrew(rami_get_require_date_time_format($flight_schedule->up_departure_time, 'm'));
                 $fligts_data[$count]['up_arrival_time_in_month_date'] = rami_get_require_date_time_format($flight_schedule->up_arrival_time, 'd') . ' ,' . get_month_name_hebrew(rami_get_require_date_time_format($flight_schedule->up_arrival_time, 'm'));
                 $fligts_data[$count]['up_desti'] = get_location_name($flight_schedule->flight_name->flight_desti);
+                $fligts_data[$count]['up_desti_id'] = $flight_schedule->flight_name->flight_desti;
                 $fligts_data[$count]['up_source'] = get_location_name($flight_schedule->flight_name->flight_source);
                 $fligts_data[$count]['up_flight_no'] = $flight_schedule->flight_name->flight_number;
                 $fligts_data[$count]['up_time_taken'] = rami_get_no_of_hours_min_diff($flight_schedule->up_departure_time, $flight_schedule->up_arrival_time);
@@ -247,6 +379,7 @@ class MobileHomeController extends Controller
             }
             $car_data[$car_count]['car_title'] = $car_details->car_title;
             $car_data[$car_count]['id'] = $car_details->id;
+            $car_data[$car_count]['loc_id'] = $car_details->location;
             $car_data[$car_count]['car_price'] = get_rami_round_num(get_rami_price_conversion_shekel_to_other(get_rami_car_price($car_details->id, $car_details->max_people, $package->package_start_date), 2));
             $car_count++;
         }

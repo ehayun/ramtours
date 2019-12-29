@@ -141,7 +141,7 @@
                   <select>
                     <option value="0">בחר טיסה</option>
                     @foreach($all_flights as $all_flight)
-                    <option value="{{$all_flight['id']}}" @if($all_flight['id']==$package->cheapest_flight_sche)
+                    <option loc_id="{{$all_flight['up_desti_id']}}" value="{{$all_flight['id']}}" @if($all_flight['id']==$package->cheapest_flight_sche)
                       selected="true" @endif >{{$all_flight['title']}}</option>
                     @endforeach
                   </select>
@@ -152,7 +152,7 @@
                 <label>דירה   ({{$hotel->hotel_code}})<!-- {{$hotel->hotel_code.'('.$hotel_dates.')'}} --></label>
                 <div class="aprt-inner">
                   <select class="rami_pkg_chnage_select chnage_select1" element_no='1' element_name="room">
-                    <option value="0">בחר חדר  {{ $hotel_dates}}</option>
+                    <option value="0">בחר חדר </option>
                     @foreach( $hotel_rooms as $room)
                     <option value="{{$room['id']}}" @if($room['id']==$package->cheapest_room) selected="true" @endif >
                       <span>
@@ -254,7 +254,7 @@
                     @if(empty($car['id']))
                     @continue
                     @endif
-                    <option value="{{$car['id']}}" @if($car['id']==$package->cheapest_car) selected="true" @endif
+                    <option loc_id="{{$car['loc_id']}}" value="{{$car['id']}}" @if($car['id']==$package->cheapest_car) selected="true" @endif
                       >{{$car['car_title']}}</option>
                     @endforeach
                   </select>
@@ -271,14 +271,12 @@
                    <span class="card_price">{{$hotel_card['price']}}</span> יורו למשפחה. </label>
              </div>
              @endif -->
-		@if (is_black_forest($package))
                 <div id="bf_card_cont" class="custom-control custom-checkbox">
                   <input id="bf_card" class="custom-control-input" type="checkbox">
                   <label class="custom-control-label" for="bf_card">
                     אבקש להוסיף לחבילה כרטיס היער השחור משפחתי בעלות של 265 יורו למשפחה.
                   </label>
                 </div>
-		@endif
                 <p class="rt_balinfo">תוספת למבוגר מעל גיל 16 היא 30 יורו ללילה.</p>
                 <p class="rt_balinfo">תוספת תינוק (0-2) לחבילה היא בעלות 150 דולר .</p>
                 <p class="rt_balinfo">שריינו את החופשה שבחרתם בתשלום מקדמה של סה"כ <span
@@ -601,6 +599,17 @@
                   @endforeach
                 </ul>
               </div>
+              @if(!empty($hotel_extra1_card))
+              <div class="col-md-12 ap-cont">
+                <h6 class="cont-head rt_cardhead">מידע על כרטיס </h6>
+                <img src="{{url('ramtours/'.$hotel_extra1_card['card_image'])}}" class="rt_cardimg">
+                <p class="rt_cardesc">המתארחים במקום לינה זה זכאים
+                  <a href=" {{$hotel_extra1_card['link']}}" target="_blank">
+                    {{$hotel_extra1_card['title']}}
+                  </a>
+                </p>
+              </div>
+              @endif
             </div>
           </div>
           @endif
@@ -719,6 +728,17 @@
                   @endforeach
                 </ul>
               </div>
+              @if(!empty($hotel_extra2_card))
+              <div class="col-md-12 ap-cont">
+                <h6 class="cont-head rt_cardhead">מידע על כרטיס </h6>
+                <img src="{{url('ramtours/'.$hotel_extra2_card['card_image'])}}" class="rt_cardimg">
+                <p class="rt_cardesc">המתארחים במקום לינה זה זכאים
+                  <a href=" {{$hotel_extra2_card['link']}}" target="_blank">
+                    {{$hotel_extra2_card['title']}}
+                  </a>
+                </p>
+              </div>
+              @endif
             </div>
           </div>
           @endif
@@ -1117,7 +1137,7 @@
                     @if($car['id']==$package['cheapest_car'])
                     @continue
                     @endif
-                    <li>{{$car['car_title']}}
+                    <li loc_id="{{$car['loc_id']}}">{{$car['car_title']}}
                       <!-- <span class="mcrprz">{{'€'.$car['car_price']}}</span> -->
                     </li>
                     @endforeach

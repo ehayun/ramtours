@@ -1,1 +1,0 @@
-404<?php /**PATH /home/newssurl/domains/new.s248.upress.link/public_html/resources/views/errors/404.blade.php ENDPATH**/ ?>

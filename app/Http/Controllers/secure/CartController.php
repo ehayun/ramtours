@@ -25,11 +25,21 @@ class CartController extends Controller
             if ($request->package_type == 1) {
                 $this->setup_temp_cart($package, $request->adults, $request->childs, $request->infants, $request->cart_id);
                 $car_response = $this->put_cars_in_temp_cart($request->cars, $request->adults, $request->childs, $request->infants, $package->package_start_date);
-                $room_response = $this->put_rooms_in_temp_cart($request->rooms, $request->adults, $request->childs, $package->package_start_date, $package->id);
+                $room_response = $this->put_rooms_in_temp_cart($request->rooms, $request->adults, $request->childs, $package->package_start_date, $package->id,0);
+                if($package->having_extra_hotel_1==1){
+                    $extra_hotel1_room_response = $this->put_rooms_in_temp_cart($request->extra_hotel1_rooms, $request->adults, $request->childs, $package->extra_hotel_1_start_date, $package->id,1);
+                }else{
+                    $extra_hotel1_room_response = array();
+                }
+                if($package->having_extra_hotel_2==1){
+                    $extra_hotel2_room_response = $this->put_rooms_in_temp_cart($request->extra_hotel2_rooms, $request->adults, $request->childs, $package->extra_hotel_2_start_date, $package->id,2);
+                }else{
+                    $extra_hotel2_room_response = array();
+                }
                 $flight_response = $this->put_flights_in_temp_cart($request->flight, $request->adults, $request->childs);
                 $card = $this->put_card_in_temp_cart($package, $request->adults, $request->childs, $request->card);
                 $total = $this->put_profit_total_in_temp_cart($package);
-                return response()->json(array('msg' => 'item added to cart', 'status' => 'success', 'error_room' => $room_response, 'error_fligts' => $flight_response, 'total_euro' => $total), 200);
+                return response()->json(array('msg' => 'item added to cart', 'status' => 'success', 'error_room' => $room_response, 'extra_hotel1_room_error'=>                    $extra_hotel1_room_response, 'extra_hotel2_room_error'=>                    $extra_hotel2_room_response, 'error_fligts' => $flight_response, 'total_euro' => $total), 200);
             }
             // if ($request->package_type == 3) {
             //     $this->setup_temp_cart($package, $request->adults, $request->childs, $request->cart_id);
@@ -121,8 +131,7 @@ class CartController extends Controller
         $prv_temp_cart['car_per_day_price_in_skl'] = $car_price;
         session()->put('temp_cart', $prv_temp_cart);
     }
-    public function put_rooms_in_temp_cart($rooms, $adults, $childs, $date, $pakage_id, $room_hotel_extra=0)
-    {
+    public function put_rooms_in_temp_cart($rooms, $adults, $childs, $date, $pakage_id, $room_hotel_extra=0){
         $total_peoples = $adults + $childs;
         $room_booked_for = 0;
         $room_price = 0;
@@ -177,7 +186,7 @@ class CartController extends Controller
           $prv_temp_cart['room_booked_for'] = $room_booked_for;
           $prv_temp_cart['room_per_day_price_in_skl'] = $room_price;  
         }else{
-          $prv_temp_cart['extra_hotel_2_rooms']=$all_rooms;
+          $prv_temp_cart['extra_hotel_'.$room_hotel_extra.'_rooms']=$all_rooms;
           $prv_temp_cart['extra_hotel_'.$room_hotel_extra.'_room_booked_for'] = $room_booked_for;
           $prv_temp_cart['extra_hotel_'.$room_hotel_extra.'_room_per_day_price_in_skl'] = $room_price;
     
@@ -257,6 +266,7 @@ class CartController extends Controller
     {
         //car calulted for extra one day as per calculation.
         $prv_temp_cart = session()->get('temp_cart');
+        //dd($prv_temp_cart);
         if (empty($package)) {
             $total = $prv_temp_cart['filght_total_price_in_skl'];
             $per_infants_taxes = get_rami_price_conversion_to_shekel(150, 1);
@@ -277,6 +287,24 @@ class CartController extends Controller
                 $hotel_infants_price_per_day = get_rami_price_conversion_to_shekel($hotel_details->infant_price, $hotel_details->infant_price_currency);
             }
         }
+        $extra_hotel_1_infants_price_per_day = 0;
+        if($package->having_extra_hotel_1==1){
+            $hotel_details = hotel::find($package->extra_hotel_1);
+            if (!empty($hotel_details)) {
+                if (!empty($hotel_details->infant_price)) {
+                    $extra_hotel_1_infants_price_per_day = get_rami_price_conversion_to_shekel($hotel_details->infant_price, $hotel_details->infant_price_currency);
+                }
+            }
+        }
+        $extra_hotel_2_infants_price_per_day = 0;
+        if($package->having_extra_hotel_2==1){
+            $hotel_details = hotel::find($package->extra_hotel_2);
+            if (!empty($hotel_details)) {
+                if (!empty($hotel_details->infant_price)) {
+                    $extra_hotel_2_infants_price_per_day = get_rami_price_conversion_to_shekel($hotel_details->infant_price, $hotel_details->infant_price_currency);
+                }
+            }
+        }
         //per_adults_extra charge 30EURO per day after 2 adults
         $per_adults_extra_charge = get_rami_price_conversion_to_shekel(30, 2) * $prv_temp_cart['no_of_days'];
         $prv_temp_cart['per_adults_extra_charge'] = $per_adults_extra_charge;
@@ -286,13 +314,25 @@ class CartController extends Controller
         $per_infants_taxes = get_rami_price_conversion_to_shekel(150, 1);
         $prv_temp_cart['per_infants_taxes'] = $per_infants_taxes;
         $infants_taxes_total = $per_infants_taxes * $prv_temp_cart['infants'];
-        $hotel_infants_price_per_day = $prv_temp_cart['infants'] * $hotel_infants_price_per_day;
+         //we 
+        $prv_temp_cart['hotel_infants_price_per_day'] = $prv_temp_cart['infants'] * $hotel_infants_price_per_day;
+        $prv_temp_cart['extra_hotel_1_infants_price_per_day'] = $prv_temp_cart['infants'] * $extra_hotel_1_infants_price_per_day;
+        $prv_temp_cart['extra_hotel_2_infants_price_per_day'] = $prv_temp_cart['infants'] * $extra_hotel_2_infants_price_per_day;
 
-        $prv_temp_cart['hotel_infants_price_per_day'] = $hotel_infants_price_per_day;
         $no_of_days = $prv_temp_cart['no_of_days'];
+        $main_hotel_days=$prv_temp_cart['no_of_days']-$prv_temp_cart['extra_hotel_1_days']-$prv_temp_cart['extra_hotel_2_days'];
+        $extra_hotel1_days=$prv_temp_cart['extra_hotel_1_days'];
+        $extra_hotel2_days=$prv_temp_cart['extra_hotel_2_days'];
         $car_total_price = $prv_temp_cart['car_per_day_price_in_skl'] * ($no_of_days + 1);
-        $room_total_price = $prv_temp_cart['room_per_day_price_in_skl'] * $no_of_days;
-        $hotel_infants_price_total = $prv_temp_cart['hotel_infants_price_per_day'] * $no_of_days;
+
+        $room_total_price = $prv_temp_cart['room_per_day_price_in_skl'] * $main_hotel_days;
+        $hotel_infants_price_total = $prv_temp_cart['hotel_infants_price_per_day'] * $main_hotel_days;
+
+        $extra_hotel_1_room_total_price = $prv_temp_cart['extra_hotel_1_room_per_day_price_in_skl'] * $extra_hotel1_days;
+        $extra_hotel_1_infants_price_total = $prv_temp_cart['extra_hotel_1_infants_price_per_day'] * $extra_hotel1_days;
+
+        $extra_hotel_2_room_total_price = $prv_temp_cart['extra_hotel_2_room_per_day_price_in_skl'] * $extra_hotel2_days;
+        $extra_hotel_2_infants_price_total = $prv_temp_cart['extra_hotel_2_infants_price_per_day'] * $extra_hotel2_days;
 
         /*
         We have to calculate the package profit according to flight package profit if exist
@@ -302,7 +342,7 @@ class CartController extends Controller
 
         $flight_package_profit = $prv_temp_cart['flight_for_package'];
 
-        $total = $car_total_price + $room_total_price + $prv_temp_cart['filght_total_price_in_skl'] + $hotel_infants_price_total + $infants_taxes_total + $adults_total_extra_charge + $prv_temp_cart['pack_card_total_price'];
+        $total = $car_total_price + $room_total_price + $extra_hotel_1_room_total_price + $extra_hotel_2_room_total_price + $prv_temp_cart['filght_total_price_in_skl'] + $hotel_infants_price_total + $extra_hotel_1_infants_price_total + $extra_hotel_2_infants_price_total + $infants_taxes_total + $adults_total_extra_charge + $prv_temp_cart['pack_card_total_price'];
 
         $package_profit_per_person = get_rami_pakage_profit($package->id, $total);
 
@@ -329,13 +369,14 @@ class CartController extends Controller
 
         $prv_temp_cart['car_total_price_in_skl'] = $car_total_price;
         $prv_temp_cart['room_total_price_in_skl'] = $room_total_price;
+        $prv_temp_cart['extra_hotel_1_room_total_price_in_skl'] = $extra_hotel_1_room_total_price;
+        $prv_temp_cart['extra_hotel_2_room_total_price_in_skl'] = $extra_hotel_2_room_total_price;
         $prv_temp_cart['profit_in_skl'] = $package_profit;
         $prv_temp_cart['profit_per_person_in_skl'] = $package_profit_per_person;
         $prv_temp_cart['total_price_in_skl'] = get_rami_round_num($total);
         $prv_temp_cart['per_person_in_skl'] = $total / $prv_temp_cart['total_peoples'];
         $prv_temp_cart['total_price_in_euro'] = get_rami_round_num(get_rami_price_conversion_shekel_to_other($total, 2));
         $prv_temp_cart['total_price_in_usd'] = get_rami_round_num(get_rami_price_conversion_shekel_to_other($total, 1));
-        //var_dump($prv_temp_cart);
         session()->put('temp_cart', $prv_temp_cart);
         return $prv_temp_cart['total_price_in_euro'];
     }
@@ -386,7 +427,7 @@ class CartController extends Controller
                 'extra_hotel_2_room_per_day_price_in_skl' => 0,
                 'extra_hotel_1_room_booked_for' => 0,
                 'extra_hotel_2_room_booked_for' => 0,
-                'room_booked_for' => 0
+                'room_booked_for' => 0,
                 'total_price_in_euro' => 0,
                 'total_price_in_usd' => 0,
                 'car_total_price_in_skl' => 0,
@@ -406,7 +447,7 @@ class CartController extends Controller
                 $temp_cart['having_extra_hotel_1']=1;
                 $temp_cart['extra_hotel_1_days']=rami_get_no_of_days_diff($package->extra_hotel_1_start_date, $package->extra_hotel_1_end_date);
             }
-            if($package->having_extra_hote2_==1){
+            if($package->having_extra_hotel_2==1){
                 $temp_cart['having_extra_hotel_2']=1;
                 $temp_cart['extra_hotel_2_days']=rami_get_no_of_days_diff($package->extra_hotel_2_start_date, $package->extra_hotel_2_end_date);
             }
@@ -419,6 +460,8 @@ class CartController extends Controller
         $car_error = 0;
         $flight_error = 0;
         $room_error = 0;
+        $extra_hotel_1_room_error=0;
+        $extra_hotel_2_room_error=0;
         $temp_cart = session()->get('temp_cart');
         if (empty($temp_cart)) {
             //return response()->json(array('msg' => 'Cart Is empty', 'status' => 'fail', 'car_error' => $car_error, 'room_error' => $room_error, 'flight_error' => $flight_error), 200);
@@ -432,6 +475,7 @@ class CartController extends Controller
             return response()->json(array('msg' => 'עגלת הקניות ריקה  ', 'status' => 'fail', 'car_error' => $car_error, 'room_error' => $room_error, 'flight_error' => $flight_error), 200);
         }
         if ($temp_cart['package_type'] == 1) {
+            
             if ($temp_cart['total_peoples_for_car'] > $temp_cart['car_booked_for']) {
                 $car_error = 1;
             }
@@ -441,8 +485,14 @@ class CartController extends Controller
             if ($temp_cart['total_peoples'] > $temp_cart['flight_sch_booked_for']) {
                 $flight_error = 1;
             }
-            if (($car_error == 1) || ($room_error == 1) || ($flight_error == 1)) {
-                return response()->json(array('msg' => '', 'status' => 'fail', 'car_error' => $car_error, 'room_error' => $room_error, 'flight_error' => $flight_error), 200);
+            if(($temp_cart['total_peoples'] > $temp_cart['extra_hotel_1_room_booked_for'])&&($temp_cart['having_extra_hotel_1']==1)){
+                $extra_hotel_1_room_error=1;
+            }
+            if(($temp_cart['total_peoples'] > $temp_cart['extra_hotel_2_room_booked_for'])&&($temp_cart['having_extra_hotel_2']==1)){
+                $extra_hotel_2_room_error=1;
+            }
+            if (($car_error == 1) || ($room_error == 1) || ($flight_error == 1)|| ($extra_hotel_1_room_error == 1)|| ($extra_hotel_2_room_error == 1)) {
+                return response()->json(array('msg' => '', 'status' => 'fail', 'car_error' => $car_error, 'room_error' => $room_error, 'flight_error' => $flight_error, 'extra_hotel_1_room_error'=>$extra_hotel_1_room_error, 'extra_hotel_2_room_error'=>$extra_hotel_2_room_error), 200);
 
             } else {
 
