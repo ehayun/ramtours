@@ -35,6 +35,38 @@
    }
    return all_rooms;
   }
+  function rami_getting_package_hotel_extra1_room(){
+   var rooms=$('.rami_package_hotel_extra1_room').find('select').length;
+   var all_rooms=[];
+   var count=1;
+   var i=0;
+   while (rooms >= count) {
+      ++i;
+      var ele='chnage_select'+i;
+      if($('.rami_package_hotel_extra1_room').find('.'+ele).length < 1){
+        continue;
+      }
+      all_rooms[count]={room_id:$('.rami_package_hotel_extra1_room .'+ele).val(), room_class_id:i};
+      count++;
+   }
+   return all_rooms;
+  }
+  function rami_getting_package_hotel_extra2_room(){
+   var rooms=$('.rami_package_hotel_extra2_room').find('select').length;
+   var all_rooms=[];
+   var count=1;
+   var i=0;
+   while (rooms >= count) {
+      ++i;
+      var ele='chnage_select'+i;
+      if($('.rami_package_hotel_extra2_room').find('.'+ele).length < 1){
+        continue;
+      }
+      all_rooms[count]={room_id:$('.rami_package_hotel_extra2_room .'+ele).val(), room_class_id:i};
+      count++;
+   }
+   return all_rooms;
+  }
   function rami_getting_package_cars(){
    var cars=$('.rami_package_cars').find('select').length;
    var count=1;
@@ -90,7 +122,7 @@
   $.ajax({
     url: '{{url('cart-setup')}}',
     type: 'POST',
-    data: {_token: _token, package_id:package_id, package_type:package_type, cart_id:window.cart_id, adults:rami_pakage_adults, childs:rami_pakage_childs, infants:rami_pakage_infants, rooms:rami_getting_package_rooms(), cars:rami_getting_package_cars(), flight:$('.rami_package_flights').find('select').val(), card:card},
+    data: {_token: _token, package_id:package_id, package_type:package_type, cart_id:window.cart_id, adults:rami_pakage_adults, childs:rami_pakage_childs, infants:rami_pakage_infants, rooms:rami_getting_package_rooms(), extra_hotel1_rooms:rami_getting_package_hotel_extra1_room(), extra_hotel2_rooms:rami_getting_package_hotel_extra2_room(), cars:rami_getting_package_cars(), flight:$('.rami_package_flights').find('select').val(), card:card},
   })
   .done(function(res) {
     if(res.status=='success'){

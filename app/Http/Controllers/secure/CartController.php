@@ -121,7 +121,7 @@ class CartController extends Controller
         $prv_temp_cart['car_per_day_price_in_skl'] = $car_price;
         session()->put('temp_cart', $prv_temp_cart);
     }
-    public function put_rooms_in_temp_cart($rooms, $adults, $childs, $date, $pakage_id)
+    public function put_rooms_in_temp_cart($rooms, $adults, $childs, $date, $pakage_id, $room_hotel_extra=0)
     {
         $total_peoples = $adults + $childs;
         $room_booked_for = 0;
@@ -172,9 +172,18 @@ class CartController extends Controller
             }
         }
         $prv_temp_cart = session()->get('temp_cart');
-        $prv_temp_cart['rooms'] = $all_rooms;
-        $prv_temp_cart['room_booked_for'] = $room_booked_for;
-        $prv_temp_cart['room_per_day_price_in_skl'] = $room_price;
+        if($room_hotel_extra==0){
+          $prv_temp_cart['rooms'] = $all_rooms;
+          $prv_temp_cart['room_booked_for'] = $room_booked_for;
+          $prv_temp_cart['room_per_day_price_in_skl'] = $room_price;  
+        }else{
+          $prv_temp_cart['extra_hotel_2_rooms']=$all_rooms;
+          $prv_temp_cart['extra_hotel_'.$room_hotel_extra.'_room_booked_for'] = $room_booked_for;
+          $prv_temp_cart['extra_hotel_'.$room_hotel_extra.'_room_per_day_price_in_skl'] = $room_price;
+    
+                
+        }
+        
         session()->put('temp_cart', $prv_temp_cart);
         return $remove_room;
 
@@ -367,6 +376,17 @@ class CartController extends Controller
                 'car_booked_for' => 0,
                 'flight_sch_booked_for' => 0,
                 'total_price_in_skl' => 0,
+                'having_extra_hotel_1'=>0,
+                'having_extra_hotel_2'=>0,
+                'extra_hotel_1_days'=>0,
+                'extra_hotel_2_days'=>0,
+                'extra_hotel_1_room_total_price_in_skl' => 0,
+                'extra_hotel_2_room_total_price_in_skl' => 0,
+                'extra_hotel_1_room_per_day_price_in_skl' => 0,
+                'extra_hotel_2_room_per_day_price_in_skl' => 0,
+                'extra_hotel_1_room_booked_for' => 0,
+                'extra_hotel_2_room_booked_for' => 0,
+                'room_booked_for' => 0
                 'total_price_in_euro' => 0,
                 'total_price_in_usd' => 0,
                 'car_total_price_in_skl' => 0,
@@ -378,8 +398,18 @@ class CartController extends Controller
                 'per_person_in_skl' => 0,
                 'flight_sch' => 0,
                 'rooms' => array(),
+                'extra_hotel_1_rooms'=>array(),
+                'extra_hotel_2_rooms'=>array(),
                 'cars' => array(),
             );
+            if($package->having_extra_hotel_1==1){
+                $temp_cart['having_extra_hotel_1']=1;
+                $temp_cart['extra_hotel_1_days']=rami_get_no_of_days_diff($package->extra_hotel_1_start_date, $package->extra_hotel_1_end_date);
+            }
+            if($package->having_extra_hote2_==1){
+                $temp_cart['having_extra_hotel_2']=1;
+                $temp_cart['extra_hotel_2_days']=rami_get_no_of_days_diff($package->extra_hotel_2_start_date, $package->extra_hotel_2_end_date);
+            }
         }
         session()->put('temp_cart', $temp_cart);
         return true;

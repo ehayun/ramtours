@@ -79,13 +79,9 @@ $package='';
                             {!! get_form_error_msg($errors, 'is_display_pkg_title') !!}
                         </div>
                         <div class="form-group form-float">
-
                             <div class="form-line">
-
                                 <select class="form-control show-tick rami_package_type" name="package_type" value="">
-
                                     <option value="">Select One</option>
-
                                     <option value="1"
                                         {{ get_edit_select_check_pvr_old_value_with_obj('package_type', $package,'package_type', '1', 'select')}}>
                                         flight+Hotel+car</option>
@@ -180,14 +176,12 @@ $package='';
                                     id='package_hotel_id' data-live-search="true"
                                     prv_hotel="{{get_edit_input_pvr_old_value_with_obj('package_hotel',$package, 'package_hotel')}}">
                                 </select>
-                                <label class="form-label">Hotel</label>
+                                <label class="form-label">Main Hotel</label>
                             </div>
                             {!! get_form_error_msg($errors, 'package_hotel') !!}
                         </div>
                         <div class="form-group form-float rami_hotel_all">
-
                             <div class="form-line">
-
                                 <select class="form-control show-tick package_hotel_room" name="package_hotel_room[]"
                                     id="hotel_room_id" multiple="" data-live-search="true"
                                     prv_rooms="{{ rami_get_prv_serialize_data('package_hotel_room',$package, 'package_hotel_room') }}">
@@ -195,9 +189,7 @@ $package='';
                                 </select>
                                 <label class="form-label">Room</label>
                             </div>
-
                             {!! get_form_error_msg($errors, 'package_hotel_room') !!}
-
                         </div>
                         <label id="room_stock">Room Stock</label>
 
@@ -208,6 +200,164 @@ $package='';
                         @endforeach
                         <div class="row" id="package_rooms_stock" style="border: 1px solid #e0e0e0; margin: 0px;">
                         </div>
+                        <div id="package_rooms_stock_error" id="display:none">
+                            @foreach (rami_get_prv_serialize_data_array('package_hotel_room',$package, 'package_hotel_room')
+                            as $room)
+                            {!! get_form_error_msg($errors, 'room_stock_'.$room) !!}
+                            @endforeach
+                        </div>
+                        <!-- //HOTEL ONE STRAT HERE -->
+                         <div class="form-group form-float having_extra_hotel">
+
+                            <label class="profit">Package having Additional Hotel 1 : </label>
+
+                            <input type="radio" name="having_extra_hotel_1" id="add_hotel_1_yes" class="with-gap radio-col-amber"
+                                value="1"
+                                {!!get_edit_select_check_pvr_old_value_with_obj('having_extra_hotel_1',$package,'having_extra_hotel_1',1, 'chacked'
+                                )!!}>
+
+                            <label for="add_hotel_1_yes" class="m-l-10 m-r-10">yes</label>
+
+                            <input type="radio" name="having_extra_hotel_1" id="add_hotel_1_no" class="with-gap radio-col-amber"
+                                value="0"
+                                {!!get_edit_select_check_pvr_old_value_with_obj('having_extra_hotel_1',$package,'having_extra_hotel_1',0, 'chacked'
+                                )!!}>
+                            <label for="add_hotel_1_no" class="m-l-10 m-r-10">No</label>
+                            {!! get_form_error_msg($errors, 'having_extra_hotel_1') !!}
+                        </div>
+                         <div class="form-group form-float rami_hotel_all hotel_1_ele">
+                            <div class="form-line">
+                                <select class="form-control show-tick package_hotel" name="extra_hotel_1"
+                                    id='extra_hotel_1' data-live-search="true">
+                                    <option value="">Select Hotel</option>
+                                    @foreach($all_hotels as $hotel)
+                                    <option value="{{$hotel->id}}"
+                                        {{get_edit_select_check_pvr_old_value_with_obj('extra_hotel_1', $package, 'extra_hotel_1', $hotel->id, 'select')}}>
+                                        {{$hotel->hotel_code}}</option>
+                                    @endforeach
+                                </select>
+                                <label class="form-label">Additional Hotel 1</label>
+                            </div>
+                            {!! get_form_error_msg($errors, 'extra_hotel_1') !!}
+                        </div>
+                        <div class="form-group form-float hotel_1_ele">
+                            <div class="form-line">
+                                <label class="form-label">Hotel Start Date</label>
+                                <input type="text" class="form-control flight_start_date" name=
+                                "extra_hotel_1_start_date"
+                                    value="{!! get_edit_input_pvr_old_value_with_obj('extra_hotel_1_start_date',$package, 'extra_hotel_1_start_date')!!}">
+                                {!! get_form_error_msg($errors, 'extra_hotel_1_start_date') !!}
+                            </div>
+                        </div>
+                        <div class="form-group form-float hotel_1_ele">
+                            <div class="form-line">
+                                <label class="form-label">Hotel End Date</label>
+                                <input type="text" class="form-control flight_start_date" name="extra_hotel_1_end_date"
+                                    value="{!! get_edit_input_pvr_old_value_with_obj('extra_hotel_1_end_date',$package, 'extra_hotel_1_end_date')!!}">
+                                {!! get_form_error_msg($errors, 'extra_hotel_1_end_date') !!}
+                            </div>
+                        </div>
+                        <div class="form-group form-float hotel_1_ele">
+                            <div class="form-line">
+                                <select class="form-control show-tick   extra_hotel_1_rooms" name=" extra_hotel_1_rooms[]"
+                                    id="extra_hotel_1_rooms" multiple="" data-live-search="true"
+                                    prv_rooms="{{ rami_get_prv_serialize_data('extra_hotel_1_rooms',$package, 'extra_hotel_1_rooms') }}">
+                                    <option value="">Select Room</option>
+                                </select>
+                                <label class="form-label">Room</label>
+                            </div>
+                            {!! get_form_error_msg($errors, 'extra_hotel_1_rooms') !!}
+                        </div>
+                         <label id="extra_hotel_1_room_stock_lebel " class="hotel_1_ele">Room Stock</label>
+                            @foreach (rami_get_prv_serialize_data_array('extra_hotel_1_rooms',$package, 'extra_hotel_1_rooms')
+                            as $room)
+                            <input type="hidden" name="room_prv_stock_{{$room}}"
+                                value=" {{get_edit_input_pvr_old_value('room_stock_'.$room, get_rami_package_room_avalible($package_id, $room))}}">
+                            @endforeach
+                            <div class="row" id="extra_hotel_1_room_stock" class="hotel_1_ele" style="border: 1px solid #e0e0e0; margin: 0px;">
+                             </div>
+                              <div id="extra_hotel_1_room_stock_error" id="display:none">
+                                    @foreach (rami_get_prv_serialize_data_array('extra_hotel_1_rooms',$package, 'extra_hotel_1_rooms')
+                                    as $room)
+                                    {!! get_form_error_msg($errors, 'room_stock_'.$room) !!}
+                                    @endforeach
+                               </div>
+
+                          <!-- //HOTEL tWO STRAT HERE -->
+                          <div class="form-group form-float hotel_1_ele">
+
+                            <label class="profit">Package having Additional Hotel 2 : </label>
+
+                            <input type="radio" name="having_extra_hotel_2" id="add_hotel_2_yes" class="with-gap radio-col-amber"
+                                value="1"
+                                {!!get_edit_select_check_pvr_old_value_with_obj('having_extra_hotel_1',$package,'having_extra_hotel_1',1, 'chacked'
+                                )!!}>
+
+                            <label for="add_hotel_2_yes" class="m-l-10 m-r-10">yes</label>
+
+                            <input type="radio" name="having_extra_hotel_2" id="add_hotel_2_no" class="with-gap radio-col-amber"
+                                value="0"
+                                {!!get_edit_select_check_pvr_old_value_with_obj('having_extra_hotel_1',$package,'having_extra_hotel_1',0, 'chacked'
+                                )!!}>
+                            <label for="add_hotel_2_no" class="m-l-10 m-r-10">No</label>
+                            {!! get_form_error_msg($errors, 'having_extra_hotel_1') !!}
+                        </div>
+                         <div class="form-group form-float rami_hotel_all hotel_2_ele">
+                            <div class="form-line">
+                                <select class="form-control show-tick package_hotel" name="extra_hotel_2" id='extra_hotel_2' data-live-search="true">
+                                    <option value="">Select Hotel</option>
+                                    @foreach($all_hotels as $hotel)
+                                    <option value="{{$hotel->id}}"
+                                        {{get_edit_select_check_pvr_old_value_with_obj('extra_hotel_2', $package, 'extra_hotel_2', $hotel->id, 'select')}}>
+                                        {{$hotel->hotel_code}}</option>
+                                    @endforeach
+                                </select>
+                                <label class="form-label">Additional Hotel 2</label>
+                            </div>
+                            {!! get_form_error_msg($errors, 'extra_hotel_2') !!}
+                        </div>
+                        <div class="form-group form-float hotel_2_ele">
+                            <div class="form-line">
+                                <label class="form-label">hotel Start Date</label>
+                                <input type="text" class="form-control flight_start_date" name="extra_hotel_2_start_date"
+                                    value="{!! get_edit_input_pvr_old_value_with_obj('extra_hotel_2_start_date',$package, 'extra_hotel_2_start_date')!!}">
+                                {!! get_form_error_msg($errors, 'extra_hotel_2_start_date') !!}
+                            </div>
+                        </div>
+                        <div class="form-group form-float hotel_2_ele">
+                            <div class="form-line">
+                                <label class="form-label">hotel End Date</label>
+                                <input type="text" class="form-control flight_start_date" name="extra_hotel_2_end_date"
+                                    value="{!! get_edit_input_pvr_old_value_with_obj('extra_hotel_2_end_date',$package, 'extra_hotel_2_end_date')!!}">
+                                {!! get_form_error_msg($errors, 'extra_hotel_2_end_date') !!}
+                            </div>
+                        </div>
+                        <div class="form-group form-float hotel_2_ele">
+                            <div class="form-line">
+                                <select class="form-control show-tick   extra_hotel_2_rooms" name=" extra_hotel_2_rooms[]"
+                                    id="extra_hotel_2_rooms" multiple="" data-live-search="true"
+                                    prv_rooms="{{ rami_get_prv_serialize_data('extra_hotel_2_rooms',$package, 'extra_hotel_2_rooms') }}">
+                                    <option value="">Select Room</option>
+                                </select>
+                                <label class="form-label">Room</label>
+                            </div>
+                            {!! get_form_error_msg($errors, 'package_hotel_room') !!}
+                        </div>
+                         <label id="extra_hotel_2_room_stock_lebel " class="hotel_2_ele">Room Stock</label>
+                            @foreach (rami_get_prv_serialize_data_array('extra_hotel_2_rooms',$package, 'extra_hotel_2_rooms')
+                            as $room)
+                            <input type="hidden" name="room_prv_stock_{{$room}}"
+                                value=" {{get_edit_input_pvr_old_value('room_stock_'.$room, get_rami_package_room_avalible($package_id, $room))}}">
+                            @endforeach
+                            <div class="row" id="extra_hotel_2_room_stock" class="hotel_2_ele" style="border: 1px solid #e0e0e0; margin: 0px;">
+                             </div>
+                             <div id="extra_hotel_2_room_stock_error" id="display:none">
+                                    @foreach (rami_get_prv_serialize_data_array('extra_hotel_2_rooms',$package, 'extra_hotel_2_rooms')
+                                    as $room)
+                                    {!! get_form_error_msg($errors, 'room_stock_'.$room) !!}
+                                    @endforeach
+                                </div>
+                       
                         <div class="form-group form-float rami_car_pack">
                             <div class="form-line">
                                 <select class="form-control show-tick package_car" name="package_car[]" id="car_id"
@@ -424,9 +574,23 @@ $package='';
             $('#add_package').on('change', '#package_hotel_id', function (event) {
                 event.preventDefault();
                 var hotel_id = $(this).val();
-                get_room_via_hotel_id(hotel_id);
+                get_room_via_hotel_id(hotel_id, '#hotel_room_id');
                 $('#package_rooms_stock').empty();
                 $('#package_rooms_stock').hide();
+            });
+            $('#add_package').on('change', '#extra_hotel_1', function (event) {
+                event.preventDefault();
+                var hotel_id = $(this).val();
+                get_room_via_hotel_id(hotel_id, '#extra_hotel_1_rooms');
+                $('#extra_hotel_1_room_stock').empty();
+                $('#extra_hotel_1_room_stock').hide();
+            });
+            $('#add_package').on('change', '#extra_hotel_2', function (event) {
+                event.preventDefault();
+                var hotel_id = $(this).val();
+                get_room_via_hotel_id(hotel_id, '#extra_hotel_2_rooms');
+                $('#extra_hotel_2_room_stock').empty();
+                $('#extra_hotel_2_room_stock').hide();
             });
             if ($('#airline_id').val() !== '') {
                 var airline_id = $('#airline_id').val();
@@ -506,7 +670,6 @@ $package='';
             });
         });
         function get_hotel_from_loc_id(loc_id) {
-            //alert('ajax working');
             $.ajax({
                 url: "{{ url('/get_hotel_from_loc_id') }}",
                 type: 'POST',
@@ -532,15 +695,14 @@ $package='';
                     $('#package_hotel_id').selectpicker('refresh');
                     if ($('#package_hotel_id').val() !== '') {
                         var hotel_id = $('#package_hotel_id').val();
-                        get_room_via_hotel_id(hotel_id);
+                        get_room_via_hotel_id(hotel_id, '#hotel_room_id');
                     }
                 })
                 .fail(function () {
                     alert('something went wrong.');
                 })
         }
-        function get_room_via_hotel_id(hotel_id) {
-            //alert('ajax working');
+        function get_room_via_hotel_id(hotel_id, elemenrt_id, room_id='#hotel_room_id', rooms_stock='#package_rooms_stock') {
             $.ajax({
                 url: "{{ url('/get_hotel_room') }}",
                 type: 'POST',
@@ -548,7 +710,7 @@ $package='';
             })
                 .done(function (res) {
                     var option = '';
-                    var prv_rooms = $('#hotel_room_id').attr('prv_rooms');
+                    var prv_rooms = $(elemenrt_id).attr('prv_rooms');
                     prv_rooms = prv_rooms.split(',');
                     var selected = '';
                     if (res.status == 'success') {
@@ -562,12 +724,12 @@ $package='';
                             option += '<option value="' + el.id + '" ' + selected + '>' + el.room_title + '</option>';
                         });
                     }
-                    $('#hotel_room_id').html();
-                    $('#hotel_room_id').html(option);
-                    $('#hotel_room_id').selectpicker('refresh');
-                    if ($('#hotel_room_id').val().length > 0) {
-                        drew_room_hotel_section(prv_rooms);
-                        $.each($('#hotel_room_id').val(), function (index, val) {
+                    $(elemenrt_id).html();
+                    $(elemenrt_id).html(option);
+                    $(elemenrt_id).selectpicker('refresh');
+                    if ($(elemenrt_id).val().length > 0) {
+                        drew_room_hotel_section(prv_rooms,room_id,rooms_stock);
+                        $.each($(elemenrt_id).val(), function (index, val) {
                             var room_stock = $('input[name=room_prv_stock_' + val + ']').val();
                             if (typeof room_stock !== "undefined") {
                                 $('input[name=room_stock_' + val + ']').val(room_stock);
@@ -664,13 +826,52 @@ $package='';
             //$('input[name=package_title]').val(text);
         }
         $('#hotel_room_id').change(function (event) {
-            drew_room_hotel_section($(this).val())
+            drew_room_hotel_section($(this).val(), '#hotel_room_id', '#package_rooms_stock');
         });
-        function drew_room_hotel_section($rooms) {
+        $('#extra_hotel_1_rooms').change(function (event) {
+            drew_room_hotel_section($(this).val(), '#extra_hotel_1_rooms', '#extra_hotel_1_room_stock');
+        });
+        $('#extra_hotel_2_rooms').change(function (event) {
+            drew_room_hotel_section($(this).val(), '#extra_hotel_2_rooms', '#extra_hotel_2_room_stock');
+        });
+        $('input[name=having_extra_hotel_1]').change(function(event) {
+           if($(this).val()==1){
+            $('.hotel_1_ele').slideDown();
+           }else{
+            $('.hotel_1_ele').slideUp();
+           }
+        });
+        $('input[name=having_extra_hotel_2]').change(function(event) {
+           if($(this).val()==1){
+            $('.hotel_2_ele').slideDown();
+           }else{
+            $('.hotel_2_ele').slideUp();
+           }
+        });
+        if($('input[name=having_extra_hotel_2]:checked').val()==1){
+            $('.hotel_2_ele').slideDown();
+        }else{
+          $('.hotel_2_ele').slideUp();  
+        }
+        if($('input[name=having_extra_hotel_1]:checked').val()==1){
+            $('.hotel_1_ele').slideDown();
+        }else{
+            $('.hotel_1_ele').slideUp();
+        }
+         if ($('#extra_hotel_1').val() !== '') {
+                var hotel_id = $(extra_hotel_1).val();
+                get_room_via_hotel_id(hotel_id, '#extra_hotel_1_rooms', '#extra_hotel_1_rooms', '#extra_hotel_1_room_stock');
+            }
+            if ($('#extra_hotel_1').val() !== '') {
+                var hotel_id = $(extra_hotel_2).val();
+                get_room_via_hotel_id(hotel_id, '#extra_hotel_2_rooms', '#extra_hotel_2_rooms', '#extra_hotel_2_room_stock');
+            }
+
+        function drew_room_hotel_section($rooms, element, drew_element) {
             var html = ""
             $.each($rooms, function (index, val) {
                 html += '<div class="col-md-3" style="padding-top: 25px; font-size: 16px;">';
-                html += '<span class="text-center page-header">' + $('#hotel_room_id option[value=' + val + ']').html() + '</span>';
+                html += '<span class="text-center page-header">' + $(element+' option[value=' + val + ']').html() + '</span>';
                 html += '</div>';
                 html += '<div class="col-md-9">';
                 html += '<div class="form-group form-float">';
@@ -682,9 +883,19 @@ $package='';
                 html += ' </div>';
 
             });
-            $('#package_rooms_stock').empty();
-            $('#package_rooms_stock').append(html);
-            $('#package_rooms_stock').show();
+            $(drew_element).empty();
+            $(drew_element).append(html);
+            $(drew_element).show();
+            drew_error_eleemnts_error(drew_element+'_error');
+        }
+        function drew_error_eleemnts_error(element) {
+            $(element+' label').each(function (index, el) {
+                var id = $(this).attr('id');
+                var new_id = id.replace("-error", "");
+                $('input[name=' + new_id + ']').after('<label id="' + id + '" class="error" for="' + new_id + '">' + $(this).text() + '</label>');
+                $(this).remove();
+            });
+       
         }
     </script>
     @endsection

@@ -149,10 +149,10 @@
               </div>
 
               <div class="pkg-select apart rami_cart_select_div rami_package_room">
-                <label>דירה</label>
+                <label>דירה   ({{$hotel->hotel_code}})<!-- {{$hotel->hotel_code.'('.$hotel_dates.')'}} --></label>
                 <div class="aprt-inner">
                   <select class="rami_pkg_chnage_select chnage_select1" element_no='1' element_name="room">
-                    <option value="0">בחר חדר</option>
+                    <option value="0">בחר חדר  {{ $hotel_dates}}</option>
                     @foreach( $hotel_rooms as $room)
                     <option value="{{$room['id']}}" @if($room['id']==$package->cheapest_room) selected="true" @endif >
                       <span>
@@ -179,6 +179,72 @@
                       aria-hidden="true"></i></a>
                 </div>
               </div>
+              @if((!empty($hotel_extra1)) && (!empty($hotel_extra1_rooms)))
+              <div class="pkg-select apart rami_cart_select_div rami_package_hotel_extra1_room">
+                <label>דמלון נוסף  1 {{$hotel_extra1->hotel_code.'('.$hotel_extra1_dates.')'}}</label>
+                <div class="aprt-inner">
+                  <select class="rami_pkg_chnage_select chnage_select1" element_no='1' element_name="hotel_extra1_room">
+                    <option value="0">בחר חדר </option>
+                    @foreach( $hotel_extra1_rooms as $room)
+                    <option value="{{$room['id']}}" @if($room['id']==$package->cheapest_room) selected="true" @endif >
+                      <span>
+                        <img src="{{url('/assets/front/images')}}/ramtours-rooms.png">
+                        @if(!empty($room['room_area']))
+                        {{$room['room_type']}} - {{$room['room_area']}} מ"ר |
+                        @else
+                        {{$room['room_type']}} |
+                        @endif
+
+                      </span>
+                      <span>
+                        &nbsp;מתאים להרכב של עד {{$room['max_people']}} נפשות <span
+                          dir="ltr">({{$room['room_code']}})</span>|
+                      </span>
+                      <span>
+                        זמין במלאי {{$room['room_avalible']}} יחידות
+
+                      </span>
+                    </option>
+                    @endforeach
+                  </select>
+                  <a href="javascript:void(0);" class="add_button" title="Add More room"><i class="fa fa-plus"
+                      aria-hidden="true"></i></a>
+                </div>
+              </div>
+              @endif
+              @if((!empty($hotel_extra2)) && (!empty($hotel_extra2_rooms)))
+              <div class="pkg-select apart rami_cart_select_div rami_package_hotel_extra2_room">
+                <label>מלון נוסף  2 {{$hotel_extra2->hotel_code.'('.$hotel_extra2_dates.')'}}</label>
+                <div class="aprt-inner">
+                  <select class="rami_pkg_chnage_select chnage_select1" element_no='1' element_name="hotel_extra2_room">
+                    <option value="0">בחר חדר </option>
+                    @foreach( $hotel_extra2_rooms as $room)
+                    <option value="{{$room['id']}}" @if($room['id']==$package->cheapest_room) selected="true" @endif >
+                      <span>
+                        <img src="{{url('/assets/front/images')}}/ramtours-rooms.png">
+                        @if(!empty($room['room_area']))
+                        {{$room['room_type']}} - {{$room['room_area']}} מ"ר |
+                        @else
+                        {{$room['room_type']}} |
+                        @endif
+
+                      </span>
+                      <span>
+                        &nbsp;מתאים להרכב של עד {{$room['max_people']}} נפשות <span
+                          dir="ltr">({{$room['room_code']}})</span>|
+                      </span>
+                      <span>
+                        זמין במלאי {{$room['room_avalible']}} יחידות
+
+                      </span>
+                    </option>
+                    @endforeach
+                  </select>
+                  <a href="javascript:void(0);" class="add_button" title="Add More room"><i class="fa fa-plus"
+                      aria-hidden="true"></i></a>
+                </div>
+              </div>
+               @endif
               <div class="pkg-select apart rami_cart_select_div rami_package_cars">
                 <label>מבחר סוג רכב </label>
                 <div class="aprt-inner">
@@ -205,14 +271,14 @@
                    <span class="card_price">{{$hotel_card['price']}}</span> יורו למשפחה. </label>
              </div>
              @endif -->
-             @if (is_black_forest($package))
+		@if (is_black_forest($package))
                 <div id="bf_card_cont" class="custom-control custom-checkbox">
                   <input id="bf_card" class="custom-control-input" type="checkbox">
                   <label class="custom-control-label" for="bf_card">
                     אבקש להוסיף לחבילה כרטיס היער השחור משפחתי בעלות של 265 יורו למשפחה.
                   </label>
                 </div>
-                @endif
+		@endif
                 <p class="rt_balinfo">תוספת למבוגר מעל גיל 16 היא 30 יורו ללילה.</p>
                 <p class="rt_balinfo">תוספת תינוק (0-2) לחבילה היא בעלות 150 דולר .</p>
                 <p class="rt_balinfo">שריינו את החופשה שבחרתם בתשלום מקדמה של סה"כ <span
@@ -371,7 +437,7 @@
               </div>
             </div>
           </div>
-          <div class="pkg-section" id="aprment">
+            <div class="pkg-section" id="aprment">
             <div class="row">
               <div class="col-md-12 bd-sec">
                 <div class="bd-head">
@@ -494,6 +560,242 @@
               @endforeach
             </div>
           </div>
+          @if(!empty($hotel_extra1))
+           <div class="pkg-section" id="extra1_aprment">
+            <div class="row">
+              <div class="col-md-12 bd-sec">
+                <div class="bd-head">
+                  <h3>מלון נוסף  1 {{$hotel_extra1->hotel_code.'('.$hotel_extra1_dates.')'}}<span class="rt_headd"> </span><img
+                      src="{{url('/assets/front/images')}}/rooms.png"></h3>
+                </div>
+              </div>
+              <div class="col-md-12 ap-cont">
+                <h6 class="cont-head">{{$hotel_extra1->hotel_display_name }}</h6>
+                <p>כתובת: {{ $hotel_extra1->hotel_code }} - {{ $hotel_extra1->hotel_address }} </p>
+              </div>
+              <div class="col-md-12 ap-cont">
+                <h6 class="cont-head">מידע כללי</h6>
+                <p>{!! $hotel_extra1->hotel_desc !!} </p>
+              </div>
+              @if(!empty($hotel_extra1->hotel_instruction_text))
+              <div class="col-md-12 ap-cont">
+                <h6 class="cont-head">אטרקציות</h6>
+                <p>
+                  {!! $hotel_extra1->hotel_instruction_text !!}
+                </p>
+              </div>
+              @endif
+              <div class="col-md-12 ap-cont">
+                <h6 class="cont-head">פעילויות בקרבת מקום</h6>
+                <ul>
+                  @foreach($hotel_extra1_amenities as $amenity)
+                  <li>{{ get_hotel_amenities($amenity) }}</li>
+                  @endforeach
+                </ul>
+              </div>
+              <div class="col-md-12 ap-cont">
+                <h6 class="cont-head">מתקני מקום הלינה </h6>
+                <ul>
+                  @foreach($hotel_extra1_features as $feature)
+                  <li>{{ get_hotel_features($feature) }}</li>
+                  @endforeach
+                </ul>
+              </div>
+            </div>
+          </div>
+          @endif
+          @if((!empty($hotel_extra1)) && (!empty($hotel_extra1_gallery)))
+          <div class="pkg-section" id="gallery_hotel_extra1">
+            <div class="row">
+              <div class="col-md-12 bd-sec">
+                <div class="bd-head">
+                  <h3>גלריה <span class="rt_headd"></span><img
+                      src="{{url('/assets/front/images')}}/gallery.png"></h3>
+                </div>
+              </div>
+              <div class="col-md-12 gallery">
+                @foreach($hotel_extra1_gallery as $img)
+                <div class="pics">
+                  <a data-fancybox="gallery" href="{{url('ramtours/'.$img->image)}}">
+                    <img class="img-fluid" src="{{url('ramtours/'.$img->image)}}" alt="{{$img->title}}">
+                  </a>
+                  @if(($loop->index==5)&&($hotel_extra1_gallery_count >0))
+                  <div class="more_img">
+                    +{{$hotel_extra1_gallery_count }}
+                  </div>
+                  @endif
+                </div>
+                @endforeach
+              </div>
+            </div>
+          </div>
+          @endif
+          @if((!empty($hotel_extra1)) && (!empty($hotel_extra1_rooms)))
+          <div class="pkg-section pack_room" id="hotel_rooms">
+            <div class="row">
+              <div class="col-md-12 bd-sec">
+                <div class="bd-head">
+                  <h3><img src="{{url('/assets/front/images')}}/apartment-ico.png"> מידע על מקום הלינה <span
+                      class="rt_headd"> {{ get_rami_page_placeholder('help_text_apartment_info',1) }}</span></h3>
+                </div>
+              </div>
+              @foreach($hotel_extra1_rooms as $room)
+              <div class="col-md-12 ap-cont">
+                <h3 class="cont-head">
+                  <span>
+                    <img src="{{url('/assets/front/images')}}/ramtours-rooms.png">
+                    @if(!empty($room['room_area']))
+                    {{$room['room_type']}} - {{$room['room_area']}} מ"ר |
+                    @else
+                    {{$room['room_type']}} |
+                    @endif
+                  </span>
+                  <span>
+                    <img src="{{url('/assets/front/images')}}/mann.png">&nbsp;מתאים להרכב של עד {{$room['max_people']}}
+                    נפשות <span dir="ltr">({{$room['room_code']}})</span>|
+                  </span>
+                  <span>
+                    <img src="{{url('/assets/front/images')}}/aproom.png">
+                    זמין במלאי {{$room['room_avalible']}} יחידות
+                  </span>
+                </h3>
+              </div>
+              <div class="col-md-7 ap-cont">
+                <p> {!! $room['room_desc'] !!}<p>
+                    <p>מתאים להרכב של עד {{$room['max_people']}} נפשות</p>
+              </div>
+              <div class="col-md-5 ap-cont">
+                <div class="col-md-12 gallery">
+                  @foreach($room['room_images'] as $room_img)
+                  <div class="pics">
+                    <a data-fancybox="gallery1" href="{{url('ramtours/'.$room_img->image)}}">
+                      <img class="img-fluid" src="{{url('ramtours/'.$room_img->image)}}" alt=""></a>
+                  </div>
+                  @endforeach
+                </div>
+              </div>
+              @endforeach
+            </div>
+          </div>
+          @endif
+          @if(!empty($hotel_extra2))
+           <div class="pkg-section" id="extra1_aprment">
+            <div class="row">
+              <div class="col-md-12 bd-sec">
+                <div class="bd-head">
+                  <h3>לון נוסף  2 {{$hotel_extra2->hotel_code.'('.$hotel_extra2_dates.')'}} <span class="rt_headd"> </span><img
+                      src="{{url('/assets/front/images')}}/rooms.png"></h3>
+                </div>
+              </div>
+              <div class="col-md-12 ap-cont">
+                <h6 class="cont-head">{{$hotel_extra2->hotel_display_name }}</h6>
+                <p>כתובת: {{ $hotel_extra2->hotel_code }} - {{ $hotel_extra2->hotel_address }} </p>
+              </div>
+              <div class="col-md-12 ap-cont">
+                <h6 class="cont-head">מידע כללי</h6>
+                <p>{!! $hotel_extra2->hotel_desc !!} </p>
+              </div>
+              @if(!empty($hotel_extra2->hotel_instruction_text))
+              <div class="col-md-12 ap-cont">
+                <h6 class="cont-head">אטרקציות</h6>
+                <p>
+                  {!! $hotel_extra2->hotel_instruction_text !!}
+                </p>
+              </div>
+              @endif
+              <div class="col-md-12 ap-cont">
+                <h6 class="cont-head">פעילויות בקרבת מקום</h6>
+                <ul>
+                  @foreach($hotel_extra2_amenities as $amenity)
+                  <li>{{ get_hotel_amenities($amenity) }}</li>
+                  @endforeach
+                </ul>
+              </div>
+              <div class="col-md-12 ap-cont">
+                <h6 class="cont-head">מתקני מקום הלינה </h6>
+                <ul>
+                  @foreach($hotel_extra2_features as $feature)
+                  <li>{{ get_hotel_features($feature) }}</li>
+                  @endforeach
+                </ul>
+              </div>
+            </div>
+          </div>
+          @endif
+            @if((!empty($hotel_extra2)) && (!empty($hotel_extra2_gallery)))
+          <div class="pkg-section" id="gallery_hotel_extra1">
+            <div class="row">
+              <div class="col-md-12 bd-sec">
+                <div class="bd-head">
+                  <h3>גלריה <span class="rt_headd"></span><img
+                      src="{{url('/assets/front/images')}}/gallery.png"></h3>
+                </div>
+              </div>
+              <div class="col-md-12 gallery">
+                @foreach($hotel_extra2_gallery as $img)
+                <div class="pics">
+                  <a data-fancybox="gallery" href="{{url('ramtours/'.$img->image)}}">
+                    <img class="img-fluid" src="{{url('ramtours/'.$img->image)}}" alt="{{$img->title}}">
+                  </a>
+                  @if(($loop->index==5)&&($hotel_extra2_gallery_count >0))
+                  <div class="more_img">
+                    +{{$hotel_extra2_gallery_count }}
+                  </div>
+                  @endif
+                </div>
+                @endforeach
+              </div>
+            </div>
+          </div>
+          @endif
+           @if((!empty($hotel_extra2)) && (!empty($hotel_extra2_rooms)))
+          <div class="pkg-section pack_room" id="hotel_extra2_rooms">
+            <div class="row">
+              <div class="col-md-12 bd-sec">
+                <div class="bd-head">
+                  <h3><img src="{{url('/assets/front/images')}}/apartment-ico.png"> מידע על מקום הלינה <span
+                      class="rt_headd"> {{ get_rami_page_placeholder('help_text_apartment_info',1) }}</span></h3>
+                </div>
+              </div>
+              @foreach($hotel_extra2_rooms as $room)
+              <div class="col-md-12 ap-cont">
+                <h3 class="cont-head">
+                  <span>
+                    <img src="{{url('/assets/front/images')}}/ramtours-rooms.png">
+                    @if(!empty($room['room_area']))
+                    {{$room['room_type']}} - {{$room['room_area']}} מ"ר |
+                    @else
+                    {{$room['room_type']}} |
+                    @endif
+                  </span>
+                  <span>
+                    <img src="{{url('/assets/front/images')}}/mann.png">&nbsp;מתאים להרכב של עד {{$room['max_people']}}
+                    נפשות <span dir="ltr">({{$room['room_code']}})</span>|
+                  </span>
+                  <span>
+                    <img src="{{url('/assets/front/images')}}/aproom.png">
+                    זמין במלאי {{$room['room_avalible']}} יחידות
+                  </span>
+                </h3>
+              </div>
+              <div class="col-md-7 ap-cont">
+                <p> {!! $room['room_desc'] !!}<p>
+                    <p>מתאים להרכב של עד {{$room['max_people']}} נפשות</p>
+              </div>
+              <div class="col-md-5 ap-cont">
+                <div class="col-md-12 gallery">
+                  @foreach($room['room_images'] as $room_img)
+                  <div class="pics">
+                    <a data-fancybox="gallery1" href="{{url('ramtours/'.$room_img->image)}}">
+                      <img class="img-fluid" src="{{url('ramtours/'.$room_img->image)}}" alt=""></a>
+                  </div>
+                  @endforeach
+                </div>
+              </div>
+              @endforeach
+            </div>
+          </div>
+          @endif
           @if(!empty($map))
           <div class="pkg-section" id="map">
             <div class="row">
@@ -801,10 +1103,6 @@
                     <h3>רכב <span class="rt_headd"> {{ get_rami_page_placeholder('help_text_vehicle',1) }}</span><img
                         src="{{url('/assets/front/images')}}/pkg-car.png"></h3>
                   </div>
-                </div>
-
-                <div class="col-md-8">
-                <small><b>איסוף והחזרה של רכב בתחנות שונות מחייב דמי החזר לחברת ההשכרה של כ-40 יורו</b></small>
                 </div>
                 <div class="col-md-8">
                   <h5>{{$all_cars['first_car_title']}}</h5>
