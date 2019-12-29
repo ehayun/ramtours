@@ -22,7 +22,7 @@ class PageController extends Controller
     public function index()
     {
         $data['page_title'] = 'All Pages';
-        $data['pages'] = page::all();
+        $data['pages'] = page::orderBy('updated_at', 'desc')->get();
         $data['all_count'] = page::all()->count();
         $data['assets_admin'] = url('assets/admin');
         return view('admin.page.all_page', $data);
@@ -46,8 +46,7 @@ class PageController extends Controller
     public function store(Request $request)
     {
         $page = new page;
-        $messages = [
-        ];
+        $messages = [];
         $this->validate($request, [
             'page_title' => 'required',
             'page_disc' => 'required',
@@ -66,6 +65,84 @@ class PageController extends Controller
         $page->package_start_date = $request->package_start_date;
         $page->package_end_date = $request->package_end_date;
         $page->package_flight_location = $request->package_flight_location;
+        
+        
+        
+        
+        if (!$request->slug) {
+            $page->slug = implode(mb_split(" ", $request->page_title), "-");
+            $slug = $page->slug;
+            $title = $request->page_title;
+            $description = strip_tags($request->page_disc);
+            $now = \Carbon\Carbon::now()->format("Y-m-d H:i");
+            
+            // dd($request->all());
+            $header = "
+                    <link rel='profile' href='http://gmpg.org/xfn/11'>
+                    <link rel='pingback' href=''>
+                <script data-cfasync='false' type='text/javascript'>//<![CDATA[
+                    var gtm4wp_datalayer_name = 'dataLayer';
+                    var dataLayer = dataLayer || [];
+                //]]>
+                </script>
+                <meta name='description' content='$description'/>
+                <link rel='canonical' href='https://ramtours.com/$slug' />
+                <meta property='og:locale' content='he_IL' />
+                <meta property='og:type' content='article' />
+                <meta property='og:title' content='' />
+                <meta property='og:description' content='' />
+                <meta property='og:url' content='https://ramtours.com/$slug' />
+                <meta property='og:site_name' content='רם - תיירות ונסיעות' />
+                <meta property='article:tag' content='$title' />
+                <meta property='article:section' conten'$title' />
+                <meta property='article:published_time' content='$now' />
+                <meta property='article:modified_time' content='$now' />
+                <meta property='og:updated_time' content='2018-11-15T10:54:36+00:00' />
+                <meta name='twitter:card' content='summary_large_image' />
+                <meta name='twitter:description' content='' />
+                <meta name='twitter:title' content='' />
+                <meta name='twitter:image' content='' />
+                <script type='application/ld+json'>{'@context':'https://schema.org','@type':'Organization','url':'https://ramtours.com/','sameAs':[],'@id':'https://ramtours.com/#organization','name':'ramtours','logo':''}</script>
+                <script type='application/ld+json'>
+                {
+                '@context':'https://schema.org',
+                '@type':'BreadcrumbList',
+                'itemListElement':[
+                    {'@type':'ListItem','position':1,'item':
+                    {'@id':'https://ramtours.com/',
+                    'name':'$slug'}
+                    },
+                    {'@type':'ListItem','position':2,'item':{'@id':'https://ramtours.com/$slug'}}]}
+                </script>
+            ";
+
+            $footer = '<script type="b9b0e8d2c75aeed76733c602-text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 1003871194;
+            var google_custom_params = window.google_tag_params;
+            var google_remarketing_only = true;
+            /* ]]> */
+            </script>
+            <script type="b9b0e8d2c75aeed76733c602-text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+            </script>
+            
+            <noscript>
+            <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1003871194/?guid=ON&script=0"/>
+            </div>
+            </noscript>';
+
+
+
+
+
+            $page->page_title_text = $request->page_title;
+            $page->page_header_custom_code = $header;
+            $page->page_footer_custom_code = $footer;
+        }
+
+        // dd($request);
+
 
         $page->save();
         if ($page->id) {
@@ -76,7 +153,7 @@ class PageController extends Controller
             }
         }
         set_flash_msg('flash_success', 'Page Inserted Successfully.');
-        return redirect('admin/page');
+        return redirect("admin/page/" . $page->id . "/edit");
     }
     /**
      * Show the form for editing the specified resource.
@@ -100,8 +177,7 @@ class PageController extends Controller
     public function update(Request $request, $id)
     {
         $page = page::find($id);
-        $messages = [
-        ];
+        $messages = [];
         $this->validate($request, [
             'page_title' => 'required',
             'page_disc' => 'required',
@@ -163,8 +239,7 @@ class PageController extends Controller
     public function store_link(Request $request, $page_id)
     {
         $pagelink = new pagelink;
-        $messages = [
-        ];
+        $messages = [];
         $this->validate($request, [
             'pagelink_title' => 'required',
             'pagelink_url' => 'required',
@@ -198,8 +273,7 @@ class PageController extends Controller
     public function update_link(Request $request, $page_id, $pagelink_id)
     {
         $pagelink = pagelink::find($pagelink_id);
-        $messages = [
-        ];
+        $messages = [];
         $this->validate($request, [
             'pagelink_title' => 'required',
             'pagelink_url' => 'required',
