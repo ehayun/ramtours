@@ -202,7 +202,7 @@ if (rami_checking_is_mobile() == 1) {
     Route::get('/search-vacation-packages', 'mobile\MobileHomeController@search_vacation_packages');
     Route::get('/loc-accommodation/{loc_id}', 'mobile\MobileHomeController@accommodation');
     Route::get('/search-accommodation/', 'mobile\MobileHomeController@search_accommodation');
-    Route::get('/accommodation/{id}', 'mobile\MobileHomeController@accommodation_detail');
+    Route::get('/accommodation-detail/{id}', 'mobile\MobileHomeController@accommodation_detail');
     Route::get('/testimonials', 'mobile\MobileHomeController@testimonials');
     Route::get('/contact', 'mobile\MobileHomeController@contact');
     Route::post('/send_contact', 'mobile\MobileHomeController@send_contact');
@@ -223,7 +223,7 @@ if (rami_checking_is_mobile() == 1) {
     Route::get('/fly-travel-package/{id}', 'front\HomeController@fly_travel_packages_detail');
     Route::get('/loc-accommodation/{loc_id}', 'front\HomeController@accommodation');
     Route::get('/search-accommodation/', 'front\HomeController@search_accommodation');
-    Route::get('/accommodation/{id}', 'front\HomeController@accommodation_detail');
+    Route::get('/accommodation-detail/{id}', 'front\HomeController@accommodation_detail');
     Route::POST('/search', 'front\HomeController@search_accommodation_hotel_code');
     Route::get('/contact', 'front\HomeController@contact');
     Route::post('/submit-contact', 'front\HomeController@submit_contact');

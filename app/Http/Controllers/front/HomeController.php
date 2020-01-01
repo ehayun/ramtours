@@ -980,6 +980,7 @@ class HomeController extends Controller
         if (empty($hotel)) {
             return redirect('/');
         }
+
         $data['site_title'] = $hotel->hotel_title_text;
         $data['header_custom_code'] = $hotel->hotel_header_custom_code;
         $data['footer_custom_code'] = $hotel->hotel_footer_custom_code;
