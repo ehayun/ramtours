@@ -143,6 +143,22 @@ $('.panel-thumbnail>a').click(function(e){
        $('#rt_rooms').addClass('show');
        $('body').addClass('fixed');          
    });
+ $('#rt_lodging_extra1_btn').click(function(){ 
+       $('#rt_lodging_extra1').addClass('show');
+       $('body').addClass('fixed');          
+   });
+ $('#rt_lodging_extra1_room_btn').click(function(){ 
+       $('#rt_lodging_extra1_room').addClass('show');
+       $('body').addClass('fixed');          
+   });
+ $('#rt_lodging_extra2_btn').click(function(){ 
+       $('#rt_lodging_extra2').addClass('show');
+       $('body').addClass('fixed');          
+   });
+ $('#rt_lodging_extra2_room_btn').click(function(){ 
+       $('#rt_lodging_extra2_room').addClass('show');
+       $('body').addClass('fixed');          
+   });
 $('#rt_car_btn').click(function(){ 
        $('#rt_car').addClass('show');
        $('body').addClass('fixed');          

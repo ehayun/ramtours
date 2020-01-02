@@ -39,6 +39,38 @@
    }
    return all_rooms;
   }
+  function rami_getting_package_hotel_extra1_room(){
+   var rooms=$('.rami_package_hotel_extra1_room').find('select').length;
+   var all_rooms=[];
+   var count=1;
+   var i=0;
+   while (rooms >= count) {
+      ++i;
+      var ele='chnage_select'+i;
+      if($('.rami_package_hotel_extra1_room').find('.'+ele).length < 1){
+        continue;
+      }
+      all_rooms[count]={room_id:$('.rami_package_hotel_extra1_room .'+ele).val(), room_class_id:i};
+      count++;
+   }
+   return all_rooms;
+  }
+  function rami_getting_package_hotel_extra2_room(){
+   var rooms=$('.rami_package_hotel_extra2_room').find('select').length;
+   var all_rooms=[];
+   var count=1;
+   var i=0;
+   while (rooms >= count) {
+      ++i;
+      var ele='chnage_select'+i;
+      if($('.rami_package_hotel_extra2_room').find('.'+ele).length < 1){
+        continue;
+      }
+      all_rooms[count]={room_id:$('.rami_package_hotel_extra2_room .'+ele).val(), room_class_id:i};
+      count++;
+   }
+   return all_rooms;
+  }
   function rami_getting_package_cars(){
    var cars=$('.rami_package_cars').find('select').length;
    var count=1;
@@ -87,7 +119,7 @@
   $.ajax({
     url: '{{url('cart-setup')}}',
     type: 'POST',
-    data: {_token: _token, package_id:package_id, package_type:package_type, cart_id:window.cart_id, adults:rami_pakage_adults, childs:rami_pakage_childs, infants:rami_pakage_infants, rooms:rami_getting_package_rooms(), cars:rami_getting_package_cars(), flight:$('.rami_package_flights').find('select').val(),card:card},
+    data: {_token: _token, package_id:package_id, package_type:package_type, cart_id:window.cart_id, adults:rami_pakage_adults, childs:rami_pakage_childs, infants:rami_pakage_infants, rooms:rami_getting_package_rooms(),extra_hotel1_rooms:rami_getting_package_hotel_extra1_room(), extra_hotel2_rooms:rami_getting_package_hotel_extra2_room(), cars:rami_getting_package_cars(), flight:$('.rami_package_flights').find('select').val(),card:card},
   })
   .done(function(res) {
     if(res.status=='success'){
@@ -182,6 +214,16 @@
          if(res.status=='success'){
            window.location.href=res.url;
          }else{
+          if(res.extra_hotel_2_room_error==1){
+           // res.msg +=',Add More Room ';
+            res.msg ='Extra hotel 2הדירה או החדר שבחרתם אינם מתאימים למספר הנפשות בעסקה.יש להוסיף חדר נוסף או לבחור חדר או דירה גדולים יותר.';
+
+           }
+           if(res.extra_hotel_1_room_error==1){
+           // res.msg +=',Add More Room ';
+            res.msg ='Extra hotel 1הדירה או החדר שבחרתם אינם מתאימים למספר הנפשות בעסקה.יש להוסיף חדר נוסף או לבחור חדר או דירה גדולים יותר.';
+
+           }
            if(res.flight_error==1){
             //res.msg +=',Add other flights ';
             res.msg =',הוסף טיסות אחרות  ';
@@ -204,6 +246,44 @@
 
 
      });
+    $('.rami_package_flights select').change(function(event) {
+       var loc_id=$(this).find('option[value='+$(this).val()+']').attr('loc_id');
+       render_car_acc_to_flight(loc_id);
+    });
+    var loc_id=$('.rami_package_flights select').find('option[value='+$('.rami_package_flights select').val()+']').attr('loc_id');
+    render_car_acc_to_flight(loc_id);
+    function render_car_acc_to_flight(loc_id){
+       $('.rami_package_cars select option').each(function(index, el) {
+        if(typeof $(this).attr('loc_id') === "undefined"){
+          $(this).show();
+        }else if( $(this).attr('loc_id')==loc_id ){
+          $(this).show();
+        }else{
+          $(this).hide();
+        }
+       });
+       var last_added=0;
+       $('.crprice li').each(function(index, el) {
+        if(typeof $(this).attr('loc_id') === "undefined"){
+          $(this).show();
+        }else if( $(this).attr('loc_id')==loc_id ){
+          $(this).show();
+          if(last_added==0){
+            $(this).addClass('li_show');
+            last_added=1;
+          }else{
+            last_added=0;
+          }
+          
+        }else{
+          $(this).hide();
+          $(this).removeClass('li_show')
+        }
+       });
+       $('.rami_package_cars select').val(0);
+       setup_cart();
+       
+    }
 
 
 

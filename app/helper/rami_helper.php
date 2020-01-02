@@ -539,7 +539,7 @@ if (!function_exists('rami_get_hotel_single_image')) {
     {
         $images = hotel_image::where(['hotel_id' => $hotel_id])->orderBy('sequence', 'DESC')->get()->first();
         if (!empty($images)) {
-            return url('ramtours/' . $images->image);
+            return rami_get_file_url('ramtours/' . $images->image);
         } else {
             return url('/assets/front/images/rtah4.jpg');
         }
@@ -1875,7 +1875,6 @@ if (!function_exists('is_black_forest')) {
         return $package-> package_flight_location == 21 ;
     }
 }
-
 
 if (!function_exists('get_child_location_parent_name_seq')) {
     function get_child_location_parent_name_seq($id, $loc_name = '')
