@@ -39,6 +39,7 @@ class CartController extends Controller
                 $flight_response = $this->put_flights_in_temp_cart($request->flight, $request->adults, $request->childs);
                 $card = $this->put_card_in_temp_cart($package, $request->adults, $request->childs, $request->card);
                 $total = $this->put_profit_total_in_temp_cart($package);
+
                 return response()->json(array('msg' => 'item added to cart', 'status' => 'success', 'error_room' => $room_response, 'extra_hotel1_room_error'=>                    $extra_hotel1_room_response, 'extra_hotel2_room_error'=>                    $extra_hotel2_room_response, 'error_fligts' => $flight_response, 'total_euro' => $total), 200);
             }
             // if ($request->package_type == 3) {
@@ -340,7 +341,7 @@ class CartController extends Controller
          */
         $is_fix_package = $package->is_fix_profit == 1;
 
-        $flight_package_profit = $prv_temp_cart['flight_for_package'];
+        $flight_package_profit = $prv_temp_cart['flight_for_package'];        
 
         $total = $car_total_price + $room_total_price + $extra_hotel_1_room_total_price + $extra_hotel_2_room_total_price + $prv_temp_cart['filght_total_price_in_skl'] + $hotel_infants_price_total + $extra_hotel_1_infants_price_total + $extra_hotel_2_infants_price_total + $infants_taxes_total + $adults_total_extra_charge + $prv_temp_cart['pack_card_total_price'];
 
@@ -378,6 +379,7 @@ class CartController extends Controller
         $prv_temp_cart['total_price_in_euro'] = get_rami_round_num(get_rami_price_conversion_shekel_to_other($total, 2));
         $prv_temp_cart['total_price_in_usd'] = get_rami_round_num(get_rami_price_conversion_shekel_to_other($total, 1));
         session()->put('temp_cart', $prv_temp_cart);
+            //dd(session()->get('temp_cart'));
         return $prv_temp_cart['total_price_in_euro'];
     }
     public function setup_temp_cart($package, $adults, $childs, $infants, $cart_id)
@@ -453,10 +455,12 @@ class CartController extends Controller
             }
         }
         session()->put('temp_cart', $temp_cart);
+        //dd(session()->get('temp_cart'));
         return true;
     }
     public function verify_cart(Request $request)
     {
+       /* dd($request);*/
         $car_error = 0;
         $flight_error = 0;
         $room_error = 0;
@@ -495,8 +499,8 @@ class CartController extends Controller
                 return response()->json(array('msg' => '', 'status' => 'fail', 'car_error' => $car_error, 'room_error' => $room_error, 'flight_error' => $flight_error, 'extra_hotel_1_room_error'=>$extra_hotel_1_room_error, 'extra_hotel_2_room_error'=>$extra_hotel_2_room_error), 200);
 
             } else {
-
-                session()->put('rami_pack_cart', $temp_cart);
+                session()->put('rami_pack_cart', $temp_cart);                                
+                //dd(session('rami_pack_cart'));
                 session()->forget('temp_cart');
                 return response()->json(array('msg' => 'item added to cart', 'status' => 'success', 'url' => '/order-passengers'), 200);
             }

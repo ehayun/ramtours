@@ -87,31 +87,31 @@
                @if((!empty($hotel_extra1)) && (!empty($package->having_extra_hotel_1==1)))
                <div class="rtpkglst">
                   <img src="{{url('assets/mobile/images/rooms.png')}}" alt="">
-                  <h4>פמלון נוסף  1 </h4>
+                  <h4>מלון נוסף  1 </h4>
                   <div class="pkg_btnn"><a href="JavaScript:Void(0);" id="rt_lodging_extra1_btn"><img
-                           src="{{url('assets/mobile/images/pkg-arrow-yellow.png')}}" class="inf_arrow"></a></div>
-               </div>
-               @endif
-               @if((!empty($hotel_extra2)) && (!empty($package->having_extra_hotel_2==1)))
-               <div class="rtpkglst">
-                  <img src="{{url('assets/mobile/images/rooms.png')}}" alt="">
-                  <h4>פמלון נוסף  2 </h4>
-                  <div class="pkg_btnn"><a href="JavaScript:Void(0);" id="rt_lodging_extra2_btn"><img
                            src="{{url('assets/mobile/images/pkg-arrow-yellow.png')}}" class="inf_arrow"></a></div>
                </div>
                @endif
                @if((!empty($package->having_extra_hotel_1==1)) && (!empty($hotel_extra1_rooms)))
                <div class="rtpkglst">
                   <img src="{{url('assets/mobile/images/rooms.png')}}" alt="">
-                  <h4>פמלון נוסף 1דר </h4>
+                  <h4>חדר מלון נוסף 1 </h4>
                   <div class="pkg_btnn"><a href="JavaScript:Void(0);" id="rt_lodging_extra1_room_btn"><img
+                           src="{{url('assets/mobile/images/pkg-arrow-yellow.png')}}" class="inf_arrow"></a></div>
+               </div>
+               @endif
+               @if((!empty($hotel_extra2)) && (!empty($package->having_extra_hotel_2==1)))
+               <div class="rtpkglst">
+                  <img src="{{url('assets/mobile/images/rooms.png')}}" alt="">
+                  <h4>מלון נוסף  2 </h4>
+                  <div class="pkg_btnn"><a href="JavaScript:Void(0);" id="rt_lodging_extra2_btn"><img
                            src="{{url('assets/mobile/images/pkg-arrow-yellow.png')}}" class="inf_arrow"></a></div>
                </div>
                @endif
                @if((!empty($package->having_extra_hotel_2==1)) && (!empty($hotel_extra2_rooms)))
                <div class="rtpkglst">
                   <img src="{{url('assets/mobile/images/rooms.png')}}" alt="">
-                  <h4>פמלון נוסף 2דר </h4>
+                  <h4>חדר מלון נוסף 2 </h4>
                   <div class="pkg_btnn"><a href="JavaScript:Void(0);" id="rt_lodging_extra2_room_btn"><img
                            src="{{url('assets/mobile/images/pkg-arrow-yellow.png')}}" class="inf_arrow"></a></div>
                </div>
@@ -399,7 +399,7 @@
             </div>
          </div>
 
-         @if(!empty($hotel_extra1_card))
+         <!-- @if(!empty($hotel_extra1_card))
          <div class="ap-cont aprt">
             <h3 class="cont-head rt_cardhead">מידע על כרטיס </h3>
             <img src="{{url('ramtours/'.$hotel_extra1_card['card_image'])}}" class="rt_cardimg">
@@ -409,7 +409,7 @@
                </a>
             </p>
          </div>
-         @endif
+         @endif -->
          <h3 class="pkg_head">מידע כללי :</h3>
          <p>{!! $hotel_extra1->hotel_desc !!}
          </p>
@@ -750,7 +750,7 @@
             @if(empty($car['car_title']))
             @continue
             @endif
-            <li loc_id="{{$car['loc_id']}}><span class="crt-desp">{{$car['car_title']}}</span>
+            <li loc_id="{{$car['loc_id']}}"><span class="crt-desp">{{$car['car_title']}}</span>
                <!--  <span class="mcrprz">{{$car['car_price']}}</span> -->
             </li>
             @endforeach
@@ -917,7 +917,7 @@
                      @if(empty($car['id']))
                      @continue
                      @endif
-                     <option loc_id="{{$car['loc_id']}} value="{{$car['id']}}" @if($car['id']==$package->cheapest_car) selected="true" @endif
+                     <option loc_id="{{$car['loc_id']}}" value="{{$car['id']}}" @if($car['id']==$package->cheapest_car) selected="true" @endif
                         >{{$car['car_title']}}</option>
                      @php
                      $idx++;

@@ -50,6 +50,7 @@
 </section>
 <section class="pkg-data">
   <div class="container">
+                        {{-- {{ dd($package) }} --}}
     <div class="row">
       <div class="col-md-3 pkgrt-sec">
         <div class="pkg-right" id="pkgrtsec">
@@ -162,7 +163,6 @@
                         @else
                         {{$room['room_type']}} |
                         @endif
-
                       </span>
                       <span>
                         &nbsp;מתאים להרכב של עד {{$room['max_people']}} נפשות <span
@@ -170,7 +170,6 @@
                       </span>
                       <span>
                         זמין במלאי {{$room['room_avalible']}} יחידות
-
                       </span>
                     </option>
                     @endforeach
@@ -179,7 +178,7 @@
                       aria-hidden="true"></i></a>
                 </div>
               </div>
-              @if((!empty($hotel_extra1)) && (!empty($hotel_extra1_rooms)))
+              @if((!empty($package->having_extra_hotel_1==1)) && (!empty($hotel_extra1_rooms)))
               <div class="pkg-select apart rami_cart_select_div rami_package_hotel_extra1_room">
                 <label>מלון נוסף  1 {{$hotel_extra1->hotel_code.'('.$hotel_extra1_dates.')'}}</label>
                 <div class="aprt-inner">
@@ -212,7 +211,7 @@
                 </div>
               </div>
               @endif
-              @if((!empty($hotel_extra2)) && (!empty($hotel_extra2_rooms)))
+              @if((!empty($package->having_extra_hotel_2==1)) && (!empty($hotel_extra2_rooms)))
               <div class="pkg-select apart rami_cart_select_div rami_package_hotel_extra2_room">
                 <label>מלון נוסף  2 {{$hotel_extra2->hotel_code.'('.$hotel_extra2_dates.')'}}</label>
                 <div class="aprt-inner">
@@ -518,8 +517,7 @@
             <div class="row">
               <div class="col-md-12 bd-sec">
                 <div class="bd-head">
-                  <h3><img src="{{url('/assets/front/images')}}/apartment-ico.png"> מידע על מקום הלינה <span
-                      class="rt_headd"> {{ get_rami_page_placeholder('help_text_apartment_info',1) }}</span></h3>
+                  <h3><img src="{{url('/assets/front/images')}}/apartment-ico.png"> מידע על מקום הלינה <span class="rt_headd"> {{ get_rami_page_placeholder('help_text_apartment_info',1) }}</span></h3>
                 </div>
               </div>
               @foreach($hotel_rooms as $room)
@@ -560,7 +558,7 @@
               @endforeach
             </div>
           </div>
-          @if(!empty($hotel_extra1))
+          @if((!empty($package->having_extra_hotel_1==1)) && (!empty($hotel_extra1)))
            <div class="pkg-section" id="extra1_aprment">
             <div class="row">
               <div class="col-md-12 bd-sec">
@@ -601,7 +599,7 @@
                   @endforeach
                 </ul>
               </div>
-              @if(!empty($hotel_extra1_card))
+              <!-- @if(!empty($hotel_extra1_card))
               <div class="col-md-12 ap-cont">
                 <h6 class="cont-head rt_cardhead">מידע על כרטיס </h6>
                 <img src="{{url('ramtours/'.$hotel_extra1_card['card_image'])}}" class="rt_cardimg">
@@ -611,11 +609,11 @@
                   </a>
                 </p>
               </div>
-              @endif
+              @endif -->
             </div>
           </div>
           @endif
-          @if((!empty($hotel_extra1)) && (!empty($hotel_extra1_gallery)))
+          @if((!empty($package->having_extra_hotel_1==1)) && (!empty($hotel_extra1_gallery)))
           <div class="pkg-section" id="gallery_hotel_extra1">
             <div class="row">
               <div class="col-md-12 bd-sec">
@@ -641,7 +639,7 @@
             </div>
           </div>
           @endif
-          @if((!empty($hotel_extra1)) && (!empty($hotel_extra1_rooms)))
+          @if((!empty($package->having_extra_hotel_1==1)) && (!empty($hotel_extra1_rooms)))
           <div class="pkg-section pack_room" id="hotel_rooms">
             <div class="row">
               <div class="col-md-12 bd-sec">
@@ -689,7 +687,7 @@
             </div>
           </div>
           @endif
-          @if(!empty($hotel_extra2))
+          @if((!empty($package->having_extra_hotel_2==1)) && (!empty($hotel_extra2)))
            <div class="pkg-section" id="extra1_aprment">
             <div class="row">
               <div class="col-md-12 bd-sec">
@@ -730,7 +728,7 @@
                   @endforeach
                 </ul>
               </div>
-              @if(!empty($hotel_extra2_card))
+              <!-- @if(!empty($hotel_extra2_card))
               <div class="col-md-12 ap-cont">
                 <h6 class="cont-head rt_cardhead">מידע על כרטיס </h6>
                 <img src="{{url('ramtours/'.$hotel_extra2_card['card_image'])}}" class="rt_cardimg">
@@ -740,11 +738,11 @@
                   </a>
                 </p>
               </div>
-              @endif
+              @endif -->
             </div>
           </div>
           @endif
-            @if((!empty($hotel_extra2)) && (!empty($hotel_extra2_gallery)))
+          @if((!empty($package->having_extra_hotel_2==1)) && (!empty($hotel_extra2_gallery)))
           <div class="pkg-section" id="gallery_hotel_extra1">
             <div class="row">
               <div class="col-md-12 bd-sec">
@@ -770,7 +768,7 @@
             </div>
           </div>
           @endif
-           @if((!empty($hotel_extra2)) && (!empty($hotel_extra2_rooms)))
+          @if((!empty($package->having_extra_hotel_2==1)) && (!empty($hotel_extra2_rooms)))
           <div class="pkg-section pack_room" id="hotel_extra2_rooms">
             <div class="row">
               <div class="col-md-12 bd-sec">
