@@ -1,6 +1,6 @@
 /node_modules
 /storage/*.key
-/storage/framework/views
+/storage/framework/views/
 /public/wp-content
 composer.lock
 /vendor
