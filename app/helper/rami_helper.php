@@ -615,7 +615,6 @@ if (!function_exists('rami_vacation_pkg_del_top_text')) {
             $text = '';
         }
         return $text;
-
     }
 }
 if (!function_exists('rami_vacation_pkg_html')) {
@@ -632,7 +631,6 @@ if (!function_exists('rami_vacation_pkg_html')) {
             $hotel_types = '';
             $hotel_star = '';
         }
-
         $pack_loction = Location::find($pack_loc_id);
         $flight_locations = '';
         $filght_sheds = unserialize($pkgs_fhc->package_flight_sche);
@@ -781,11 +779,8 @@ if (!function_exists('rami_vacation_pkg_mobile_html')) {
         $html .= '            </div>';
         $html .= '        </div>';
         return $html;
-
     }
-
 }
-
 if (!function_exists('rami_get_first_package_for_flight')) {
     function rami_get_first_package_for_flight($flight_id)
     {
@@ -793,7 +788,6 @@ if (!function_exists('rami_get_first_package_for_flight')) {
         return $p ? $p->package_profit_fhc : "";
     }
 }
-
 if (!function_exists('rami_fly_drive_pkg_mobile_html')) {
     function rami_fly_drive_pkg_mobile_html($pkgs_fhc)
     {
@@ -841,12 +835,11 @@ if (!function_exists('rami_fly_drive_pkg_mobile_html')) {
         $html .= '  </div>';
         return $html;
     }
-
 }
-
 if (!function_exists('rami_fly_drive_pkg_html')) {
     function rami_fly_drive_pkg_html($pkgs_fhc)
     {
+       //dd($pkgs_fhc->package_lowest_price);
         $pack_loc_id = $pkgs_fhc->package_flight_location;
         $pack_loction = Location::find($pack_loc_id);
         $pack_loction_name = '';

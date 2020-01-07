@@ -35,9 +35,10 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody>                               
                                 @foreach($packages as $package)
-                                <tr>
+                               {{--  {{ dd($packages[646]) }}
+ --}}                                <tr>
                                     <td>{{++$loop->index}}</td>                                    
                                     <td><span class="text-muted">{{$package->package_title}}</span></td>
                                     <td><span class="text-muted">{{$package->package_start_date}}</span></td>

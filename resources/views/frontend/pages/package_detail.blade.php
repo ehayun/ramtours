@@ -148,7 +148,6 @@
                   </select>
                 </div>
               </div>
-
               <div class="pkg-select apart rami_cart_select_div rami_package_room">
                 <label>דירה   ({{$hotel->hotel_code}})<!-- {{$hotel->hotel_code.'('.$hotel_dates.')'}} --></label>
                 <div class="aprt-inner">
@@ -183,7 +182,7 @@
                 <label>מלון נוסף  1 {{$hotel_extra1->hotel_code.'('.$hotel_extra1_dates.')'}}</label>
                 <div class="aprt-inner">
                   <select class="rami_pkg_chnage_select chnage_select1" element_no='1' element_name="hotel_extra1_room">
-                    <option value="0">בחר חדר </option>
+                    {{-- <option value="0">בחר חדר </option> --}}
                     @foreach( $hotel_extra1_rooms as $room)
                     <option value="{{$room['id']}}" @if($room['id']==$package->cheapest_room) selected="true" @endif >
                       <span>
@@ -193,7 +192,6 @@
                         @else
                         {{$room['room_type']}} |
                         @endif
-
                       </span>
                       <span>
                         &nbsp;מתאים להרכב של עד {{$room['max_people']}} נפשות <span
@@ -201,13 +199,11 @@
                       </span>
                       <span>
                         זמין במלאי {{$room['room_avalible']}} יחידות
-
                       </span>
                     </option>
                     @endforeach
                   </select>
-                  <a href="javascript:void(0);" class="add_button" title="Add More room"><i class="fa fa-plus"
-                      aria-hidden="true"></i></a>
+                  <a href="javascript:void(0);" class="add_button" title="Add More room"><i class="fa fa-plus" aria-hidden="true"></i></a>
                 </div>
               </div>
               @endif
@@ -216,7 +212,7 @@
                 <label>מלון נוסף  2 {{$hotel_extra2->hotel_code.'('.$hotel_extra2_dates.')'}}</label>
                 <div class="aprt-inner">
                   <select class="rami_pkg_chnage_select chnage_select1" element_no='1' element_name="hotel_extra2_room">
-                    <option value="0">בחר חדר </option>
+                    {{-- <option value="0">בחר חדר </option> --}}
                     @foreach( $hotel_extra2_rooms as $room)
                     <option value="{{$room['id']}}" @if($room['id']==$package->cheapest_room) selected="true" @endif >
                       <span>

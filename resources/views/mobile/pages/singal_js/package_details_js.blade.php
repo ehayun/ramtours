@@ -257,8 +257,10 @@
         if(typeof $(this).attr('loc_id') === "undefined"){
           $(this).show();
         }else if( $(this).attr('loc_id')==loc_id ){
+          $(this).addClass('opt_show');
           $(this).show();
         }else{
+          $(this).removeClass('opt_show');
           $(this).hide();
         }
        });
@@ -280,7 +282,7 @@
           $(this).removeClass('li_show')
         }
        });
-       $('.rami_package_cars select').val(0);
+       $('.rami_package_cars select').val($(".rami_package_cars select .opt_show:first").val());
        setup_cart();
        
     }

@@ -1058,7 +1058,7 @@ div#map .bd-sec {margin-bottom: 7px;}
 .pkg-section .rt_flts .flights-headings {width: 30%;}
 .pkg-section .flight-secc.bottom {padding: 15px 0px;}
 div#car h5 {color: #a0a0a0;padding-top: 10px;font-weight: normal!important;}
-ul.crprice li:nth-child(odd) {background: #e3e5e6;}
+/*ul.crprice li:nth-child(odd) {background: #e3e5e6;}*/
 ul.crprice .li_show {background: #e3e5e6;}
 .hotel_contt .pics {display: none;}
 .hotel_contt .pics:nth-child(1) {display: block;}

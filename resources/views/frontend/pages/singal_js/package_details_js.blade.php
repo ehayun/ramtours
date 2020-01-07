@@ -262,19 +262,21 @@
         if(typeof $(this).attr('loc_id') === "undefined"){
           $(this).show();
         }else if( $(this).attr('loc_id')==loc_id ){
+          $(this).addClass('opt_show');
           $(this).show();
         }else{
+          $(this).removeClass('opt_show');
           $(this).hide();
         }
        });
        var last_added=0;
        $('.crprice li').each(function(index, el) {
-        if(typeof $(this).attr('loc_id') === "undefined"){
+        if(typeof $(this).attr('loc_id') == "undefined"){
           $(this).show();
         }else if( $(this).attr('loc_id')==loc_id ){
           $(this).show();
           if(last_added==0){
-            $(this).addClass('li_show');
+           $(this).addClass('li_show');
             last_added=1;
           }else{
             last_added=0;
@@ -285,7 +287,8 @@
           $(this).removeClass('li_show')
         }
        });
-       $('.rami_package_cars select').val(0);
+       $
+       $('.rami_package_cars select').val($(".rami_package_cars select .opt_show:first").val());
        setup_cart();
        
     }

@@ -39,7 +39,7 @@ class CartController extends Controller
                 $flight_response = $this->put_flights_in_temp_cart($request->flight, $request->adults, $request->childs);
                 $card = $this->put_card_in_temp_cart($package, $request->adults, $request->childs, $request->card);
                 $total = $this->put_profit_total_in_temp_cart($package);
-
+         
                 return response()->json(array('msg' => 'item added to cart', 'status' => 'success', 'error_room' => $room_response, 'extra_hotel1_room_error'=>                    $extra_hotel1_room_response, 'extra_hotel2_room_error'=>                    $extra_hotel2_room_response, 'error_fligts' => $flight_response, 'total_euro' => $total), 200);
             }
             // if ($request->package_type == 3) {
@@ -378,8 +378,9 @@ class CartController extends Controller
         $prv_temp_cart['per_person_in_skl'] = $total / $prv_temp_cart['total_peoples'];
         $prv_temp_cart['total_price_in_euro'] = get_rami_round_num(get_rami_price_conversion_shekel_to_other($total, 2));
         $prv_temp_cart['total_price_in_usd'] = get_rami_round_num(get_rami_price_conversion_shekel_to_other($total, 1));
-        session()->put('temp_cart', $prv_temp_cart);
-            //dd(session()->get('temp_cart'));
+        session()->put('temp_cart', $prv_temp_cart);/*
+            
+            dd(session()->get('temp_cart'));*/
         return $prv_temp_cart['total_price_in_euro'];
     }
     public function setup_temp_cart($package, $adults, $childs, $infants, $cart_id)
@@ -460,7 +461,6 @@ class CartController extends Controller
     }
     public function verify_cart(Request $request)
     {
-       /* dd($request);*/
         $car_error = 0;
         $flight_error = 0;
         $room_error = 0;

@@ -16,14 +16,14 @@
   </section>
   <section class="rt_frames">
     <div class="container">
-       <div class="row">
+      <div class="row">
         <div class="col-lg-12 text-center">
-              <h2 class="section-heading">{{$page_title }} </h2>
+          <h2 class="section-heading">{{ $page_title }} </h2>
         </div>
        <!-- {!!rami_package_hotel_filter_html()!!}-->
         <div class="col-lg-12">
           @foreach($show_settings as $setting)
-           @if(!empty($setting['results']))
+            @if(!empty($setting['results']))
               @if(!empty($setting['section_title']))
               <div class="row">
                 <div class="col-lg-12 text-center">
@@ -32,23 +32,23 @@
               </div>
               @endif
               <div class="row text-center pakage_div">
-               @foreach($setting['results'] as $pkgs_fhc)           
-               {!!rami_vacation_pkg_html($pkgs_fhc, 3)!!}
+              @foreach($setting['results'] as $pkgs_fhc)           
+                {!!rami_vacation_pkg_html($pkgs_fhc, 3)!!}
               @endforeach
               </div>
             @endif
-           @endforeach
-           @if(!empty($show_load_more))
+          @endforeach
+          @if(!empty($show_load_more))
            <div class="col-md-12 load_more_packs_div">
             <input type="hidden" name="pack_location" value="{{$loc_id}}">
             <input type="hidden" name="pack_start_date" value="{{$ser_start_date}}">
             <input type="hidden" name="pack_end_date" value="{{$ser_end_date}}">
             <button class="test-btn load_more_packs" type="submit" page_attr="2">ראה עוד</button>
            </div>
-          </div>
+        </div>
           @endif
-  </div>
-</div>
+      </div>
+    </div>
 </section>
 @endsection
 @section('rami_front_footer_js')
