@@ -1198,7 +1198,9 @@ class HomeController extends Controller
 
         $data['flights'] = $flights;
         $data['locations'] = $locations;
-        return view('frontend.pages.profits', $data);
+        $data['loc'] = $loc;
+        $data['fnum'] = $fnum;
+        return view('frontend.pages.profits', $data); 
     }
 
     // function about() {

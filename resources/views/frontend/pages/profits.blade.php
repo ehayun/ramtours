@@ -13,9 +13,9 @@
                 </div>
 
                 <div class="input-group col-lg-8">
-                    @foreach ($locations as $loc)
+                    @foreach ($locations as $loct)
                     <button class="btn btn-link pull-right"><a
-                            href="{{route('flight_profit', ['loc' => $loc->id]) }}">{{$loc->loc_name}}</a></button>
+                            href="{{route('flight_profit', ['loc' => $loct->id]) }}">{{$loct->loc_name}}</a></button>
                     @endforeach
                 </div>
             </div>
@@ -52,7 +52,7 @@
 
         </tbody>
     </table>
-    {{$flights->appends(['id' => 4])->links()}}
+    {{$flights->appends(['loc' => $loc, 'fnum' => $fnum])->links()}}
 </body>
 
 </html>
