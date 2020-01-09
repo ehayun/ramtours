@@ -1,7 +1,9 @@
 {
-	"APP_NAME":"רמטורים",	
-	"APP_TITLE":"רמטורים",
-	"APP_ADMIN_TITLE":"רמטורס-מנהל",
+	"APP_NAME":"רמטורס",	
+	"APP_TITLE":"רמטורס",
+	"APP_ADMIN_TITLE":"רמטורס-ממשק ניהול",
 	"by":"על ידי",
-	"Sign in to your Account":"תתחבר לחשבון שלך"
+	"Sign in to your Account":"תתחבר לחשבון שלך",
+	"black forest packages":"חבילות נופש ביער השחור"
+
 }

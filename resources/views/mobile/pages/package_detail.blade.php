@@ -80,7 +80,7 @@
                <div class="rtpkglst">
                   <img src="{{url('assets/mobile/images/apartment-ico.png')}}" alt="">
                   <h4>פרטי דירה</h4>
-                  <div class="pkg_btnn"><a href="JavaScript:Void(0);" id="rt_rooms_btn">
+                  <div class="pkg_btnn"><a href="JavaScript:Void(0);" id="rt_rooms_btn"> 
                         <img src="{{url('assets/mobile/images/pkg-arrow-yellow.png')}}" class="inf_arrow"></a>
                   </div>
                </div>
@@ -353,7 +353,7 @@
    <div class="rt_popup" id="rt_lodging_extra1">
       <div class="popup-header">
          <div class="rt_close"><img src="{{url('assets/mobile/images/rt_navclse.png')}}"></div>
-         <h4 style="font-size: 15px"><img src="{{url('assets/mobile/images/rooms.png')}}" alt="">מלון נוסף  1 {{$hotel_extra1->hotel_code}}({{$hotel_extra2_dates}})</h4>
+         <h4 style="font-size: 15px"><img src="{{url('assets/mobile/images/rooms.png')}}" alt="">מלון נוסף  1 {{$hotel_extra1->hotel_code}}&nbsp;או מלון אחר באותה הרמה</h4>
       </div>
       <div class="ap-cont">
          <h5> {{$hotel_extra1->hotel_display_name}} </h5>
@@ -879,7 +879,7 @@
             </div>
             @endif
              @if((!empty($package->having_extra_hotel_2==1)) && (!empty($hotel_extra2_rooms)))
-             <label>דמלון נוסף  2 {{$hotel_extra2->hotel_code.'('.$hotel_extra2_dates.')'}}</label>
+             <label>מלון נוסף  2 {{$hotel_extra2->hotel_code.'('.$hotel_extra2_dates.')'}}</label>
             <div class="pkg-select apart rami_cart_select_div rami_package_hotel_extra2_room">
                <div class="aprt-inner">
                   <select class="rami_pkg_chnage_select chnage_select1" element_no='1' element_name="room">

@@ -1665,3 +1665,13 @@ div.pack_room .ap-cont div.gallery {
 .custom-control-label {
 	padding-right: 20px;
 }
+
+.carousel-indicators li {
+    height: 12px;
+    
+    
+   border: 2px solid#ffa800;
+    
+    
+   
+}

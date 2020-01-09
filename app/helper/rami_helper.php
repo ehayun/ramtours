@@ -2026,7 +2026,8 @@ if (!function_exists('get_rami_car_price_cheapest')) {
         }
         for ($i = 1; $i <= $car->max_people; $i++) {
             $price = get_rami_car_price($car_id, $i, $date);
-            $price_per_person = $price / $i;
+            // $price_per_person = $price / $i;
+            $price_per_person = $price; // Eli Hayun - Car price is car price and not per person
             if ($i == 1) {
                 $low_price['price'] = $price;
                 $low_price['per_person_price'] = $price_per_person;

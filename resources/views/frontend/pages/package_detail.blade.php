@@ -180,6 +180,7 @@
               @if((!empty($package->having_extra_hotel_1==1)) && (!empty($hotel_extra1_rooms)))
               <div class="pkg-select apart rami_cart_select_div rami_package_hotel_extra1_room">
                 <label>מלון נוסף  1 {{$hotel_extra1->hotel_code.'('.$hotel_extra1_dates.')'}}</label>
+
                 <div class="aprt-inner">
                   <select class="rami_pkg_chnage_select chnage_select1" element_no='1' element_name="hotel_extra1_room">
                     {{-- <option value="0">בחר חדר </option> --}}
@@ -559,7 +560,7 @@
             <div class="row">
               <div class="col-md-12 bd-sec">
                 <div class="bd-head">
-                  <h3>מלון נוסף  1 {{$hotel_extra1->hotel_code.'('.$hotel_extra1_dates.')'}}<span class="rt_headd"> </span><img
+                  <h3>מלון נוסף  1 {{$hotel_extra1->hotel_code.'('.$hotel_extra1_dates.')'}}<br><small>או מלון דומה באותה הרמה</small><span class="rt_headd"> </span><img
                       src="{{url('/assets/front/images')}}/rooms.png"></h3>
                 </div>
               </div>

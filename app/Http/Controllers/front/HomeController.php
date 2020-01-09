@@ -234,6 +234,8 @@ class HomeController extends Controller
         if (empty($location)) {
             return redirect('/');
         }
+
+        $loc_id = $location->id;
         $page_content = location_page_content::where([['loc_id', $loc_id], ['pkg_type', 4]])->get(['page_title', 'page_disc'])->first();
         if (!empty($page_content)) {
             $data['page_title'] = $page_content->page_title;
