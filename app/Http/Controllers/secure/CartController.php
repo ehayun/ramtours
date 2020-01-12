@@ -12,14 +12,14 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function offline_setup($package, $adults, $childs, $flight, $room_id, $car_id,  $infants = 0, $cart_id = 0)
+    public function offline_setup($package, $adults, $childs, $flight, $room_id, $car_id,  $h1, $h2, $infants = 0, $cart_id = 0)
     {
 
         $this->setup_temp_cart($package, $adults, $childs, $infants, $cart_id);
         $cars[] = ['car_id' => $car_id, 'car_class_id' => 'A'];
         $rooms[] = ['room_id' => $room_id, 'room_class_id' => 1];
-        $extra_hotel1_rooms[] = [];
-        $extra_hotel2_rooms[] = [];
+        $extra_hotel1_rooms[] = ['room_id' => $h1, 'room_class_id' => 1];
+        $extra_hotel2_rooms[] = ['room_id' => $h2, 'room_class_id' => 1];
         // $flight = ;
         $card = 0;
 

@@ -49,7 +49,7 @@ class UpdateAllPackages extends Command
 
         $c = new CartController;
 
-        $packages = package::where([['package_type', 1], ['package_status', 1]])->get();
+        $packages = package::where([['package_type', 1], ['package_status', 1] ])->get();
         foreach ($packages as $curr_pack) {
             $res = [];
             $lowest = 1000000;
@@ -80,8 +80,10 @@ class UpdateAllPackages extends Command
                                 if ($car->max_people >= $adults + $childrens) {
                                     if ($r->max_people >= $adults + $childrens) {
                                         if ($car->location == $fl_loc) {
-                                            // print $car->location . " " . "$fl_loc \n";
-                                            $price = $c->offline_setup($curr_pack, $adults, $childrens, $curr_flight->id, $room, $car_id);
+                                            $h1 = $curr_pack->extra_hotel_1 ? $curr_pack->extra_hotel_1 : 0;
+                                            $h2 = $curr_pack->extra_hotel_2 ? $curr_pack->extra_hotel_2 : 0;
+
+                                            $price = $c->offline_setup($curr_pack, $adults, $childrens, $curr_flight->id, $room, $car_id, $h1, $h2);
                                             $price_pp = $price / ($adults + $childrens);
                                             if ($lowest > $price_pp) {
                                                 // print "$adults $childrens $room car: $car_id $price $price_pp\n";

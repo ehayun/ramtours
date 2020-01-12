@@ -89,7 +89,7 @@
   var package_type='{{$package->package_type}}';
   var _token='{!! csrf_token() !!}';
   var rami_pakage_adults=parseInt($('#rami_pakage_adults').val());
-  var rami_pakage_childs=parseInt($('#rami_pakage_childs').val());
+  var rami_pakage_childs=parseInt($('#rami_pakage_childs').val()); 
   var rami_pakage_infants=parseInt($('#rami_pakage_infants').val());
 
 
@@ -120,7 +120,7 @@
     return false;
   }
   $.ajax({
-    url: '{{url('cart-setup')}}',
+    url: '{{url("cart-setup")}}',
     type: 'POST',
     data: {_token: _token, package_id:package_id, package_type:package_type, cart_id:window.cart_id, adults:rami_pakage_adults, childs:rami_pakage_childs, infants:rami_pakage_infants, rooms:rami_getting_package_rooms(), extra_hotel1_rooms:rami_getting_package_hotel_extra1_room(), extra_hotel2_rooms:rami_getting_package_hotel_extra2_room(), cars:rami_getting_package_cars(), flight:$('.rami_package_flights').find('select').val(), card:card},
   })
@@ -141,7 +141,7 @@
         }
         if(res.error_fligts != 0){
           //alert('please check current flight not added cart because require vacancy not avalible');
-          alert('אנא בדוק את העגלה הנוכחית שלא הוספה עגלה מכיוון שדורש פנוי אינו זמין ');
+          alert(' החדר אינו זמין או שאין מקומות בטיסה ');
         }
 
     }else{
@@ -211,7 +211,7 @@
    });
     $('body').on('click', '.checking_cart', function(event) {
       $.ajax({
-        url: '{{url('verify-cart')}}',
+        url: '{{url("verify-cart")}}',
         type: 'post',
         data: {_token: '{!! csrf_token() !!}', cart_id:window.cart_id},
       })
@@ -255,10 +255,14 @@
        var loc_id=$(this).find('option[value='+$(this).val()+']').attr('loc_id');
        render_car_acc_to_flight(loc_id);
     });
+    
     var loc_id=$('.rami_package_flights select').find('option[value='+$('.rami_package_flights select').val()+']').attr('loc_id');
     render_car_acc_to_flight(loc_id);
+
     function render_car_acc_to_flight(loc_id){
+      var s_id = 0
        $('.rami_package_cars select option').each(function(index, el) {
+         if ($(this).attr('selected') == "selected") { s_id = index}
         if(typeof $(this).attr('loc_id') === "undefined"){
           $(this).show();
         }else if( $(this).attr('loc_id')==loc_id ){
@@ -287,10 +291,8 @@
           $(this).removeClass('li_show')
         }
        });
-       $
-       $('.rami_package_cars select').val($(".rami_package_cars select .opt_show:first").val());
+      //  $('.rami_package_cars select').val($(".rami_package_cars select .opt_show:first").val());
        setup_cart();
-       
     }
 
 
