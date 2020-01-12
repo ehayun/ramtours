@@ -8,8 +8,6 @@ use Illuminate\Console\Command;
 use App\model\car;
 use App\model\flight;
 use App\model\flight_schedule;
-use App\model\hotel;
-use App\model\Location;
 use App\model\package;
 use App\model\room;
 
