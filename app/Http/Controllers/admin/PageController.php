@@ -73,7 +73,7 @@ class PageController extends Controller
             $page->slug = implode(mb_split(" ", $request->page_title), "-");
             $slug = $page->slug;
             $title = $request->page_title;
-            $description = strip_tags($request->page_disc);
+            $description = strip_tags($request->pck_shot_desc);
             $now = \Carbon\Carbon::now()->format("Y-m-d H:i");
             
             // dd($request->all());
@@ -89,8 +89,8 @@ class PageController extends Controller
                 <link rel='canonical' href='https://ramtours.com/$slug' />
                 <meta property='og:locale' content='he_IL' />
                 <meta property='og:type' content='article' />
-                <meta property='og:title' content='' />
-                <meta property='og:description' content='' />
+                <meta property='og:title' content='$title' />
+                <meta property='og:description' content='$description' />
                 <meta property='og:url' content='https://ramtours.com/$slug' />
                 <meta property='og:site_name' content='רם - תיירות ונסיעות' />
                 <meta property='article:tag' content='$title' />
@@ -139,6 +139,7 @@ class PageController extends Controller
             $page->page_title_text = $request->page_title;
             $page->page_header_custom_code = $header;
             $page->page_footer_custom_code = $footer;
+            $page->pck_shot_desc = $request->pck_shot_desc;
         }
 
         // dd($request);

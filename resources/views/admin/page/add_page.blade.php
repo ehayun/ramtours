@@ -35,10 +35,6 @@ $page='';
                         @section('method_field')
                         @show
 
-
-
-
-
                         <div class="form-group form-float">
                             <div class="form-line">
                                 <input type="text" class="form-control" name="page_title"
@@ -54,6 +50,15 @@ $page='';
                                 <textarea class="ckeditor1"
                                     name="page_disc">{!! get_edit_input_pvr_old_value_with_obj('page_disc',$page,'page_disc')!!}</textarea>
                                 {!! get_form_error_msg($errors, 'page_disc') !!}
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label class="form-label">Page Short description</label>
+                                <br><br>
+                                <textarea class="ckeditor1"
+                                    name="pck_shot_desc">{!! get_edit_input_pvr_old_value_with_obj('pck_shot_desc',$page,'pck_shot_desc')!!}</textarea>
+                                {!! get_form_error_msg($errors, 'pck_shot_desc') !!}
                             </div>
                         </div>
                         <div class="form-group form-float">
