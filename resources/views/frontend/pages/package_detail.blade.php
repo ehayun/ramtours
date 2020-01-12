@@ -244,13 +244,14 @@
               <div class="pkg-select apart rami_cart_select_div rami_package_cars">
                 <label>מבחר סוג רכב </label>
                 <div class="aprt-inner">
+                
                   <select class="rami_pkg_chnage_select chnage_select1" element_no='1' element_name="car">
                     <option value="0">בחר מכונית</option>
                     @foreach( $all_cars as $car)
                     @if(empty($car['id']))
                     @continue
                     @endif
-                    <option loc_id="{{$car['loc_id']}}" value="{{$car['id']}}" @if($car['id']==$package->cheapest_car) selected="true" @endif
+                    <option loc_id="{{$car['loc_id']}}" value="{{$car['id']}}" @if($car['id']==$package->cheapest_car) {{"selected=selected"}}  @endif
                       >{{$car['car_title']}}</option>
                     @endforeach
                   </select>
