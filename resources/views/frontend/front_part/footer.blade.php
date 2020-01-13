@@ -58,16 +58,16 @@
           {{--  Vacation Packages for the Black Forest --}}
           <li><a href="{{ url('/מידע-לנוסע-על-אוסטריה') }}">מידע לנוסע על אוסטריה</a></li>
           {{--Knowledge of passengers on Austria--}}
-          <li><a href="{{ url('/flights/21') }}">טיסות ליער השחור</a></li>
+          <li><a href="{{ url('/טיסות-ליער-השחור') }}">טיסות ליער השחור</a></li>
           {{--Flights to the Black Forest --}} 
-          <li><a href="{{ url('/flights/55') }}">טיסות לזלצבורג</a></li> {{--Flights to Salzburg--}}
-          <li><a href="{{ url('/flights/44') }}">טיסות למינכן</a></li> {{--Flights to Munich--}}
-          <li><a href="{{ url('/flights/טיסות-לציריך') }}">טיסות לציריך</a></li> {{--Flights to Zurich--}}
-          <li><a href="{{ url('/flights/45') }}">טיסות לפרנקפורט</a></li> {{--Flights to Frankfurt--}}
-          <li><a href="{{ url('/flights/81') }}">טיסות לבריסל</a></li> {{--Flights to Frankfurt--}}
-          <li><a href="{{ url('/loc-accommodation/לינה-ביער-השחור') }}">אפשרויות לינה ביער השחור</a></li>
+          <li><a href="{{ url('/טיסות-לזלצבורג') }}">טיסות לזלצבורג</a></li> {{--Flights to Salzburg--}}
+          <li><a href="{{ url('/טיסות-למינכן') }}">טיסות למינכן</a></li> {{--Flights to Munich--}}
+          <li><a href="{{ url('/טיסות-לציריך') }}">טיסות לציריך</a></li> {{--Flights to Zurich--}}
+          <li><a href="{{ url('/טיסות-לפרנקפורט') }}">טיסות לפרנקפורט</a></li> {{--Flights to Frankfurt--}}
+          <li><a href="{{ url('/טיסות-לבריסל') }}">טיסות לבריסל</a></li> {{--Flights to Frankfurt--}}
+          <li><a href="{{ url('/לינה-ביער-השחור') }}">אפשרויות לינה ביער השחור</a></li>
           {{--Accommodation in the Black Forest--}}
-          <li><a href="{{ url('/loc-accommodation/לינה-בזלצבורג') }}">אפשרויות לינה בזלצבורג</a></li>
+          <li><a href="{{ url('/לינה-בזלצבורג') }}">אפשרויות לינה בזלצבורג</a></li>
           {{--Accommodation in Salzburg--}}
           <li><a href="{{ url('/כפרי-נופש-בהולנד') }}">כפרי נופש בהולנד</a></li>
           <li><a href="{{ url('/הולנד-עם-ילדים') }}">הולנד עם ילדים</a></li>
