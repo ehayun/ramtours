@@ -238,6 +238,7 @@ class PackageController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $package = package::find($id);
         $messages = [
         ];
