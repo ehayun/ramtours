@@ -73,7 +73,7 @@ class UpdateAllPackages extends Command
      */
     public function handle()
     {
-
+        $c = new CartController;
         $this->updateCars();
 
         $packages = package::where([['package_type', 1], ['package_status', 1]])->get();
