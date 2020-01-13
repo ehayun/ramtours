@@ -260,9 +260,7 @@
     render_car_acc_to_flight(loc_id);
 
     function render_car_acc_to_flight(loc_id){
-      var s_id = 0
        $('.rami_package_cars select option').each(function(index, el) {
-         if ($(this).attr('selected') == "selected") { s_id = index}
         if(typeof $(this).attr('loc_id') === "undefined"){
           $(this).show();
         }else if( $(this).attr('loc_id')==loc_id ){
@@ -291,9 +289,12 @@
           $(this).removeClass('li_show')
         }
        });
-      //  $('.rami_package_cars select').val($(".rami_package_cars select .opt_show:first").val());
+       $
+       $('.rami_package_cars select').val($(".rami_package_cars select .opt_show:first").val());
        setup_cart();
+       
     }
+
 
 
 

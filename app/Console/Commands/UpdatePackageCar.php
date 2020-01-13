@@ -47,8 +47,6 @@ class UpdatePackageCar extends Command
     public function handle()
     {
 
-        $c = new CartController;
-
         $packages = package::where([['package_type', 1], ['package_status', 1]])->get();
         foreach ($packages as $curr_pack) {
             $flights = unserialize($curr_pack->package_flight_sche);
