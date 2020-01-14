@@ -38,7 +38,7 @@ class SendEmailAlert extends Mailable
         $today = $c->format('d/m/Y');
 
         $data = ['flight' => $this->flight, 'message' => $this->msg];
-        return $this->markdown('emails.alerts.flight_alert', $data)->subject("התראת טיסה $today")
+        return $this->markdown('emails.alerts.flight_alert', $data)->subject("התראה נכון לתאריך  $today")
         ->to(get_rami_setting('notification_email_id'))
         ->cc("rami@ramtours.com")
         ->cc("dana@ramtours.com");

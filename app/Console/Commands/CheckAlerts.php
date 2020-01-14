@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use App\model\flight_schedule;
+use App\model\room;
 
 use App\Mail\SendEmailAlert;
 use Illuminate\Support\Facades\Mail;
@@ -44,9 +45,19 @@ class CheckAlerts extends Command
         foreach ($flight_schedules as $flight_schedule) {
             $msg = $flight_schedule->$msgFld;
             $flight = $flight_schedule->flight_sche_title;
-            //call mail function for mail alert 
-            // $this->info($msg);
             Mail::send(new SendEmailAlert($flight, $msg));
+        }
+    }
+
+    function room_schedule_alert($num)
+    {
+        $fld = "alert_date_$num";
+        $msgFld = "alert_msg_$num";
+        $rooms = room::where([[$fld, '=', date('Y-m-d')]])->get();
+        foreach ($rooms as $room) {
+            $msg = $room->$msgFld;
+            $title = $room->room_title;
+            Mail::send(new SendEmailAlert($title, $msg));
         }
     }
 
@@ -57,8 +68,11 @@ class CheckAlerts extends Command
      */
     public function handle()
     {
-        for($i=1; $i<6; $i++) {
+        for ($i = 1; $i < 6; $i++) {
             $this->flight_schedule_alert($i);
+        }
+        for ($i = 1; $i < 6; $i++) {
+            $this->room_schedule_alert($i);
         }
     }
 }
