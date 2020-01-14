@@ -144,7 +144,7 @@
                         </td>
                         <td width="20%">
                            <strong>מין </strong><br>
-                           <span class="order_inner_data">ז{{ $adult['family_name'] }} </span>
+                           <span class="order_inner_data">{{ $adult['family_name'] }} </span>
                         </td>
 
                         <td width="20%">
@@ -258,6 +258,12 @@
                   </tbody>
                </table>
             </td>
+         </tr>
+
+
+         <tr>
+            <td>כרטיס ליער השחור: </td>
+            <td{{$card}}</td>
          </tr>
 
          <tr>
@@ -469,7 +475,7 @@
                      <tr class="item">
                         <td class="name" width="25%">{{$car->car_title}}</td>
                         <td class="quantity" width="40%">
-                           <strong>כתעופה :&nbsp;&nbsp;</strong>נמל תעופה יעד <br />
+                           <strong>תעופה :&nbsp;&nbsp;</strong>נמל תעופה יעד <br />
                            @if(!empty($car->car_supp_name))
                            <strong>הסוכנות רכב :&nbsp;&nbsp;</strong>{{$car->car_supp_name->car_suplier_name}}<br />
                            @endif

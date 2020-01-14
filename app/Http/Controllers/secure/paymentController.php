@@ -56,7 +56,7 @@ class paymentController extends Controller
     {
         return "404: Not allow";
     }
-    
+
     public function payment()
     {
         if (rami_checking_is_mobile()) {
@@ -214,7 +214,9 @@ class paymentController extends Controller
 
 
         if (function_exists("simplexml_load_string")) {
-            if (strpos(strtoupper($result), 'HEB')) {$result = iconv("utf-8", "iso-8859-8", $result);}
+            if (strpos(strtoupper($result), 'HEB')) {
+                $result = iconv("utf-8", "iso-8859-8", $result);
+            }
             $xmlObj = simplexml_load_string($result);
             if (isset($xmlObj->response->doDeal->mpiHostedPageUrl)) {
                 // print out the url which we should redirect our customers to
@@ -351,7 +353,6 @@ class paymentController extends Controller
             }
 
             curl_close($CR);
-
         }
         $output = array();
         parse_str($result, $output); # ResponseCode={0}&Description={1}......
@@ -525,7 +526,6 @@ class paymentController extends Controller
                     $fligts_data['up_depart_full_date'] = rami_get_require_date_time_format($flight->departure_time, 'd') . ' ' . get_month_name_hebrew(rami_get_require_date_time_format($flight->departure_time, 'm')) . ' ,' . rami_get_require_date_time_format($flight->departure_time, 'Y');
                     $fligts_data['up_departure_time'] = $flight->departure_time;
                     $fligts_data['up_flight_no'] = $flight->flight->flight_number;
-
                 }
                 $up_flights[$int]['airline_name'] = $flight->flight->airline_name->airl_name_eng;
                 $up_flights[$int]['airline_logo'] = $flight->flight->airline_name->airl_logo_img;
@@ -557,7 +557,6 @@ class paymentController extends Controller
             $fligts_data['up_source'] = get_location_name($flight_schedule->flight_name->flight_source);
             $fligts_data['up_flight_no'] = $flight_schedule->flight_name->flight_number;
             $fligts_data['up_time_taken'] = rami_get_no_of_hours_min_diff($flight_schedule->up_departure_time, $flight_schedule->up_arrival_time);
-
         }
         if ($flight_schedule->flight_type_down == 2) {
             $flight_conn_down = flight_schedule_connection::where([['type', 2], ['flight_schedule_id', $flight_schedule->id]])->orderBy('departure_time', 'asc')->get();
@@ -569,7 +568,6 @@ class paymentController extends Controller
                     $fligts_data['down_depart_full_date'] = get_week_name_hebrew(rami_get_require_date_time_format($flight->departure_time, 'w')) . ' ,' . rami_get_require_date_time_format($flight->departure_time, 'd') . ' ,' . get_month_name_hebrew(rami_get_require_date_time_format($flight->departure_time, 'm')) . ' ,' . rami_get_require_date_time_format($flight->departure_time, 'Y');
                     $fligts_data['down_departure_time'] = $flight->departure_time;
                     $fligts_data['down_flight_no'] = $flight->flight->flight_number;
-
                 }
                 $down_flights[$int]['airline_name'] = $flight->flight->airline_name->airl_name_eng;
                 $down_flights[$int]['airline_logo'] = $flight->flight->airline_name->airl_logo_img;
@@ -614,6 +612,7 @@ class paymentController extends Controller
             $count++;
         }
         $data['total_price_in_euro'] = $cart['total_price_in_euro'];
+        $data['card'] = $cart['pack_card_total_price'];
         $data['total_price_in_skl'] = $cart['total_price_in_skl'];
         $data['amount_paid_in_skl'] = $order['amount_paid_in_skl'];
         $data['remaining_amount'] = $order['total_amount_skl'] - $order['amount_paid_in_skl'];
@@ -678,6 +677,7 @@ class paymentController extends Controller
         }
         $data['total_person'] = $cart['total_peoples'];
         $data['pack_passenger'] = unserialize($order['pack_passenger']);
+        $data['card']=$cart['pack_card_total_price'];
         $data['hotel'] = array();
         $data['rooms'] = array();
         $flight_schedule = flight_schedule::find($cart['flight_sch']);
@@ -693,7 +693,6 @@ class paymentController extends Controller
                     $fligts_data['up_depart_full_date'] = rami_get_require_date_time_format($flight->departure_time, 'd') . ' ' . get_month_name_hebrew(rami_get_require_date_time_format($flight->departure_time, 'm')) . ' ,' . rami_get_require_date_time_format($flight->departure_time, 'Y');
                     $fligts_data['up_departure_time'] = $flight->departure_time;
                     $fligts_data['up_flight_no'] = $flight->flight->flight_number;
-
                 }
                 $up_flights[$int]['airline_name'] = $flight->flight->airline_name->airl_name_eng;
                 $up_flights[$int]['airline_logo'] = $flight->flight->airline_name->airl_logo_img;
@@ -725,7 +724,6 @@ class paymentController extends Controller
             $fligts_data['up_source'] = get_location_name($flight_schedule->flight_name->flight_source);
             $fligts_data['up_flight_no'] = $flight_schedule->flight_name->flight_number;
             $fligts_data['up_time_taken'] = rami_get_no_of_hours_min_diff($flight_schedule->up_departure_time, $flight_schedule->up_arrival_time);
-
         }
         if ($flight_schedule->flight_type_down == 2) {
             $flight_conn_down = flight_schedule_connection::where([['type', 2], ['flight_schedule_id', $flight_schedule->id]])->orderBy('departure_time', 'asc')->get();
@@ -737,7 +735,6 @@ class paymentController extends Controller
                     $fligts_data['down_depart_full_date'] = get_week_name_hebrew(rami_get_require_date_time_format($flight->departure_time, 'w')) . ' ,' . rami_get_require_date_time_format($flight->departure_time, 'd') . ' ,' . get_month_name_hebrew(rami_get_require_date_time_format($flight->departure_time, 'm')) . ' ,' . rami_get_require_date_time_format($flight->departure_time, 'Y');
                     $fligts_data['down_departure_time'] = $flight->departure_time;
                     $fligts_data['down_flight_no'] = $flight->flight->flight_number;
-
                 }
                 $down_flights[$int]['airline_name'] = $flight->flight->airline_name->airl_name_eng;
                 $down_flights[$int]['airline_logo'] = $flight->flight->airline_name->airl_logo_img;
@@ -781,6 +778,7 @@ class paymentController extends Controller
         // $data['downflight']=flight::find($data['flight_schedule']->flight_down);
         $data['cars'] = array();
         $data['total_price_in_euro'] = $cart['total_price_in_euro'];
+        $data['card'] = $cart['pack_card_total_price'];
         $data['total_price_in_skl'] = $cart['total_price_in_skl'];
         $data['amount_paid_in_skl'] = $order['amount_paid_in_skl'];
         $data['remaining_amount'] = $order['total_amount_skl'] - $order['amount_paid_in_skl'];
@@ -804,7 +802,6 @@ class paymentController extends Controller
         if (!empty($order)) {
             Mail::send(new OrderCompleted($order));
         }
-
     }
     public function stock()
     {
@@ -826,19 +823,23 @@ class paymentController extends Controller
                 foreach ($cart['rooms'] as $room) {
                     $new_room = room::find($room['room_id']);
                     if (!empty($new_room)) {
-                        $room_stock = package_room_stock::where([['room_id', $room['room_id']], ['package_id', $cart[
-                            'package_id']]])->get()->first();
+                        $room_stock = package_room_stock::where([['room_id', $room['room_id']], ['package_id', $cart['package_id']]])->get()->first();
                         if ($room_stock->room_available > 0) {
                             --$room_stock->room_available;
+                            if ($room_stock->room_available == 0) {
+                                // Remove room from package in case of no room in stock
+                                $pr = package::find($cart["package_id"]);
+                                $p_rooms = unserialize($pr->package_hotel_room);
+                                $p_rooms = array_diff($p_rooms, [$room['room_id']]);
+                                $pr->package_hotel_room = serialize($p_rooms);
+                                $pr->save();
+                            }
                         }
 
                         $room_stock->save();
-
                     }
-
                 }
             }
         }
     }
-
 }

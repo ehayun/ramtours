@@ -152,6 +152,7 @@ class CheckoutController extends Controller
         $passengers['childs'] = $child_passengers;
         $passengers['adults'] = $adult_passengers;
         $passengers['infants'] = $infant_passengers;
+        $payee['card'] = "12345";
         $payee['name'] = $request->payer_firstname;
         $payee['surname'] = $request->payer_surname;
         $payee['home_phone'] = $request->payer_home_phone;

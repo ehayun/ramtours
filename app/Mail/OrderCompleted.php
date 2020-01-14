@@ -31,7 +31,7 @@ class OrderCompleted extends Mailable
     public function build()
     {
         //dd($this->order);
-        $data['payee_name']= $this->order['payee_name'];
+        $data['payee_name']= $this->order['payee_name']; 
         $data['email']=$this->order['payee_email_id'];
         $data['tran1']=$this->order['tran_id'];
         $data['tran2']=$this->order['internal_deal_number'];
@@ -48,6 +48,7 @@ class OrderCompleted extends Mailable
         $data['adults']=$cart['adults'];
         $data['childs']=$cart['childs'];
         $data['total_peoples']=$cart['total_peoples'];
+        $data['card']=$cart['pack_card_total_price']; 
         $data['total_price_in_skl']=$cart['total_price_in_skl'];
         $data['total_price_in_euro']=$cart['total_price_in_euro'];
         $data['amount_paid_in_skl']=$this->order['amount_paid_in_skl'];

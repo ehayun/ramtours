@@ -168,7 +168,7 @@
                   <tbody>
                      <tr>
                         <td width="33%">
-                           <strong> עסך עלות העסקה ביורו: </strong>
+                           <strong> סך עלות העסקה ביורו: </strong>
                         </td>
                         <td width="67%">{{$total_price_in_euro}} €</td>
                      </tr>
@@ -178,6 +178,17 @@
                         </td>
                         <td width="67%">{{$total_price_in_skl}} ₪ </td>
                      </tr>
+                     @if ($card > 0)
+                     <tr>
+                        <td width="33%">
+                           <strong> כרטיס ליער השחור: </strong>
+                        </td>
+                        <td width="67%">{{$card}} ₪ </td>
+                     </tr>
+                     @endif
+
+
+
                      <tr>
                         <td width="33%">
                            <strong> הסכום ששולם באתר:</strong>
