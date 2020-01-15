@@ -484,12 +484,12 @@ class RoomController extends Controller
         $messages = [
         ];
         $this->validate($request, [
-            'booking_date' => 'required',
-            'alert_date_1' => 'required',
-            'alert_date_2' => 'required',
-            'alert_date_3'=>'required',
-            'alert_date_4'=>'required',
-            'alert_date_5'=>'required'
+            // 'booking_date' => 'required',
+            // 'alert_date_1' => 'required',
+            // 'alert_date_2' => 'required',
+            // 'alert_date_3'=>'required',
+            // 'alert_date_4'=>'required',
+            // 'alert_date_5'=>'required'
         ], $messages);
         $room->booking_date=$request->booking_date;
         $room->alert_date_1=$request->alert_date_1;
