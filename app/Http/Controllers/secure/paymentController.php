@@ -677,7 +677,7 @@ class paymentController extends Controller
         }
         $data['total_person'] = $cart['total_peoples'];
         $data['pack_passenger'] = unserialize($order['pack_passenger']);
-        $data['card']=$cart['pack_card_total_price'];
+        $data['card'] = $cart['pack_card_total_price'];
         $data['hotel'] = array();
         $data['rooms'] = array();
         $flight_schedule = flight_schedule::find($cart['flight_sch']);
@@ -833,6 +833,13 @@ class paymentController extends Controller
                                 $p_rooms = array_diff($p_rooms, [$room['room_id']]);
                                 $pr->package_hotel_room = serialize($p_rooms);
                                 $pr->save();
+                                
+                                $pr = package::find($cart["package_id"]);
+                                $rooms = unserialize($pr->package_hotel_room);
+                                if ($rooms == []) {
+                                    $pr->package_status = 0;
+                                    $pr->save();
+                                }
                             }
                         }
 

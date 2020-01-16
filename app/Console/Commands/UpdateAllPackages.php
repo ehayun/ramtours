@@ -91,6 +91,7 @@ class UpdateAllPackages extends Command
             // print "pkg: " . $curr_pack->id . " \n";
             // var_dump($curr_pack);
             // $this->setup_low_cost_for_package($package->id);
+            $rooms = unserialize($curr_pack->package_hotel_room);
             $flights = unserialize($curr_pack->package_flight_sche);
             foreach ($flights as $flight) {
                 $curr_flight = flight_schedule::find($flight);
@@ -178,6 +179,10 @@ class UpdateAllPackages extends Command
             $curr_pack->total_price_in_euro = $res['price'];
             $curr_pack->package_lowest_price = $res['price'] / $persons;
             $curr_pack->total_persons_combinations = '2' . '&' . "$persons-2";
+            $rooms = unserialize($curr_pack->package_hotel_room);
+            if ($rooms == []) {
+                $curr_pack->package_status = 0;
+            }
             $curr_pack->save();
             // var_dump($ss);
         }
