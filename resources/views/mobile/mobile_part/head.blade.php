@@ -20,6 +20,7 @@
    <link href="{{url('assets/mobile')}}/css/daterangepicker.css" rel="stylesheet">
    <link href="{{url('assets/mobile')}}/css/style.css" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+   <script id="ptoken" src="https://ws.callindex.co.il/campaign/send_analytics.js?ptoken=534"></script>
    @show
    <script src='https://www.google.com/recaptcha/api.js'></script>
    @if (env('APP_ENV') == 'production')
