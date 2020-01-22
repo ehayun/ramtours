@@ -52,7 +52,7 @@ if (!function_exists('rami_checking_is_mobile')) {
         if ($agent->isMobile() || $agent->isTablet()) {
             return 1;
         } else {
-            return 0;
+            return 1;
         }
     }
 }

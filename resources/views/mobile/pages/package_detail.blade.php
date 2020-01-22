@@ -560,7 +560,7 @@
                         <h3>
                            <span>
                               <img src="{{url('/assets/front/images')}}/ramtours-rooms.png">
-                              @if(!empty($room['room_area']))
+                              @if(!empty($room['room_area']) && ($room['room_area'] > 0))
                               {{$room['room_type']}} - {{$room['room_area']}} מ"ר |
                               @else
                               {{$room['room_type']}} |
@@ -834,7 +834,9 @@
                      @foreach( $hotel_rooms as $room)
                      <option value="{{$room['id']}}" @if($room['id']==$package->cheapest_room) selected="true" @endif>
                         <span>
-                           חדרים -{{$room['room_area']}} מ"ר |
+                           @if(!empty($room['room_area']) && ($room['room_area'] > 0))
+                              חדרים -{{$room['room_area']}} מ"ר |
+                           @endif
                         </span>
                         <span>
                            &nbsp;מתאים להרכב של עד {{$room['max_people']}} נפשות <span

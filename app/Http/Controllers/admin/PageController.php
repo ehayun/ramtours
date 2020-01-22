@@ -27,57 +27,18 @@ class PageController extends Controller
         $data['assets_admin'] = url('assets/admin');
         return view('admin.page.all_page', $data);
     }
-    /**
-     * Show the form for creating a new resource.
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+
+    private function updateMeta($page, $request)
     {
-        $data['page_title'] = 'Add Page';
-        $data['assets_admin'] = url('assets/admin');
-        $data['locations'] = Location::all();
-        return view('admin.page.add_page', $data);
-    }
-    /**
-     * Store a newly created resource in storage.
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $page = new page;
-        $messages = [];
-        $this->validate($request, [
-            'page_title' => 'required',
-            'page_disc' => 'required',
-            'show_in_header_menu' => 'required',
-            'show_in_footer_menu' => 'required',
-            'page_status' => 'required',
-            'page_img' => 'image|max:2048',
-        ], $messages);
-        $page->page_title = $request->page_title;
-        $page->page_disc = $request->page_disc;
-        $page->menu_title = $request->menu_title;
-        $page->show_in_header_menu = $request->show_in_header_menu;
-        $page->show_in_footer_menu = $request->show_in_footer_menu;
-        $page->sequence = $request->sequence;
-        $page->page_status = $request->page_status;
-        $page->package_start_date = $request->package_start_date;
-        $page->package_end_date = $request->package_end_date;
-        $page->package_flight_location = $request->package_flight_location;
-        
-        
-        
-        
-        if (!$request->slug) {
-            $page->slug = implode(mb_split(" ", $request->page_title), "-");
-            $slug = $page->slug;
-            $title = $request->page_title;
-            $description = strip_tags($request->pck_shot_desc);
-            $now = \Carbon\Carbon::now()->format("Y-m-d H:i");
-            
-            // dd($request->all());
-            $header = "
+
+        $slug = $page->slug;
+        $title = $request->page_title;
+        $description = strip_tags($request->pck_shot_desc);
+        $now = \Carbon\Carbon::now()->format("Y-m-d H:i");
+
+        // dd($request->all());
+        $header = "
                     <link rel='profile' href='http://gmpg.org/xfn/11'>
                     <link rel='pingback' href=''>
                 <script data-cfasync='false' type='text/javascript'>//<![CDATA[
@@ -116,7 +77,7 @@ class PageController extends Controller
                 </script>
             ";
 
-            $footer = '<script type="b9b0e8d2c75aeed76733c602-text/javascript">
+        $footer = '<script type="b9b0e8d2c75aeed76733c602-text/javascript">
             /* <![CDATA[ */
             var google_conversion_id = 1003871194;
             var google_custom_params = window.google_tag_params;
@@ -136,15 +97,66 @@ class PageController extends Controller
 
 
 
-            $page->page_title_text = $request->page_title;
-            $page->page_header_custom_code = $header;
-            $page->page_footer_custom_code = $footer;
-            $page->pck_shot_desc = $request->pck_shot_desc;
+        $page->page_header_custom_code = $header;
+        $page->page_footer_custom_code = $footer;
+
+
+        return $page;
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $data['page_title'] = 'Add Page';
+        $data['assets_admin'] = url('assets/admin');
+        $data['locations'] = Location::all();
+        return view('admin.page.add_page', $data);
+    }
+    /**
+     * Store a newly created resource in storage.
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $page = new page;
+        $messages = [];
+        $this->validate($request, [
+            'page_title' => 'required',
+            'page_disc' => 'required',
+            'show_in_header_menu' => 'required',
+            'show_in_footer_menu' => 'required',
+            'page_status' => 'required',
+            'page_img' => 'image|max:2048',
+        ], $messages);
+        $page->page_title = $request->page_title;
+        $page->page_disc = $request->page_disc;
+        $page->menu_title = $request->menu_title;
+        $page->show_in_header_menu = $request->show_in_header_menu;
+        $page->show_in_footer_menu = $request->show_in_footer_menu;
+        $page->sequence = $request->sequence;
+        $page->page_status = $request->page_status;
+        $page->package_start_date = $request->package_start_date;
+        $page->package_end_date = $request->package_end_date;
+        $page->package_flight_location = $request->package_flight_location;
+
+
+
+
+        if (!$request->slug) {
+            $page->slug = implode(mb_split(" ", $request->page_title), "-");
         }
 
-        // dd($request);
+        $page = $this->updateMeta($page, $request);
+
+        $page->pck_shot_desc = $request->pck_shot_desc;
 
 
+
+        $page->page_title_text = $request->page_title;
         $page->save();
         if ($page->id) {
             if ($request->file('page_img')) {
@@ -189,6 +201,7 @@ class PageController extends Controller
         ], $messages);
         $page->page_title = $request->page_title;
         $page->page_disc = $request->page_disc;
+        $page->pck_shot_desc = $request->pck_shot_desc;
         $page->menu_title = $request->menu_title;
         $page->show_in_header_menu = $request->show_in_header_menu;
         $page->show_in_footer_menu = $request->show_in_footer_menu;
@@ -198,6 +211,9 @@ class PageController extends Controller
         $page->package_start_date = $request->package_start_date;
         $page->package_end_date = $request->package_end_date;
         $page->package_flight_location = $request->package_flight_location;
+
+        $page = $this->updateMeta($page, $request);
+
         $page->save();
         if ($page->id) {
             if ($request->file('page_img')) {

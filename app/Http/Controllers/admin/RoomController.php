@@ -99,6 +99,7 @@ class RoomController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $room=room::find($id);
         $messages = [
         ];
@@ -110,7 +111,7 @@ class RoomController extends Controller
             'room_area'=>'required'
         ], $messages);            
         $room->room_title=$request->room_title;
-        $room->old_room_id=$request->old_room_id;
+        // $room->old_room_id=$request->old_room_id;
         $room->room_desc=$request->room_desc;
         $room->room_area=$request->room_area;
         $room->room_type=$request->room_type;
