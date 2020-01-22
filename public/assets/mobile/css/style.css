@@ -1164,3 +1164,8 @@ html.translated-ltr .pkgprc font {font-size: 32px!important;}
     height: 12px;
     border: 2px solid#ffa800;
 }
+
+
+ol {
+	text-align: right;
+}
