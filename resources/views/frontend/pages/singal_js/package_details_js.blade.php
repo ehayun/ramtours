@@ -290,7 +290,7 @@
         }
        });
        $
-      //  $('.rami_package_cars select').val($(".rami_package_cars select .opt_show:first").val());
+       $('.rami_package_cars select').val($(".rami_package_cars select .opt_show:first").val());
        setup_cart();
        
     }
