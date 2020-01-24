@@ -479,7 +479,6 @@
                            @if(!empty($car->car_supp_name))
                            <strong>הסוכנות רכב :&nbsp;&nbsp;</strong>{{$car->car_supp_name->car_suplier_name}}<br />
                            @endif
-                           <!-- <strong>גיר :&nbsp;&nbsp;</strong>ידני <br /> -->
                            <strong>GPS:&nbsp;&nbsp;</strong>נניתן להזמין gps בתוספת <br />
                            <strong>מקס. נוסעים :&nbsp;&nbsp;</strong>{{$car->max_people}}<br />
                         </td>
