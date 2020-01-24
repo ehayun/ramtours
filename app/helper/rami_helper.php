@@ -620,6 +620,7 @@ if (!function_exists('rami_vacation_pkg_del_top_text')) {
 if (!function_exists('rami_vacation_pkg_html')) {
     function rami_vacation_pkg_html($pkgs_fhc, $col = 3)
     {
+        // dd($pkgs_fhc);
         $hotel_id = $pkgs_fhc->package_hotel;
         $pack_loc_id = $pkgs_fhc->package_flight_location;
         $hotel_details = hotel::find($hotel_id);
@@ -633,8 +634,9 @@ if (!function_exists('rami_vacation_pkg_html')) {
         }
         $pack_loction = Location::find($pack_loc_id);
         $flight_locations = '';
-        $filght_sheds = unserialize($pkgs_fhc->package_flight_sche);
-        $filght_sheds = flight_schedule::find($filght_sheds[0]);
+        // Eli Hayun - Wrong to get the 1st flight. take the cheapest flight
+        $filght_sheds =    $pkgs_fhc->cheapest_flight_sche;  // unserialize($pkgs_fhc->package_flight_sche);
+        $filght_sheds = flight_schedule::find($filght_sheds);
         if (!empty($filght_sheds)) {
             $flight = flight::find($filght_sheds->flight_up);
             if (!empty($flight->location_desti)) {
