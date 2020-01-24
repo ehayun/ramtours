@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
@@ -53,8 +54,7 @@ class PackageController extends Controller
     public function store(Request $request)
     {
         $package = new package;
-        $messages = [
-        ];
+        $messages = [];
         //dd($request);
         if (!empty($request->package_hotel_room)) {
             foreach ($request->package_hotel_room as $room) {
@@ -92,7 +92,7 @@ class PackageController extends Controller
             'instant_approval' => 'required',
             'package_status' => 'required',
         );
-        if(($request->package_type == 1)&&($request->having_extra_hotel_1 == 1)){
+        if (($request->package_type == 1) && ($request->having_extra_hotel_1 == 1)) {
             $valid_array['extra_hotel_1'] = 'required|different:package_hotel';
             $valid_array['extra_hotel_1_start_date'] = 'required|date|date_format:Y-m-d|after_or_equal:package_start_date|before:extra_hotel_1_end_date';
             $valid_array['extra_hotel_1_end_date'] = 'required|date|date_format:Y-m-d|before_or_equal:package_end_date|after:extra_hotel_1_start_date';
@@ -100,26 +100,23 @@ class PackageController extends Controller
             if (!empty($request->extra_hotel_1_rooms)) {
                 foreach ($request->extra_hotel_1_rooms as $room) {
                     $valid_array['room_stock_' . $room] = 'required|numeric|min:0|max:999';
-
                 }
             }
-            if($request->having_extra_hotel_2 == 1){
+            if ($request->having_extra_hotel_2 == 1) {
                 $valid_array['extra_hotel_2'] = 'required|not_in:extra_hotel_1|different:package_hotel';
                 $valid_array['extra_hotel_2_start_date'] = 'required|date|date_format:Y-m-d|after_or_equal:extra_hotel_1_end_date|before:extra_hotel_2_end_date';
                 $valid_array['extra_hotel_2_end_date'] = 'required|date|date_format:Y-m-d|before_or_equal:package_end_date|after:extra_hotel_1_start_date';
                 $valid_array['extra_hotel_2_rooms'] = 'required';
                 if (!empty($request->extra_hotel_2_rooms)) {
-                foreach ($request->extra_hotel_2_rooms as $room) {
-                    $valid_array['room_stock_' . $room] = 'required|numeric|min:0|max:999';
-
+                    foreach ($request->extra_hotel_2_rooms as $room) {
+                        $valid_array['room_stock_' . $room] = 'required|numeric|min:0|max:999';
+                    }
                 }
-            }
             }
         }
         if (!empty($request->package_hotel_room)) {
             foreach ($request->package_hotel_room as $room) {
                 $valid_array['room_stock_' . $room] = 'required|numeric|min:0|max:999';
-
             }
         }
         if ($request->package_profit_type == 1) {
@@ -161,19 +158,18 @@ class PackageController extends Controller
         $package->package_status = $request->package_status;
         $package->is_hot_deal = $request->is_hot_deal;
         $package->pkg_instruction_text = $request->pkg_instruction_text;
-        if($request->having_extra_hotel_1 == 1){
+        if ($request->having_extra_hotel_1 == 1) {
             $package->having_extra_hotel_1 = $request->having_extra_hotel_1;
             $package->extra_hotel_1_start_date = $request->extra_hotel_1_start_date;
             $package->extra_hotel_1_end_date = $request->extra_hotel_1_end_date;
             $package->extra_hotel_1 = $request->extra_hotel_1;
-            $package->extra_hotel_1_rooms =serialize($request->extra_hotel_1_rooms);
-            if($request->having_extra_hotel_2 == 1){
+            $package->extra_hotel_1_rooms = serialize($request->extra_hotel_1_rooms);
+            if ($request->having_extra_hotel_2 == 1) {
                 $package->having_extra_hotel_2 = $request->having_extra_hotel_2;
                 $package->extra_hotel_2_start_date = $request->extra_hotel_2_start_date;
                 $package->extra_hotel_2_end_date = $request->extra_hotel_2_end_date;
                 $package->extra_hotel_2 = $request->extra_hotel_2;
-                $package->extra_hotel_2_rooms =serialize($request->extra_hotel_2_rooms);
-                
+                $package->extra_hotel_2_rooms = serialize($request->extra_hotel_2_rooms);
             }
         }
         $package->save();
@@ -189,24 +185,22 @@ class PackageController extends Controller
             }
         }
         if (!empty($request->extra_hotel_1_rooms)) {
-                foreach ($request->extra_hotel_1_rooms as $room) {
-                    $package_room_stocks = new package_room_stock;
-                    $package_room_stocks->room_id = $room;
-                    $package_room_stocks->package_id = $package->id;
-                    $package_room_stocks->room_available = $request->{'room_stock_' . $room};
-                    $package_room_stocks->save();
-
-                }
+            foreach ($request->extra_hotel_1_rooms as $room) {
+                $package_room_stocks = new package_room_stock;
+                $package_room_stocks->room_id = $room;
+                $package_room_stocks->package_id = $package->id;
+                $package_room_stocks->room_available = $request->{'room_stock_' . $room};
+                $package_room_stocks->save();
+            }
         }
-         if (!empty($request->extra_hotel_2_rooms)) {
-                foreach ($request->extra_hotel_2_rooms as $room) {
-                    $package_room_stocks = new package_room_stock;
-                    $package_room_stocks->room_id = $room;
-                    $package_room_stocks->package_id = $package->id;
-                    $package_room_stocks->room_available = $request->{'room_stock_' . $room};
-                    $package_room_stocks->save();
-
-                }
+        if (!empty($request->extra_hotel_2_rooms)) {
+            foreach ($request->extra_hotel_2_rooms as $room) {
+                $package_room_stocks = new package_room_stock;
+                $package_room_stocks->room_id = $room;
+                $package_room_stocks->package_id = $package->id;
+                $package_room_stocks->room_available = $request->{'room_stock_' . $room};
+                $package_room_stocks->save();
+            }
         }
         $this->setup_low_cost_for_package($package->id);
         set_flash_msg('flash_success', 'Package Inserted Successsfully.');
@@ -240,8 +234,7 @@ class PackageController extends Controller
     {
 
         $package = package::find($id);
-        $messages = [
-        ];
+        $messages = [];
         if (!empty($request->package_hotel_room)) {
             foreach ($request->package_hotel_room as $room) {
                 $messages['room_stock_' . $room . '.required'] = 'Please enter valid room avalible field';
@@ -250,7 +243,7 @@ class PackageController extends Controller
                 $messages['room_stock_' . $room . '.numeric'] = 'Please enter valid room avalible field';
             }
         }
-         if (!empty($request->extra_hotel_1_rooms)) {
+        if (!empty($request->extra_hotel_1_rooms)) {
             foreach ($request->extra_hotel_1_rooms as $room) {
                 $messages['room_stock_' . $room . '.required'] = 'Please enter valid room avalible field';
                 $messages['room_stock_' . $room . '.max'] = 'Please enter valid room avalible field(max 99)';
@@ -276,7 +269,7 @@ class PackageController extends Controller
             'instant_approval' => 'required',
             'package_status' => 'required',
         );
-        if(($request->package_type == 1)&&($request->having_extra_hotel_1 == 1)){
+        if (($request->package_type == 1) && ($request->having_extra_hotel_1 == 1)) {
             $valid_array['extra_hotel_1'] = 'required|different:package_hotel';
             $valid_array['extra_hotel_1_start_date'] = 'required|date|date_format:Y-m-d|after_or_equal:package_start_date|before:extra_hotel_1_end_date';
             $valid_array['extra_hotel_1_end_date'] = 'required|date|date_format:Y-m-d|before_or_equal:package_end_date|after:extra_hotel_1_start_date';
@@ -284,20 +277,18 @@ class PackageController extends Controller
             if (!empty($request->extra_hotel_1_rooms)) {
                 foreach ($request->extra_hotel_1_rooms as $room) {
                     $valid_array['room_stock_' . $room] = 'required|numeric|min:0|max:999';
-
                 }
             }
-            if($request->having_extra_hotel_2 == 1){
+            if ($request->having_extra_hotel_2 == 1) {
                 $valid_array['extra_hotel_2'] = 'required|not_in:extra_hotel_1|different:package_hotel';
                 $valid_array['extra_hotel_2_start_date'] = 'required|date|date_format:Y-m-d|after_or_equal:extra_hotel_1_end_date|before:extra_hotel_2_end_date';
                 $valid_array['extra_hotel_2_end_date'] = 'required|date|date_format:Y-m-d|before_or_equal:package_end_date|after:extra_hotel_1_start_date';
                 $valid_array['extra_hotel_2_rooms'] = 'required';
                 if (!empty($request->extra_hotel_2_rooms)) {
-                foreach ($request->extra_hotel_2_rooms as $room) {
-                    $valid_array['room_stock_' . $room] = 'required|numeric|min:0|max:999';
-
+                    foreach ($request->extra_hotel_2_rooms as $room) {
+                        $valid_array['room_stock_' . $room] = 'required|numeric|min:0|max:999';
+                    }
                 }
-            }
             }
         }
 
@@ -346,19 +337,18 @@ class PackageController extends Controller
         $package->is_hot_deal = $request->is_hot_deal;
         $package->pkg_instruction_text = $request->pkg_instruction_text;
         //dd($package);
-       if($request->having_extra_hotel_1 == 1){
+        if ($request->having_extra_hotel_1 == 1) {
             $package->having_extra_hotel_1 = $request->having_extra_hotel_1;
             $package->extra_hotel_1_start_date = $request->extra_hotel_1_start_date;
             $package->extra_hotel_1_end_date = $request->extra_hotel_1_end_date;
             $package->extra_hotel_1 = $request->extra_hotel_1;
-            $package->extra_hotel_1_rooms =serialize($request->extra_hotel_1_rooms);
-            if($request->having_extra_hotel_2 == 1){
+            $package->extra_hotel_1_rooms = serialize($request->extra_hotel_1_rooms);
+            if ($request->having_extra_hotel_2 == 1) {
                 $package->having_extra_hotel_2 = $request->having_extra_hotel_2;
                 $package->extra_hotel_2_start_date = $request->extra_hotel_2_start_date;
                 $package->extra_hotel_2_end_date = $request->extra_hotel_2_end_date;
                 $package->extra_hotel_2 = $request->extra_hotel_2;
-                $package->extra_hotel_2_rooms =serialize($request->extra_hotel_2_rooms);
-                
+                $package->extra_hotel_2_rooms = serialize($request->extra_hotel_2_rooms);
             }
         }
         $package->save();
@@ -376,24 +366,22 @@ class PackageController extends Controller
             }
         }
         if (!empty($request->extra_hotel_1_rooms)) {
-                foreach ($request->extra_hotel_1_rooms as $room) {
-                    $package_room_stocks = new package_room_stock;
-                    $package_room_stocks->room_id = $room;
-                    $package_room_stocks->package_id = $package->id;
-                    $package_room_stocks->room_available = $request->{'room_stock_' . $room};
-                    $package_room_stocks->save();
-
-                }
+            foreach ($request->extra_hotel_1_rooms as $room) {
+                $package_room_stocks = new package_room_stock;
+                $package_room_stocks->room_id = $room;
+                $package_room_stocks->package_id = $package->id;
+                $package_room_stocks->room_available = $request->{'room_stock_' . $room};
+                $package_room_stocks->save();
+            }
         }
-         if (!empty($request->extra_hotel_2_rooms)) {
-                foreach ($request->extra_hotel_2_rooms as $room) {
-                    $package_room_stocks = new package_room_stock;
-                    $package_room_stocks->room_id = $room;
-                    $package_room_stocks->package_id = $package->id;
-                    $package_room_stocks->room_available = $request->{'room_stock_' . $room};
-                    $package_room_stocks->save();
-
-                }
+        if (!empty($request->extra_hotel_2_rooms)) {
+            foreach ($request->extra_hotel_2_rooms as $room) {
+                $package_room_stocks = new package_room_stock;
+                $package_room_stocks->room_id = $room;
+                $package_room_stocks->package_id = $package->id;
+                $package_room_stocks->room_available = $request->{'room_stock_' . $room};
+                $package_room_stocks->save();
+            }
         }
         $this->setup_low_cost_for_package($package->id);
         set_flash_msg('flash_success', 'Package Updated Successsfully.');
@@ -682,6 +670,47 @@ class PackageController extends Controller
                 $curr_pack->cheapest_flight_sche = $flight_id;
                 $curr_pack->save();
             }
+
+            // Check room too - Eli Hayun
+            $rooms = unserialize($curr_pack->package_hotel_room);
+            if (empty($rooms)) {
+                $curr_pack->package_status = 0;
+                $curr_pack->save();
+            }
+            $new_room = array();
+            $count = 1;
+            $room_id = null;
+            foreach ($rooms as $room) {
+                $curr_room = room::find($room);
+                if (empty($curr_room)) {
+                    continue;
+                }
+                $room_price = get_rami_room_price($room->id, 2, $curr_pack->package_start_date);
+                if ($count == 1) {
+                    $room_id = $room;
+                    $old_price = $room_price;
+                } elseif (($old_price >= $room_price) && ($room_price > 0)) {
+                    $room_id = $room;
+                    $old_price = $room_price;
+                }
+                if (($room_price != 0)) {
+                    $new_room[] = $curr_room->id;
+                }
+                $count++;
+            }
+            if (empty($new_room)) {
+                $curr_pack->package_hotel_room = serialize($new_room);
+                $curr_pack->package_status = 0;
+                $curr_pack->save();
+            } else {
+                $curr_pack->package_hotel_room = serialize($new_room);
+                $curr_pack->cheapest_roome = $room_id;
+                $curr_pack->save();
+            }
+
+
+
+
             $no_of_days = rami_get_no_of_days_diff($start_date, $end_date);
             $car_price = get_rami_car_price_cheapest($curr_pack->cheapest_car, $start_date);
             $room_price = get_rami_room_price_cheapest($curr_pack->cheapest_room, $start_date);
