@@ -40,7 +40,7 @@
                      <ul class="dropdown-menu" role="menu">
                         <li class="dropdown-item dropdown">
                            <a href="" class="dropdown-toggle">
-                              חלינה בגרמניה </a>
+                              לינה בגרמניה </a>
                            <!--<ul class="dropdown-menu">
                                     <li class="dropdown-item"><a href="#">לינה ביער השחור</a></li>
                                     <li class="dropdown-item"><a href="#">לינה בפרייבורג</a></li>

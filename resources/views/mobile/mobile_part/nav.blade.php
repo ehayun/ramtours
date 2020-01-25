@@ -13,24 +13,50 @@
                         הבית</a>
                   </li>
                   {{-- vacation packages --}}
+                  
                   <li class="nav-item dropdown">
                      <a href="#" class="nav-link {{ get_rami_active_menu('vacation-packages') }}" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">חבילות נופש</a>
-                     <ul class="dropdown-menu" role="menu">
-                        <li class=""><a class="dropdown-item" href="{{ url('/package-category/21') }}">חבילות נופש
-                              באיזור היער השחור גרמניה </a></li>
-                        <!-- <li class=""><a href="{{ url('/package-category/53') }}" class="dropdown-item">חבילות ליער השחור ראש השנה סוכות</a></li> -->
-                        <li class=""><a href="{{ url('/package-category/82') }}" class="dropdown-item">חבילות וכפרי נופש
-                              ברחבי הולנד</a></li>
-                        <li class=""><a href="{{ url('/package-category/55') }}" class="dropdown-item">חבילות הנופש
-                              באיזור זלצבורג אוסטריה </a></li>
-                        <!-- <li class=""><a href="{{ url('/package-category/55') }}" class="dropdown-item">חבילות נופש ליער השחור פסח</a></li>
-                                 <li class=""><a href="{{ url('/package-category/45') }}" class="dropdown-item">כל חבילות הנופש באיזור זלצבורג אוסטריה</a></li> -->
-                        <li class=""><a href="{{ url('/package-category/54') }}" class="dropdown-item">חבילות נופש
-                              באיזור טירול אוסטריה</a></li>
-
-
+                        <ul class="dropdown-menu" role="menu">
+                  <li class="dropdown-item dropdown">
+                     <a href="#" class="dropdown-toggle {{ get_rami_active_menu('accommodation') }}">
+                        {{_("חבילות נופש ביער השחור")}} </a>
+                     <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href="{{ url('/package-category/21') }}">חבילות נופש באיזור היער השחור גרמניה</a></li>
+                        <li class="dropdown-item"><a href="{{ url('/20') }}">חבילות נופש ליער השחור לפסח</a></li>
+                        <li class="dropdown-item"><a href="{{ url('/44') }}">חבילות נופש ליער השחור קיץ </a></li>
+                        <li class="dropdown-item"><a href="{{ url('/70') }}">חבילות נופש ליער השחור לראש השנה וסוכות </a></li>
                      </ul>
+                  </li>
+                  <li class="dropdown-item dropdown">
+                     <a href="#" class="dropdown-toggle {{ get_rami_active_menu('accommodation') }} "> חבילות וכפרי נופש ברחבי הולנד</a>
+                     <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href="{{ url('/package-category/82') }}"> חבילות וכפרי נופש בהולנד</a></li>
+                        <li class="dropdown-item"><a href="{{ url('/264') }}"> חבילות נופש להולנד פסח</a></li>
+                        <li class="dropdown-item"><a href="{{ url('/265') }}"> חבילות נופש להולנד בקיץ</a></li>
+                        <li class="dropdown-item"><a href="{{ url('/266') }}"> חבילות נופש להולנד ראש השנה וסוכות</a></li>
+                     </ul>
+                  </li>
+                  <li class="dropdown-item dropdown">
+                     <a href="#" class="dropdown-toggle {{ get_rami_active_menu('accommodation') }} "> חבילות נופש זלצבורג אוסטריה</a>
+                     <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href="{{ url('/package-category/55') }}"> חבילות נופש באיזור זלצבורג אוסטריה</a></li>
+                        <li class="dropdown-item"><a href="{{ url('/262') }}"> חבילות נופש לזלצבורג פסח </a></li>
+                        <li class="dropdown-item"><a href="{{ url('/74') }}"> חבילות נופש לזלצבורג בקיץ </a></li>
+                        <li class="dropdown-item"><a href="{{ url('/263') }}"> חבילות נופש לזלצבורג ראש השנה וסוכות </a></li>
+                     </ul>
+                  </li>
+                  <li class="dropdown-item dropdown">
+                     <a href="#" class="dropdown-toggle {{ get_rami_active_menu('accommodation') }} "> חבילות נופש טירול אוסטריה</a>
+                     <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href="{{ url('/package-category/54') }}"> חבילות נופש באיזור טירול אוסטריה</a></li>
+                        <li class="dropdown-item"><a href="{{ url('/268') }}"> חבילות נופש לטירול לפסח </a></li>
+                        <li class="dropdown-item"><a href="{{ url('/269') }}"> חבילות נופש לטירול ראש השנה וסוכות </a></li>
+                        <li class="dropdown-item"><a href="{{ url('/267') }}"> חבילות נופש לטירול לקיץ </a></li>
+                     </ul>
+                  </li>
+               </ul>
+                     
                   </li>
                   {{-- fly and travel menu --}}
                   {{-- <li class="nav-item dropdown"> 
