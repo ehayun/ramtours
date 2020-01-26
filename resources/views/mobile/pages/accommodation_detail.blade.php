@@ -315,10 +315,12 @@
                         <div class="bd-head">
 
                            <h3>
+                              @if (!empty($room['room_area']))
                               <span>
-                                 <img src="{{url('/assets/front/images')}}/ramtours-rooms.png"> חדרים
-                                 -{{$room['room_area']}} מ"ר |
+                                 <img src="{{url('/assets/front/images')}}/ramtours-rooms.png"> 
+                                 {{$room['room_area']}} מ"ר |
                               </span>
+                              @endif
                               <span>
                                  <img src="{{url('/assets/front/images')}}/mann.png">&nbsp;מתאים להרכב של עד
                                  {{$room['max_people']}} נפשות <span dir="ltr">({{$room['room_code']}})</span>|

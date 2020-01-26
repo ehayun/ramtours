@@ -862,7 +862,9 @@
                      @foreach( $hotel_extra1_rooms as $room)
                      <option value="{{$room['id']}}" @if($room['id']==$package->cheapest_room) selected="true" @endif>
                         <span>
-                           חדרים -{{$room['room_area']}} מ"ר |
+                          @if (!empty($room['room_area']))
+                           חדרים - {{$room['room_area']}} מ"ר |
+                           @endif
                         </span>
                         <span>
                            &nbsp;מתאים להרכב של עד {{$room['max_people']}} נפשות <span
@@ -888,9 +890,11 @@
                      <option value="0">אנא בחר חדר</option>
                      @foreach( $hotel_extra2_rooms as $room)
                      <option value="{{$room['id']}}" @if($room['id']==$package->cheapest_room) selected="true" @endif>
+                        @if (!empty($room['room_area']))
                         <span>
-                           חדרים -{{$room['room_area']}} מ"ר |
+                           חדרים - {{$room['room_area']}} מ"ר |
                         </span>
+                        @endif
                         <span>
                            &nbsp;מתאים להרכב של עד {{$room['max_people']}} נפשות <span
                               dir="ltr">({{$room['room_code']}})</span>|
