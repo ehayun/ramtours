@@ -595,7 +595,7 @@ if (!function_exists('rami_get_add_days_to_date')) {
 if (!function_exists('rami_vacation_pkg_del_top_text')) {
     function rami_vacation_pkg_del_top_text($loc_id)
     {
-        if ($loc_id == 21 || $loc_id == 53 || $loc_id == 55) {
+        if ($loc_id == 21 || $loc_id == 53 || $loc_id == 55 || $loc_id == 54) {
             $text = '<ul>
                     <li> טיסה סדירה הכוללת מזוודה 23 קילו  וארוחה </li>
                     <li>דירת נופש או חדר במלון על פי בסיס האירוח</li>
