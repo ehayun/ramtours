@@ -685,6 +685,9 @@ class PackageController extends Controller
                 if (empty($curr_room)) {
                     continue;
                 }
+                if (!$curr_room) {
+                    continue;
+                }
                 $room_price = get_rami_room_price($room->id, 2, $curr_pack->package_start_date);
                 if ($count == 1) {
                     $room_id = $room;
