@@ -707,7 +707,7 @@ class PackageController extends Controller
                 $curr_pack->save();
             } else {
                 $curr_pack->package_hotel_room = serialize($new_room);
-                $curr_pack->cheapest_roome = $room_id;
+                $curr_pack->cheapest_room = $room_id;
                 $curr_pack->save();
             }
 
