@@ -313,7 +313,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 .terms-form-box {margin-right: 30px;margin-left: 30px;position: relative;margin-top: 20px;}
 .terms p {text-align: right;}
 .terms a {color: #ffa800;}
-.terms ul li {text-align: right;}
+.terms ul li {text-align: right;margin-right: 20px;}
 .terms ul li a,.terms ul li strong {color: #ffa800;}
 .term-input-box {width: 23%;margin-left: 2%;float: right;}
 .term-input-box-last {width: 25%;margin-left: 0;float: right;}
@@ -1419,7 +1419,7 @@ section.bfcard .bfleftnav+.pages_static_rami table.passinfo_bf td a img {width: 
 section.bfcard .bfleftnav+.pages_static_rami table.ffort_tab td img{width:100%;}
 section.bfcard .bfleftnav+.pages_static_rami img{float:none;}
 section.bfcard th {background: #ffa800;color: #fff;}
-section.bfcard strong {font-weight: bold!important;display: block;line-height: 32px;}
+section.bfcard strong {font-weight: bold!important;/* display: block;*/line-height: 32px;}
 section.bfcard .bfleftnav+.pages_static_rami h5{text-align:right;padding-right:15px;}
 section.bfcard .bfleftnav+.pages_static_rami .footer-nav-box{max-width:50%;}
 section.bfcard .bfleftnav+.pages_static_rami .footer-nav-box h3{margin: 0;padding: 0 22px 0 0;text-align: right;}

@@ -1076,7 +1076,7 @@ class HomeController extends Controller
     {
         $page = page::where([['slug', urldecode($id)], ['page_status', 1]])->get()->first();
 //dd(urldecode($id));
-        //dd($page);
+        //dd($page); 
         if (empty($page)) {
             $page = page::where([['id', $id], ['page_status', 1]])->get()->first();
         }
