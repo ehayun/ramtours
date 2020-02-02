@@ -14,7 +14,11 @@
 @endif
 <script>
 
-
+$( document ).ready(function() {
+  $( ".contact-submit" ).click(function() {
+    $( ".contact-submit" ).hide()
+});
+});
 
   $('img').bind('touchend', function (e) {
     e.preventDefault();

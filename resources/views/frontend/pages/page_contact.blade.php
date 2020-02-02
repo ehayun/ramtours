@@ -49,9 +49,13 @@
             <input type="checkbox" name="club_member[]" value="הוסף אותי למועדון לקוחות לצורך קבלת מבצעים ופרסומות" >
           </div>
         </div>
-        <p><input type="submit" value="שלח" class="contact-submit">
+        <p><input type="submit" value="שלח" class="contact-submit" >
         </p></div>       
        </form>
         </div>     
        </div>
      </div>
+<script>
+
+</script>
+    

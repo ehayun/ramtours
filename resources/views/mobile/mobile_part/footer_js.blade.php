@@ -15,6 +15,11 @@
 @if (env('APP_ENV') == 'production')
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38205015-1"></script>
 <script>
+      $( document ).ready(function() {
+            $( ".contact-submit" ).click(function() {
+                  $( ".contact-submit" ).hide()
+             });
+      });
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
