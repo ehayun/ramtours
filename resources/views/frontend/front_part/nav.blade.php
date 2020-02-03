@@ -124,7 +124,7 @@
                <a class="nav-link js-scroll-trigger {{ get_rami_active_menu('testimonials') }}" href="{{ url('/testimonials') }}">המלצות לקוחות</a>
             </li>
             <li class="nav-item">
-               <a class="nav-link js-scroll-trigger {{ get_rami_active_menu('blackforest-info') }}" href="{{ url('/היער-השחור-מידע') }}">היער השחור מידע</a>
+               <a class="nav-link js-scroll-trigger {{ get_rami_active_menu('blackforest-info') }}" href="{{ url('/היער-השחור') }}">היער השחור מידע</a>
             </li>
             <li class="nav-item dropdown">
                <a href="#" class="nav-link dropdown-toggle {{ get_rami_active_menu('tourist-info') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">מידע למטייל</a>
