@@ -172,19 +172,21 @@ class UpdateAllPackages extends Command
                 print $lowest . "\n";
                 print_r($res);
             }
-            $persons = $res['adults'] + $res['childrens'];
-            $curr_pack->cheapest_room = $res['room'];
-            $curr_pack->cheapest_car = $res['car'];
-            $curr_pack->cheapest_flight_sche = $res['flight'];
-            $curr_pack->total_price_in_euro = $res['price'];
-            $curr_pack->package_lowest_price = $res['price'] / $persons;
-            $curr_pack->total_persons_combinations = '2' . '&' . "$persons-2";
-            $rooms = unserialize($curr_pack->package_hotel_room);
-            if ($rooms == []) {
-                $curr_pack->package_status = 0;
+            if ($res != []) {
+                $persons = $res['adults'] + $res['childrens'];
+                $curr_pack->cheapest_room = $res['room'];
+                $curr_pack->cheapest_car = $res['car'];
+                $curr_pack->cheapest_flight_sche = $res['flight'];
+                $curr_pack->total_price_in_euro = $res['price'];
+                $curr_pack->package_lowest_price = $res['price'] / $persons;
+                $curr_pack->total_persons_combinations = '2' . '&' . "$persons-2";
+                $rooms = unserialize($curr_pack->package_hotel_room);
+                if ($rooms == []) {
+                    $curr_pack->package_status = 0;
+                }
+                $curr_pack->save();
+                // var_dump($ss);
             }
-            $curr_pack->save();
-            // var_dump($ss);
         }
     }
 }

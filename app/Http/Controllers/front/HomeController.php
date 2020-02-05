@@ -785,7 +785,7 @@ class HomeController extends Controller
         if (empty($location)) {
             $location = Location::find($loc_id);
         }
-        if (empty($location)) {
+        if (empty($location)) { 
             return redirect('/');
         }
         $data['site_title'] = $location->loc_package_title_text;
