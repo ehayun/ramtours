@@ -11,9 +11,11 @@
 
 Route::get('/clear-cache', function () {
     //dd('test');
-    Artisan::call('cache:clear');
+    Artisan::call('cache:clear'); 
     return "Cache is cleared";
 });
+Route::resource('admin/bans', 'admin\BansController'); 
+
 Route::get('/admin', 'admin\AdminController@index')->name('admin');
 Route::get('/admin/profile', 'admin\AdminController@profile')->name('admin.profile');
 Route::PUT('/admin/updateprofile/{id}', 'admin\AdminController@updateprofile')->name('admin.updateprofile');

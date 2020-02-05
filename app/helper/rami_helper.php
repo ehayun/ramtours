@@ -6,6 +6,7 @@ use App\model\flight;
 use App\model\flight_schedule;
 use App\model\flight_schedule_connection;
 use App\model\hotel;
+use App\model\Ban;
 use App\model\hotel_amenity;
 use App\model\hotel_feature;
 use App\model\hotel_image;
@@ -2148,6 +2149,24 @@ if (!function_exists('flight_array_comparision_price')) {
 
     }
 }
+
+function rami_check_ban($user) 
+{
+    $ip = getIp();
+    $first = $user['first_name'];
+    $last = $user['last_name'] ;
+    $phone = $user['phone'] ;
+    $email = $user['email'] ;
+
+    $b = Ban::where('ip_address', $ip)->orWhere('email', $email)->orWhere('phone', $phone)->first();
+    if (!$b) {
+        $b = Ban::Create(['full_name' => "$last $first", 'email' => $email, 'phone' => $phone, 'ip_address' => $ip]);
+    }
+
+    return !$b->is_ban;
+
+}
+
 
 function getIp()
 {

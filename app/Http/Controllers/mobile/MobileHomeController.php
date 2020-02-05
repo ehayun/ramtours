@@ -917,7 +917,13 @@ class MobileHomeController extends Controller
         $user['email'] = $request->email;
         $user['msg'] = $request->msg_contact;
         $user['interested_in'] = $request->interested_in;
-        Mail::to(get_rami_setting('notification_email_id'))->send(new ContactUs($user));
+        
+        if (!preg_match("/(?i)\b((?:https?:\/\/))/", $request->msg_contact)) { 
+            if (rami_check_ban($user)) {
+                Mail::to(get_rami_setting('notification_email_id'))->send(new ContactUs($user));
+            }
+        }
+
         set_flash_msg('flash_success', 'תודה רבה  <br> קיבלנו את פנייתכם  <br> נציג מטעמנו יחזור אליכם תוך 24 שעות.');
         return redirect('contact');
     }
