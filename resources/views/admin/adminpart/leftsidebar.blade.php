@@ -272,6 +272,9 @@
                     <span>More Pages</span>
                 </a>
                 <ul class="ml-menu">
+                <li class="">
+                        <a href="{{url('admin/bans')}}">Ban People</a>
+                    </li>
                     <li class="">
                         <a href="{{url('admin/page')}}">Pages</a>
                     </li>
