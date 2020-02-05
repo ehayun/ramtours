@@ -1084,7 +1084,8 @@
                       <div class="flight-text-box tf1">
                         {{$flight['source']}}
                         <span class="rt_tmm">{{$flight['departure_time']}}
-                        </span> 8 יולי
+                        </span> {{$flight['depart_time_in_month_date']}}
+                        
                       </div>
                       <div class="flight-take-off ftbord">
                         <span class="rt_plane">
@@ -1095,14 +1096,14 @@
                         {{$flight['desti']}}
                         <span class="rt_tmm">
                           {{$flight['arrival_time']}}
-                        </span> 8 יולי
+                        </span> {{$flight['arrival_time_in_month_date']}}
                       </div>
                       <div class="flight-text-box tf3">
                         <span class="fltt-info">
                           פרטי הטיסה
                         </span>
                         <span class="fltt-ttltime">
-                          {{' 4טיסת '.$flight['flight_no']}} {{ $flight['source'] }} ל{{$flight['desti']}}
+                          {{' טיסת '.$flight['flight_no']}} {{ $flight['source'] }} ל{{$flight['desti']}}
                         </span>
                       </div>
                       <div class="flight-text-box tf4"></div>
