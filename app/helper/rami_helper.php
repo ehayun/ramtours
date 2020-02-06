@@ -2161,6 +2161,8 @@ function rami_check_ban($user)
     $b = Ban::where('ip_address', $ip)->orWhere('email', $email)->orWhere('phone', $phone)->first();
     if (!$b) {
         $b = Ban::Create(['full_name' => "$last $first", 'email' => $email, 'phone' => $phone, 'ip_address' => $ip]);
+    } else {
+        $b->update(['full_name' => "$last $first", 'email' => $email, 'phone' => $phone, 'ip_address' => $ip]);
     }
 
     return !$b->is_ban;
