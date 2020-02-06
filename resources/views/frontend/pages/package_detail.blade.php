@@ -251,7 +251,7 @@
                     @if(empty($car['id']))
                     @continue
                     @endif
-                    <option loc_id="{{$car['loc_id']}}" value="{{$car['id']}}" @if($car['id']==$package->cheapest_car) {{"selected=selected"}}  @endif
+                    <option loc_id="{{$car['loc_id']}}" value="{{$car['id']}}" @if($car['id']==$package->cheapest_car) {{"def=1 selected=selected"}}  @endif
                       >{{$car['car_title']}}</option>
                     @endforeach
                   </select>

@@ -15,15 +15,15 @@
   @section('rami_front_head_css')
   <link rel="icon" type="image/x-icon" href="{{url('/assets/front/images')}}/favicon.ico">
   <link href="{{url('assets/front/css/bootstrap.min.css')}}" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{url('assets/front/css/jquery-ui.min.css')}}" rel="stylesheet">
   <link href="{{url('assets/front/css/style.css')}}" rel="stylesheet">
   <link href="{{url('assets/front/css/jquery.fancybox.css')}}" rel="stylesheet">
   <link href="{{url('assets/front/css/daterangepicker.css')}}" rel="stylesheet">
-  <script id="ptoken" src="https://ws.callindex.co.il/campaign/send_analytics.js?ptoken=534"></script>
+  <script id="ptoken" src="//ws.callindex.co.il/campaign/send_analytics.js?ptoken=534"></script>
   @show
-  <script src='https://www.google.com/recaptcha/api.js'></script>
+  <script src='//www.google.com/recaptcha/api.js'></script>
   @if (env('APP_ENV') == 'production')
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <meta name="google-site-verification" content="h70ijBBOLp8VIvyioyIFbMLLDQ0DHwg5QkNYskw27tM" />

@@ -75,6 +75,9 @@
    while (cars >= count) {
       ++i;
       var ele='chnage_select'+i;
+      if (typeof $(eSel).attr('selected') != "undefined" ) {
+        alert(i)
+      }
       if($('.rami_package_cars').find('.'+ele).length < 1){
         continue;
       }
@@ -253,6 +256,7 @@
      });
     $('.rami_package_flights select').change(function(event) {
        var loc_id=$(this).find('option[value='+$(this).val()+']').attr('loc_id');
+
        render_car_acc_to_flight(loc_id);
     });
     
@@ -260,10 +264,15 @@
     render_car_acc_to_flight(loc_id);
 
     function render_car_acc_to_flight(loc_id){
+      var has_def = false;
        $('.rami_package_cars select option').each(function(index, el) {
         if(typeof $(this).attr('loc_id') === "undefined"){
           $(this).show();
-        }else if( $(this).attr('loc_id')==loc_id ){
+        }else if( $(this).attr('loc_id')==loc_id ){ 
+          if ($(this).attr('def') == "1") {
+            $(this).addClass('def_loc');
+            has_def = true
+          }
           $(this).addClass('opt_show');
           $(this).show();
         }else{
@@ -289,10 +298,16 @@
           $(this).removeClass('li_show')
         }
        });
-       $
-       $('.rami_package_cars select').val($(".rami_package_cars select .opt_show:first").val());
+       if (has_def) {
+         $('.rami_package_cars select').val($(".rami_package_cars select .def_loc:first").val());
+       }
+
+       if (!has_def) {
+         $('.rami_package_cars select').val($(".rami_package_cars select .opt_show:first").val());
+       }
+
        setup_cart();
-       
+       //.opt_show:first
     }
     
 

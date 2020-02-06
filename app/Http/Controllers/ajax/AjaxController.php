@@ -12,7 +12,7 @@ use Validator;
 use App\Mail\ContactUs;
 use Illuminate\Support\Facades\Mail;
 
-class AjaxController extends Controller
+class AjaxController extends Controller 
 {
     public function ajax_for_load_more(Request $request){
     	if(!empty($request->page)){
