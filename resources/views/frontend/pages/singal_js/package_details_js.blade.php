@@ -75,9 +75,6 @@
    while (cars >= count) {
       ++i;
       var ele='chnage_select'+i;
-      if (typeof $(eSel).attr('selected') != "undefined" ) {
-        alert(i)
-      }
       if($('.rami_package_cars').find('.'+ele).length < 1){
         continue;
       }
@@ -298,13 +295,13 @@
           $(this).removeClass('li_show')
         }
        });
-      //  if (has_def) {
-      //    $('.rami_package_cars select').val($(".rami_package_cars select .def_loc:first").val());
-      //  }
+       if (has_def) {
+         $('.rami_package_cars select').val($(".rami_package_cars select .def_loc:first").val());
+       }
 
-      //  if (!has_def) {
+       if (!has_def) {
          $('.rami_package_cars select').val($(".rami_package_cars select .opt_show:first").val());
-      //  }
+       }
 
        setup_cart();
        //.opt_show:first
