@@ -28,8 +28,8 @@ class ContactUs extends Mailable
      */
     public function build()
     {
-        if (!rami_check_ban($this->user)) {
+        // if (!rami_check_ban($this->user)) {
             return $this->markdown('emails.contact.contact_us', $this->user)->subject(' לקוח חדש ,פניית צור קשר מהאתר');
-        }
+        // }
     }
 }
