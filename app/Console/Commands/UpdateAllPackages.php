@@ -108,9 +108,7 @@ class UpdateAllPackages extends Command
                 $tmp = "";
                 foreach ($cars as $car_id) {
                     $car = car::find($car_id);
-                    if ($pkg) {
-                        print "Car:: " . $car->id . "\n\n";
-                    }
+                    
                     foreach ($rooms as $room) {
                         $r = room::find($room);
                         foreach ([2] as $adults) {
@@ -130,9 +128,7 @@ class UpdateAllPackages extends Command
 
                                             $dt = $curr_pack->package_start_date;
 
-                                            if ($pkg) {
-                                                print "Car: " . $car->id . " " . $car->car_title . " [$mp]  [" . get_rami_car_price($car->id, $tot, $dt) . "]\n";
-                                            }
+                                           
                                             if ($pkg) {
                                                 // print "$adults $childrens $room car: $car_id $price [[$lowest]] [[$price_pp]] [$mp] \n";
                                                 // $res['adults'] = $adults;

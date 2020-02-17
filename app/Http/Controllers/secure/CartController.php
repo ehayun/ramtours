@@ -237,17 +237,23 @@ class CartController extends Controller
         $error_flight = 0;
         $flight_sch_booked_for = 0;
         $fligt_price = 0;
+        $flight_profit = 0;
         $flight_sch = flight_schedule::find($flight);
         $flight_package_profit = 0;
         if (!empty($flight_sch)) {
             if ($check_flight) {
+                $f_price = get_rami_flight_price($flight_sch->id);
+                $flight_package_profit = $flight_sch->package_profit;
+                $flight_profit = $flight_sch->flight_profit;
+
+
                 if ($flight_sch->num_available_seat >= $total_peoples) {
                     $flight_id = $flight_sch->id;
                     $flight_sch_booked_for = $total_peoples;
                     /* Eli Hayun */
                     $flight_package_profit = $flight_sch->package_profit;
                     /* === */
-                    $fligt_price = $total_peoples * get_rami_flight_price($flight_sch->id);
+                    $fligt_price = $total_peoples * get_rami_flight_price($flight_sch->id) ;
                 } else {
                     $error_flight = $flight_sch->id;
                 }
@@ -257,10 +263,11 @@ class CartController extends Controller
                 /* Eli Hayun */
                 $flight_package_profit = $flight_sch->package_profit;
                 /* === */
-                $fligt_price = $total_peoples * get_rami_flight_price($flight_sch->id);
+                $fligt_price = $total_peoples * get_rami_flight_price($flight_sch->id) ;
             }
         }
         $prv_temp_cart = session()->get('temp_cart');
+        $prv_temp_cart['flight_profit'] = $flight_profit;
         $prv_temp_cart['flight_sch'] = $flight_id;
         $prv_temp_cart['filght_total_price_in_skl'] = $fligt_price;
         $prv_temp_cart['flight_sch_booked_for'] = $flight_sch_booked_for;
@@ -381,14 +388,20 @@ class CartController extends Controller
         $is_fix_package = $package->is_fix_profit == 1;
 
         $flight_package_profit = $prv_temp_cart['flight_for_package'];
+        $flight_profit = $prv_temp_cart['flight_profit'];
 
-        $total = $car_total_price + $room_total_price + $extra_hotel_1_room_total_price + $extra_hotel_2_room_total_price + $prv_temp_cart['filght_total_price_in_skl'] + $hotel_infants_price_total + $extra_hotel_1_infants_price_total + $extra_hotel_2_infants_price_total + $infants_taxes_total + $adults_total_extra_charge + $prv_temp_cart['pack_card_total_price'];
+        $total = $car_total_price + $room_total_price + $extra_hotel_1_room_total_price 
+        + $extra_hotel_2_room_total_price + $prv_temp_cart['filght_total_price_in_skl'] 
+        + $hotel_infants_price_total + $extra_hotel_1_infants_price_total + $extra_hotel_2_infants_price_total 
+        + $infants_taxes_total + $adults_total_extra_charge + $prv_temp_cart['pack_card_total_price'];
 
         $package_profit_per_person = get_rami_pakage_profit($package->id, $total);
 
         if (!$is_fix_package) {
             if ($flight_package_profit > 0) {
                 $package_profit_per_person = $flight_package_profit;
+            } else {
+                $package_profit_per_person = $flight_profit;
             }
         }
 
