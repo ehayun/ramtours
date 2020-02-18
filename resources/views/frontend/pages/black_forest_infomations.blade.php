@@ -1,3 +1,13 @@
+@php
+$header_custom_code = '
+<meta name="description" content="היער השחור - חווייה בלתי נשכחת! יופי אירופאי, עיירות צבעוניות, אטרקציות לילדים ועוד הפתעות. המחיר הזול ביותר ליער השחור! מ-599€ לאדם לשבוע (טיסה+מלון+רכב) "/>
+<link rel="canonical" href="https://ramtours.com/%D7%94%D7%99%D7%A2%D7%A8-%D7%94%D7%A9%D7%97%D7%95%D7%A8" />
+
+
+
+';
+@endphp
+
 @extends('frontend.home_main')
 @section('rami_front_container')
 <section>
@@ -21,7 +31,7 @@
       </div>
       <div class="col-lg-12">
         <div class="row text-center">
-          <!-- <div class="col-md-3 flightss">
+          <!-- <div class="col-md-3 flightss"> 
             <div class="home-product-box">
               <div class="pakinner">
                 <div class="home-product-inner-box">
@@ -307,6 +317,9 @@
             <div class="term-textBox">
               <textarea name="message" cols="40" rows="10" class="form-control" placeholder="תוכן הודעה..."></textarea>
             </div>
+
+
+
             <div class="term-select-box">
               <div class="contactselection">
                 <select name="interested" class="form-control">
