@@ -27,7 +27,7 @@ $header_custom_code = '
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2 class="section-heading">מידע ודילים מומלצים ליער השחור</h2>
+        <h1 class="section-heading">מידע ודילים מומלצים ליער השחור</h1>
       </div>
       <div class="col-lg-12">
         <div class="row text-center">
