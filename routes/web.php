@@ -242,7 +242,7 @@ Route::post('/submit-contact-page', 'front\HomeController@submit_contact_page');
 // Route::get('/search-accommodation/', 'front\HomeController@search_accommodation');
 // Route::POST('/search', 'front\HomeController@search_accommodation_hotel_code');
 Route::get('/blackforest-cards', 'front\HomeController@blackforest_cards');
-Route::get('/היער-השחור', 'front\HomeController@blackforest_info');
+Route::get('/היער-השחור', 'front\HomeController@blackforest_info'); 
 Route::get('/setup_package', 'front\HomeController@setup_package');
 Route::get('/data-security', 'front\HomeController@data_security');
 Route::get('/sites-policy', 'front\HomeController@sites_policy');

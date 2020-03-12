@@ -203,6 +203,19 @@
                   <li class="dropdown-item"><a href="{{ url('/טיסה-לבריסל-לואו-קוסט') }}">טיסה לבריסל לואו קוסט</a></li>
                </ul>
             </li>
+
+            <li class="dropdown-item dropdown">
+               <a href="" class="dropdown-toggle {{ get_rami_active_menu('tourist-info') }}">טירול</a>
+               <ul class="dropdown-menu">
+                  <li class="dropdown-item"><a href="{{ url('/חבל-טירול-אוסטריה') }}">חבל-טירול-אוסטריה</a></li>
+                  <li class="dropdown-item"><a href="{{ url('/חבל-טירול-עם-ילדים') }}"> חבל טירול עם ילדים </a></li>
+                  <li class="dropdown-item"><a href="{{ url('/טיול-בחבל-טירול-אוסטריה') }}">   טיול בחבל טירול אוסטריה</a></li>
+                  <li class="dropdown-item"><a href="{{ url('/חבילות-נופש-אוסטריה-טירול') }}">  
+                        חבילות נופש אוסטריה טירול</a></li>
+               </ul>
+            </li>
+
+
             <li class="dropdown-item dropdown">
                <a href="" class="dropdown-toggle {{ get_rami_active_menu('tourist-info') }}">כללי</a>
                <ul class="dropdown-menu">
