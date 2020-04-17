@@ -27,6 +27,10 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
 
+        $schedule->command('ramitours:updateNoFlights')->hourlyAt(8);
+        $schedule->command('ramitours:updateNoFlights')->hourlyAt(23);
+        $schedule->command('ramitours:updateNoFlights')->hourlyAt(38);
+        $schedule->command('ramitours:updateNoFlights')->hourlyAt(52);
         $schedule->command('ramitours:updatePackages')->everyFifteenMinutes();
         $schedule->command('ramitours:check_alerts')->dailyAt('07:00');
     }
