@@ -1,4 +1,4 @@
-@extends('frontend.front_notop')
+@extends('frontend.home_main')
 @section('rami_front_container')
 <section>
   <div class="container">
@@ -10,7 +10,7 @@
           <img src="{{url('/assets/front/images')}}/bread-crum-arrow.png" alt="">
           מינכן <img src="{{url('/assets/front/images')}}/bread-crum-arrow.png" alt="">
           <strong>
-            {{$all_flight['up_flight_no']}} {{$all_flight['up_source'] }} to {{$all_flight['up_desti'] }}
+            {{$all_flight['up_flight_no']}} מ{{$all_flight['up_source'] }} ל{{$all_flight['up_desti'] }}
           </strong>
         </div>
       </div>
