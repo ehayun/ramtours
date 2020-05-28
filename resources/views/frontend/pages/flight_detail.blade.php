@@ -57,7 +57,7 @@
                   פרטי הטיסה
                 </span>
                 <span class="fltt-ttltime">
-                  {{'טיסת '.$all_flight['down_flight_no']}} {{ $all_flight['down_source'] }} ל{{$all_flight['down_desti']}}
+                  {{'טיסת '.$all_flight['up_flight_no']}} {{ $all_flight['up_source'] }} ל{{$all_flight['up_desti']}}
                 </span>
               </div>
               <div class="flight-text-box tf4"></div>
@@ -138,7 +138,7 @@
                   פרטי הטיסה
                 </span>
                 <span class="fltt-ttltime">
-                  {{'טיסת '.$all_flight['up_flight_no']}} {{ $all_flight['up_source'] }} ל{{$all_flight['up_desti']}}
+                  {{'טיסת '.$all_flight['down_flight_no']}} {{ $all_flight['down_source'] }} ל{{$all_flight['down_desti']}}
                 </span>
               </div>
               <div class="flight-text-box tf4"></div>
