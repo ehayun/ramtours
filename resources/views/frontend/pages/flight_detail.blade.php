@@ -118,7 +118,7 @@
                                    $all_flight['down_airline_name'] }} </span></div>
               </div>
               <div class="flight-text-box tf1">
-                {{$all_flight['up_source']}}
+                {{$all_flight['down_source']}}
                 <span class="rt_tmm">{{$all_flight['down_departure_time']}}
                 </span>{{$all_flight['down_departure_time_in_month_date']}}
               </div>
