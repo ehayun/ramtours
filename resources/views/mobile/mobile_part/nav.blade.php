@@ -55,6 +55,7 @@
                         <li class="dropdown-item"><a href="{{ url('/267') }}"> חבילות נופש לטירול לקיץ </a></li>
                      </ul>
                   </li>
+                  <li class="dropdown-item"><a href="{{ url('/280') }}"> חבילות נופש לקרואטיה </a></li>
                </ul>
                      
                   </li>

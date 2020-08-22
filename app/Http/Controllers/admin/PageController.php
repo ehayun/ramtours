@@ -147,7 +147,8 @@ class PageController extends Controller
 
 
         if (!$request->slug) {
-            $page->slug = implode(mb_split(" ", $request->page_title), "-");
+            // $page->slug = implode(mb_split(" ", $request->page_title), "-");
+            $page->slug = str_replace(" ", "-", $request->page_title);
         }
 
         $page = $this->updateMeta($page, $request);
