@@ -52,6 +52,7 @@
                         <li class="dropdown-item"><a href="{{ url('/267') }}"> חבילות נופש לטירול לקיץ </a></li>
                      </ul>
                   </li>
+                  
                   <li class="dropdown-item"><a href="{{ url('/280') }}"> חבילות נופש לקרואטיה</a></li>
                </ul>
             </li>
@@ -108,7 +109,13 @@
                         <li><a href="{{ url('/flights/44') }}" class="dropdown-item">טטיסות למינכן </a></li>
                      </ul>
                   </li>
-
+                  <li class="dropdown-item dropdown">
+                     <a href="#" class="dropdown-toggle {{ get_rami_active_menu('flights') }} ">   טיסות לקרואטיה </a>
+                     <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href="{{ url('/flights/106') }}">טיסות לדוברובניק</a></li>
+                        <li class="dropdown-item"><a href="{{ url('/flights/107') }}">טיסות לזאגרב</a></li>
+                     </ul>
+                  </li>
                </ul>
             </li>
             <li class="nav-item dropdown">
