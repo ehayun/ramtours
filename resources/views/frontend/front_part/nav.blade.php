@@ -112,7 +112,7 @@
                   <li class="dropdown-item dropdown">
                      <a href="#" class="dropdown-toggle {{ get_rami_active_menu('flights') }} ">   טיסות לקרואטיה </a>
                      <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a href="{{ url('/flights/106') }}">טיסות לדוברובניק</a></li>
+                        <li class="dropdown-item"><a href="{{ url('/flights/105') }}">טיסות לדוברובניק</a></li>
                         <li class="dropdown-item"><a href="{{ url('/flights/107') }}">טיסות לזאגרב</a></li>
                      </ul>
                   </li>
