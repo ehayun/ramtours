@@ -677,7 +677,11 @@ class paymentController extends Controller
         }
         $data['total_person'] = $cart['total_peoples'];
         $data['pack_passenger'] = unserialize($order['pack_passenger']);
-        $data['card'] = $cart['pack_card_total_price'];
+	if (isset($cart['pack_card_total_price'])) {
+		$data['card'] = $cart['pack_card_total_price'];
+	} else {
+		$data['card'] = $cart['total_price_in_skl'];
+	}
         $data['hotel'] = array();
         $data['rooms'] = array();
         $flight_schedule = flight_schedule::find($cart['flight_sch']);
@@ -778,7 +782,12 @@ class paymentController extends Controller
         // $data['downflight']=flight::find($data['flight_schedule']->flight_down);
         $data['cars'] = array();
         $data['total_price_in_euro'] = $cart['total_price_in_euro'];
-        $data['card'] = $cart['pack_card_total_price'];
+        //$data['card'] = $cart['pack_card_total_price'];
+	if (isset($cart['pack_card_total_price'])) {
+		$data['card'] = $cart['pack_card_total_price'];
+	} else {
+		$data['card'] = $cart['total_price_in_skl'];
+	}
         $data['total_price_in_skl'] = $cart['total_price_in_skl'];
         $data['amount_paid_in_skl'] = $order['amount_paid_in_skl'];
         $data['remaining_amount'] = $order['total_amount_skl'] - $order['amount_paid_in_skl'];

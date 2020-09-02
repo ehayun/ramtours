@@ -1,19 +1,19 @@
       @section('rami_mobile_footer')
       <footer>
           <div id="rt_warning" class="modal fade" aria-modal="true" style="padding-right: 17px;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Error</h4>
-            </div>
-            <div class="modal-body">
-				<p class="rt_errormsg">Error Message Here...</p>
-               
-            </div>
-        </div>
-    </div>
-</div>
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		                <h4 class="modal-title">Error</h4>
+		            </div>
+		            <div class="modal-body">
+						<p class="rt_errormsg">Error Message Here...</p>
+		               
+		            </div>
+		        </div>
+		    </div>
+		</div>
          <div class="container footer_secbar">
             <div class="row">
                <div class="col-6 col-sm-6 footerFB">
@@ -36,7 +36,13 @@
                <div class="col-6 col-sm-6 footer-number">
                   <p class="footer-number-text"><a href="tel:072-372-6240">072-372-6240<i class="fa fa-phone" aria-hidden="true"></i></a></p>
                </div>
+               <div class="rami_creator_div" style="width: 100%;text-align: center;padding: 2px;">
+                  <span >Created By: </span>
+                   <a href="https://sisfy.com/" target="_blank">SISFY Web & Software Services</a>
+              </div>
             </div>
+
          </div>
+
       </footer>
       @show

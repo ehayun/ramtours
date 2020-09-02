@@ -48,7 +48,12 @@ class OrderCompleted extends Mailable
         $data['adults']=$cart['adults'];
         $data['childs']=$cart['childs'];
         $data['total_peoples']=$cart['total_peoples'];
-        $data['card']=$cart['pack_card_total_price']; 
+        //$data['card']=$cart['pack_card_total_price']; 
+	if (isset($cart['pack_card_total_price'])) {
+		$data['card'] = $cart['pack_card_total_price'];
+	} else {
+		$data['card'] = $cart['total_price_in_skl'];
+	}
         $data['total_price_in_skl']=$cart['total_price_in_skl'];
         $data['total_price_in_euro']=$cart['total_price_in_euro'];
         $data['amount_paid_in_skl']=$this->order['amount_paid_in_skl'];
