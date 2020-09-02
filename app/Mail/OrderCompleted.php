@@ -52,7 +52,7 @@ class OrderCompleted extends Mailable
 	if (isset($cart['pack_card_total_price'])) {
 		$data['card'] = $cart['pack_card_total_price'];
 	} else {
-		$data['card'] = $cart['total_price_in_skl'];
+		$data['card'] = 0;
 	}
         $data['total_price_in_skl']=$cart['total_price_in_skl'];
         $data['total_price_in_euro']=$cart['total_price_in_euro'];

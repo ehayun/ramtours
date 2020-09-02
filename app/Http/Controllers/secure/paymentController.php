@@ -680,7 +680,7 @@ class paymentController extends Controller
 	if (isset($cart['pack_card_total_price'])) {
 		$data['card'] = $cart['pack_card_total_price'];
 	} else {
-		$data['card'] = $cart['total_price_in_skl'];
+		$data['card'] = 0;
 	}
         $data['hotel'] = array();
         $data['rooms'] = array();
@@ -786,7 +786,7 @@ class paymentController extends Controller
 	if (isset($cart['pack_card_total_price'])) {
 		$data['card'] = $cart['pack_card_total_price'];
 	} else {
-		$data['card'] = $cart['total_price_in_skl'];
+		$data['card'] = 0;
 	}
         $data['total_price_in_skl'] = $cart['total_price_in_skl'];
         $data['amount_paid_in_skl'] = $order['amount_paid_in_skl'];
